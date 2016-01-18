@@ -81,7 +81,9 @@ public class TestRecyclerViewLinearLayoutActivity extends MTFBaseActivity {
                 return;
             }
 
-            if (currentSize < PAGE_COUNT) {
+
+
+            if (recyclerView.getAdapter().getItemCount() < PAGE_COUNT) {
                 // loading more
                 MTFRecyclerViewStateUtils.setFooterViewState(context, recyclerView, PAGE_SIZE, MTFLoadingFooter.State.Loading, null);
                 requestData();
