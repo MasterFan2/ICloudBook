@@ -14,4 +14,6 @@
     <color name="mtf_gray_900">#212121</color>
     <color name="mtf_gray_1000">#000000</color>
     <!-- end gray -->
+
+    <color name="filter_red_txt">#F36C6C</color>
 </resources>

@@ -42,6 +42,12 @@ public class TestMainActivity extends MTFBaseActivity {
     }
 
 
+    @OnClick(R.id.download)
+    public void gotoDownload(View view){
+        animStart(TestDownloadActivity.class);
+    }
+
+
 
 
 
