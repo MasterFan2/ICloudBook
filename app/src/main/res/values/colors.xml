@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#29A861</color>
+    <color name="colorPrimaryDark">#2FAF6F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
@@ -9,4 +9,9 @@
     <color name="green">#00FF00</color>
     <color name="green_1">#42C17A</color>
     <color name="green_2">##29A861</color>
+
+
+    <color name="base_green">#29A861</color>
+
+    <color name="base_green_checked">#42C17A</color>
 </resources>

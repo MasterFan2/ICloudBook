@@ -32,7 +32,7 @@ public abstract class MTFBaseFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        MTFFragmentFeature fragmentFeature = MTFBaseFragment.class.getClass().getAnnotation(MTFFragmentFeature.class);
+        MTFFragmentFeature fragmentFeature = this.getClass().getAnnotation(MTFFragmentFeature.class);
         if(fragmentFeature == null) throw new IllegalArgumentException(">>> not set layout resources!");
         View view = inflater.inflate(fragmentFeature.layout(), container, false);
         ButterKnife.bind(this, view);

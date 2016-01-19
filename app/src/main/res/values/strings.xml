@@ -2,4 +2,12 @@
     <string name="app_name">ICloudBook</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_test_download">TestDownloadActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <!-- home bottom -->
+    <string name="home_index">首页</string>
+    <string name="home_resource">资源</string>
+    <string name="home_personal">个人</string>
+    <string name="home_management">管理</string>
+    <!-- end home bottom -->
 </resources>
