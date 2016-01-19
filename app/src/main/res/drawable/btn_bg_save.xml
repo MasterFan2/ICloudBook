@@ -3,7 +3,7 @@
     xmlns:android= "http://schemas.android.com/apk/res/android" >
     <item android:state_pressed= "true">
         <shape android:shape= "rectangle">
-            <gradient android:startColor="@color/green_2" android:endColor="@color/green_2" android:angle="270.0" />
+            <gradient android:startColor="@color/base_green_checked" android:endColor="@color/base_green_checked" android:angle="270.0" />
             <!--             <stroke android:width="1.0px" android:color="@color/more_pressed_end" /> -->
             <corners android:bottomLeftRadius= "8.0dip" android:bottomRightRadius ="8.0dip" android:topLeftRadius="8.0dip" android:topRightRadius="8.0dip" />
 
@@ -13,7 +13,7 @@
 
     <item>
         <shape android:shape= "rectangle">
-            <gradient android:startColor="@color/green_1" android:centerColor="@color/green_1" android:endColor="@color/green_1" android:angle="270.0" />
+            <gradient android:startColor="@color/base_green" android:centerColor="@color/base_green" android:endColor="@color/base_green" android:angle="270.0" />
             <!--             <stroke android:width="1.0px" android:color="@color/more_pressed_end" /> -->
             <corners android:bottomLeftRadius= "8.0dip" android:bottomRightRadius ="8.0dip" android:topLeftRadius="8.0dip" android:topRightRadius="8.0dip" />
 
