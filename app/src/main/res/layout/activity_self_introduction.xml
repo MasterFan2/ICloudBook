@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="@drawable/bk_gray_5"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:padding="15dp"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/update_nickname_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:hint="自我介绍"
+                android:maxLines="5"
+                android:lines="2"
+                android:maxLength="200"
+                android:textColor="#666666"
+                android:background="@null"
+                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="0/200"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+    <Button
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_bg_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="保存"
+        />
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="@drawable/bk_gray_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:padding="15dp"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/update_nickname_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:hint="输入昵称"
+                android:maxLines="1"
+                android:maxLength="20"
+                android:textColor="#666666"
+                android:background="@null"
+                />
+
+        </RelativeLayout>
+    </LinearLayout>
+    <Button
+        android:textColor="@color/white"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/btn_bg_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="保存"
+        />
+</LinearLayout>

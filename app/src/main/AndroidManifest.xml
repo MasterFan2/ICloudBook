@@ -41,6 +41,58 @@
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <!-- 个人 start  -->
+        <activity
+        android:name=".activity.personal.PersonalActivity"
+        android:label="@string/title_activity_test_download"
+        android:theme="@style/AppTheme.NoActionBar">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
+        </intent-filter>
+    </activity>
+
+        <activity
+            android:name=".activity.personal.NickNameActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.personal.PersonalDataActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.personal.UploadProtocolActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.personal.SelfIntroductionActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <!-- 个人 end  -->
     </application>
 
 </manifest>
