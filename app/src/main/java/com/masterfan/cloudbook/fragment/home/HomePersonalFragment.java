@@ -11,6 +11,7 @@ import com.masterfan.library.ui.annotation.MTFFragmentFeature;
 
 import org.xutils.view.annotation.ViewInject;
 
+import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
@@ -18,12 +19,15 @@ import butterknife.OnClick;
  */
 @MTFFragmentFeature(layout = R.layout.activity_personal)
 public class HomePersonalFragment extends MTFBaseFragment {
-    @ViewInject(R.id.personal_head_img)
+
+    @Bind(R.id.personal_head_img)
     ImageView headImageView;
+
     @Override
     public void initialize() {
 
     }
+
     @OnClick(R.id.personal_head_img)
     public void onclickHeadImage(){
         Intent intent = new Intent(HomePersonalFragment.this.getContext(),PersonalDataActivity.class);
