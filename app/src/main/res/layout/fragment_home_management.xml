@@ -5,9 +5,42 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="管理"
-        android:id="@+id/textView"/>
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialog_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="弹窗"
+            />
+
+        <Button
+            android:id="@+id/dialog_btn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="弹窗2"
+            />
+
+        <Button
+            android:id="@+id/dialog_btn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="wait"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/dialog_btn4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="版本"
+            />
+    </LinearLayout>
 </LinearLayout>
