@@ -7,6 +7,8 @@ import com.masterfan.cloudbook.R;
 import com.masterfan.library.dialog.normal.DialogAction;
 import com.masterfan.library.dialog.normal.GravityEnum;
 import com.masterfan.library.dialog.normal.MTFDialog;
+import com.masterfan.library.dialog.version.MTFVersionDialog;
+import com.masterfan.library.dialog.wait.WaitDialog;
 import com.masterfan.library.ui.MTFBaseFragment;
 import com.masterfan.library.ui.annotation.MTFFragmentFeature;
 import com.masterfan.library.utils.T;
@@ -18,6 +20,10 @@ import butterknife.OnClick;
  */
 @MTFFragmentFeature(layout = R.layout.fragment_home_management)
 public class HomeManagementFragment extends MTFBaseFragment {
+
+    private final String TAG = HomeManagementFragment.class.getCanonicalName();
+
+    private MTFVersionDialog versionDialog;
 
     @OnClick(R.id.dialog_btn)
     public void dialogClick(View view) {
@@ -54,8 +60,36 @@ public class HomeManagementFragment extends MTFBaseFragment {
                 }).show();
     }
 
+    @OnClick(R.id.dialog_btn3)
+    public void dialogClick3(View view) {
+        WaitDialog d =  new WaitDialog.Builder(context).create();
+        d.setCancelable(true);
+        d.show();
+    }
+
+    @OnClick(R.id.dialog_btn4)
+    public void dialogClick4(View view) {
+        versionDialog.show(getFragmentManager(), TAG);
+    }
+
     @Override
     public void initialize() {
+        versionDialog = new MTFVersionDialog();
+        versionDialog.setOnMTFDialogClickListener(new MTFVersionDialog.OnMTFDialogClickListener() {
+            @Override
+            public void onClose() {
+                versionDialog.tilesClose();
+            }
 
+            @Override
+            public void onPositive() {
+                versionDialog.change2download(null);
+            }
+
+            @Override
+            public void onTilesAnimFinish() {
+                versionDialog.dismiss();
+            }
+        });
     }
 }

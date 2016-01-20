@@ -35,7 +35,9 @@ public abstract class MTFBaseFragment extends Fragment {
         MTFFragmentFeature fragmentFeature = this.getClass().getAnnotation(MTFFragmentFeature.class);
         if(fragmentFeature == null) throw new IllegalArgumentException(">>> not set layout resources!");
         View view = inflater.inflate(fragmentFeature.layout(), container, false);
+        context = getActivity();
         ButterKnife.bind(this, view);
+        initialize();
         return view;
     }
 
