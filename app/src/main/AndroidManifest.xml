@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.masterfan.cloudbook"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.masterfan.cloudbook">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".CloudBookApplication"
@@ -20,66 +20,87 @@
         </activity>
         <activity
             android:name=".activity.launcher.LauncherActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".activity.login.LoginActivity">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activity.login.LoginActivity"></activity>
         <activity
             android:name=".activity.test.TestMaterialIconActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.test.TestRecyclerViewLinearLayoutActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.test.TestDownloadActivity"
             android:label="@string/title_activity_test_download"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.main.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- 个人 start  -->
+        <!-- 个人 start -->
         <activity
-        android:name=".activity.personal.PersonalActivity"
-        android:label="@string/title_activity_test_download"
-        android:theme="@style/AppTheme.NoActionBar">
-
-    </activity>
-
+            android:name=".activity.personal.PersonalActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.personal.NickNameActivity"
             android:label="@string/title_activity_test_download"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.personal.PersonalDataActivity"
             android:label="@string/title_activity_test_download"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.personal.UploadProtocolActivity"
             android:label="@string/title_activity_test_download"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.personal.SelfIntroductionActivity"
             android:label="@string/title_activity_test_download"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.personal.BirthdayActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.personal.EmailActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.personal.PhoneActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.personal.UpdatePassWordActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <!-- 个人 end  -->
+        <activity
+            android:name=".activity.personal.ActionTabBookFriendFragmentActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppThemeGuanzhu"></activity>
+
+        <activity
+            android:name=".activity.personal.CommentActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <activity
+            android:name=".activity.personal.NoteBookActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <!-- 个人 end -->
+        <activity
+            android:name=".activity.login.SignupActivity"
+            android:label="@string/title_activity_signup"
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
     </application>
 
 </manifest>
