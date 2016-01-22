@@ -14,7 +14,7 @@ import com.masterfan.library.ui.annotation.MTFActivityFeature;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-@MTFActivityFeature(layout = R.layout.activity_main, status_bar_color = R.color.colorPrimary, toolbar = R.id.toolbar)
+@MTFActivityFeature(layout = R.layout.activity_main, status_bar_color = R.color.colorPrimary)
 public class TestMainActivity extends MTFBaseActivity {
 
     @Bind(R.id.fab)

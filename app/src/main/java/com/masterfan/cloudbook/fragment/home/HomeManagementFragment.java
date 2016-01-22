@@ -1,9 +1,12 @@
 package com.masterfan.cloudbook.fragment.home;
 
 import android.support.annotation.NonNull;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 
 import com.masterfan.cloudbook.R;
+import com.masterfan.cloudbook.activity.test.TestRecyclerViewLinearLayoutActivity;
 import com.masterfan.library.dialog.normal.DialogAction;
 import com.masterfan.library.dialog.normal.GravityEnum;
 import com.masterfan.library.dialog.normal.MTFDialog;
@@ -11,8 +14,14 @@ import com.masterfan.library.dialog.version.MTFVersionDialog;
 import com.masterfan.library.dialog.wait.WaitDialog;
 import com.masterfan.library.ui.MTFBaseFragment;
 import com.masterfan.library.ui.annotation.MTFFragmentFeature;
+import com.masterfan.library.utils.S;
 import com.masterfan.library.utils.T;
+import com.masterfan.library.widget.pickerWheel.TimePopupWindow;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import butterknife.Bind;
 import butterknife.OnClick;
 
 /**
@@ -23,7 +32,11 @@ public class HomeManagementFragment extends MTFBaseFragment {
 
     private final String TAG = HomeManagementFragment.class.getCanonicalName();
 
-    private MTFVersionDialog versionDialog;
+    private MTFVersionDialog versionDialog;//版本dialog
+    private TimePopupWindow pwTime;
+
+    @Bind(R.id.dialog_btn)
+    Button dialogBtn;
 
     @OnClick(R.id.dialog_btn)
     public void dialogClick(View view) {
@@ -72,6 +85,16 @@ public class HomeManagementFragment extends MTFBaseFragment {
         versionDialog.show(getFragmentManager(), TAG);
     }
 
+    @OnClick(R.id.dialog_btn5)
+    public void dialogClick5(View view) {
+        pwTime.showAtLocation(dialogBtn, Gravity.BOTTOM, 0, 0, new Date());
+    }
+
+    @OnClick(R.id.dialog_btn6)
+    public void dialogClick6(View view) {
+        animStart(TestRecyclerViewLinearLayoutActivity.class);
+    }
+
     @Override
     public void initialize() {
         versionDialog = new MTFVersionDialog();
@@ -89,6 +112,20 @@ public class HomeManagementFragment extends MTFBaseFragment {
             @Override
             public void onTilesAnimFinish() {
                 versionDialog.dismiss();
+            }
+        });
+
+        //时间选择器
+        pwTime = new TimePopupWindow(getActivity(), TimePopupWindow.Type.YEAR_MONTH_DAY);
+        pwTime.setTime(new Date());
+        pwTime.setDefaultRange();
+
+        //时间选择后回调
+        pwTime.setOnTimeSelectListener(new TimePopupWindow.OnTimeSelectListener() {
+
+            @Override
+            public void onTimeSelect(Date date) {
+                S.o("" + date.toString());
             }
         });
     }

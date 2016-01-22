@@ -19,7 +19,7 @@ import java.util.concurrent.Executor;
 
 import butterknife.Bind;
 
-@MTFActivityFeature(layout = R.layout.activity_test_download, status_bar_color = R.color.colorPrimary, toolbar = R.id.toolbar)
+@MTFActivityFeature(layout = R.layout.activity_test_download, status_bar_color = R.color.colorPrimary)
 public class TestDownloadActivity extends MTFBaseActivity implements Callback.CommonCallback<File>, Callback.ProgressCallback<File>, Callback.Cancelable {
 
     @Bind(R.id.progress_bar)

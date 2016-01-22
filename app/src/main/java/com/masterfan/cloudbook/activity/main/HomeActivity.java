@@ -21,7 +21,7 @@ import com.masterfan.library.ui.annotation.MTFActivityFeature;
 
 import butterknife.Bind;
 
-@MTFActivityFeature(layout = R.layout.activity_home, status_bar_color = R.color.colorPrimary, toolbar = R.id.toolbar)
+@MTFActivityFeature(layout = R.layout.activity_home, status_bar_color = R.color.colorPrimary)
 public class HomeActivity extends MTFBaseActivity {
 
     private int index = 0;       //touched index
@@ -35,6 +35,8 @@ public class HomeActivity extends MTFBaseActivity {
     private Fragment[] fragments;
 
     //Layout
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
     @Bind(R.id.home_index_rl_layout)
     RelativeLayout indexLayout;
     @Bind(R.id.home_resource_rl_layout)
@@ -68,6 +70,8 @@ public class HomeActivity extends MTFBaseActivity {
         //layout
         layouts = new RelativeLayout[]{indexLayout, resourceLayout, managementLayout, personalLayout};
         layouts[0].setBackgroundColor(getResources().getColor(R.color.base_green_checked));
+
+        toolbar.setTitle("首页");
     }
 
     /**

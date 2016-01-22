@@ -3,6 +3,7 @@ package com.masterfan.cloudbook.activity.test;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.masterfan.cloudbook.activity.test.bean.Item;
 import com.masterfan.library.ui.MTFBaseActivity;
 import com.masterfan.library.ui.annotation.MTFActivityFeature;
 import com.masterfan.library.utils.S;
+import com.masterfan.library.utils.T;
 import com.masterfan.library.widget.recyclerview.MTFEndlessRecyclerOnScrollListener;
 import com.masterfan.library.widget.recyclerview.MTFLoadingFooter;
 import com.masterfan.library.widget.recyclerview.MTFRecyclerViewAdapterWrapper;
@@ -27,10 +29,10 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-@MTFActivityFeature(layout = R.layout.activity_test_recycler_view_linear_layout, status_bar_color = R.color.colorPrimary, toolbar = R.id.toolbar)
-public class TestRecyclerViewLinearLayoutActivity extends MTFBaseActivity {
+@MTFActivityFeature(layout = R.layout.activity_test_recycler_view_linear_layout, status_bar_color = R.color.colorPrimary)
+public class TestRecyclerViewLinearLayoutActivity extends MTFBaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    private final int PAGE_COUNT = 43;//总大小
+    private final int PAGE_COUNT = 33;//总大小
     private final int PAGE_SIZE  = 10;//每页大小
     private final int PAGE_INDEX = 1; //第几页
 
@@ -43,6 +45,9 @@ public class TestRecyclerViewLinearLayoutActivity extends MTFBaseActivity {
 
     @Bind(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @Bind(R.id.refreshLayout)
+    SwipeRefreshLayout refreshLayout;
 
     private MTFRecyclerViewAdapterWrapper adapterWrapper;
     private MyAdapter adapter;
@@ -61,13 +66,11 @@ public class TestRecyclerViewLinearLayoutActivity extends MTFBaseActivity {
         recyclerView.setAdapter(adapterWrapper);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        ImageView img = new ImageView(context);
-        img.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        img.setImageResource(R.mipmap.ic_launcher);
-
-        MTFRecyclerViewUtils.setHeaderView(recyclerView, img);
-
+        View headerView = LayoutInflater.from(context).inflate(R.layout.test_recyclerview_header, null, false);
+        MTFRecyclerViewUtils.setHeaderView(recyclerView, headerView);
         recyclerView.addOnScrollListener(mOnScrollListener);
+
+        refreshLayout.setOnRefreshListener(this);//添加refresh Listener
     }
 
     private MTFEndlessRecyclerOnScrollListener mOnScrollListener = new MTFEndlessRecyclerOnScrollListener() {
@@ -95,16 +98,37 @@ public class TestRecyclerViewLinearLayoutActivity extends MTFBaseActivity {
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            for (int i = 0; i < 10; i++) {
-                dataList.add(new Item(i, String.valueOf(i)));
+            switch (msg.what){
+                case 0:
+                    for (int i = 0; i < 10; i++) {
+                        dataList.add(new Item(i, String.valueOf(i)));
+                    }
+                    adapter.notifyDataSetChanged();
+                    MTFRecyclerViewStateUtils.setFooterViewState(recyclerView, MTFLoadingFooter.State.Normal);
+                    break;
+                case 1:
+                    refreshLayout.setRefreshing(false);
+                    T.s(context, "刷新成功");
+                    adapter.notifyDataSetChanged();
+                    break;
             }
-            adapter.notifyDataSetChanged();
-            MTFRecyclerViewStateUtils.setFooterViewState(recyclerView, MTFLoadingFooter.State.Normal);
+
         }
     };
 
     private void requestData() {
-        handler.sendEmptyMessageDelayed(0, 3000);
+        handler.sendEmptyMessageDelayed(0, 1500);
+    }
+
+    @Override
+    public void onRefresh() {
+
+        dataList .clear();
+        for (int i = 0; i < 10; i++) {
+            dataList.add(new Item(i, String.valueOf(i)));
+        }
+        currentSize = dataList.size();
+        handler.sendEmptyMessageDelayed(1, 2000);
     }
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MTFViewHolder> {
