@@ -1,7 +1,9 @@
 package com.masterfan.cloudbook.activity.personal;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -24,7 +26,7 @@ public class PersonalDataActivity extends MTFBaseActivity {
     @Bind(R.id.personal_data_nick_name_layout)
     LinearLayout nickNameLayout;
 
-    @Bind(R.id.personal_data_zwjs_layout)
+    @Bind(R.id.personal_data_self_introduction_layout)
     LinearLayout zwjsLayout;
 
     @Bind(R.id.personal_data_birthday_layout)
@@ -38,6 +40,9 @@ public class PersonalDataActivity extends MTFBaseActivity {
 
     @Bind(R.id.personal_data_login_password_layout)
     LinearLayout loginPassWordLayout;
+
+    @Bind(R.id.personal_data_sex_textview)
+    TextView sexTxt;
 
     @Override
     public void initialize(Bundle savedInstanceState) {
@@ -64,8 +69,8 @@ public class PersonalDataActivity extends MTFBaseActivity {
         }
     }
 
-    @OnClick(R.id.personal_data_zwjs_layout)
-    public void setOnclickZwjs(View view){
+    @OnClick(R.id.personal_data_self_introduction_layout)
+    public void setOnclickSelfIntroduction(View view){
         Intent intent = new Intent(this,SelfIntroductionActivity.class);
         if(intent != null){
             startActivityForResult(intent, 0);
@@ -94,6 +99,7 @@ public class PersonalDataActivity extends MTFBaseActivity {
         }
     }
 
+
     @OnClick(R.id.personal_data_login_password_layout)
     public void setOnclickLoginPassword(View view){
         Intent intent = new Intent(this,UpdatePassWordActivity.class);
@@ -102,5 +108,36 @@ public class PersonalDataActivity extends MTFBaseActivity {
         }else{
             Log.i("AAAA","intent==null");
         }
+    }
+
+    @OnClick(R.id.personal_data_sex_textview)
+    public void setOnclickSex(View view){
+       showSinChosDia();
+    }
+
+    /*单项选择对话框*/
+    int yourChose = 0;
+    private void showSinChosDia()
+    {
+        final String[] mList={"男","女"};
+        yourChose = 0;
+        final AlertDialog.Builder sinChosDia=new AlertDialog.Builder(PersonalDataActivity.this);
+        sinChosDia.setTitle("选择你的性别");
+        sinChosDia.setSingleChoiceItems(mList, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                yourChose=which;
+                Log.i("AAAA","选的是："+yourChose);
+            }
+        });
+        sinChosDia.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+                    sexTxt.setText(mList[yourChose]);
+            }
+        });
+        sinChosDia.create().show();
     }
 }

@@ -2,9 +2,6 @@ package com.masterfan.cloudbook.activity.personal;
 
 import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.masterfan.cloudbook.R;
+import com.masterfan.cloudbook.activity.personal.entity.Person;
 import com.masterfan.library.ui.MTFBaseFragment;
 import com.masterfan.library.ui.annotation.MTFFragmentFeature;
 
@@ -26,10 +24,10 @@ import butterknife.Bind;
 /**
  * 关注我的书友
  */
-@MTFFragmentFeature(layout = R.layout.fragment_gzwd)
-public class GzwdFragment extends MTFBaseFragment {
+@MTFFragmentFeature(layout = R.layout.fragment_attention_mine)
+public class AttentionMineFragment extends MTFBaseFragment {
 
-	@Bind(R.id.fragment_gzwd_listview)
+	@Bind(R.id.fragment_attention_mine_listview)
 	ListView listView;
 
 	PersonListAdapter adapter;

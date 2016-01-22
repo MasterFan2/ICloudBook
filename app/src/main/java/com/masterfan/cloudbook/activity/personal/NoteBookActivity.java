@@ -13,10 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.masterfan.cloudbook.R;
+import com.masterfan.cloudbook.activity.personal.entity.Comment;
 import com.masterfan.library.ui.MTFBaseActivity;
 import com.masterfan.library.ui.annotation.MTFActivityFeature;
 
 import java.util.ArrayList;
+
+import butterknife.Bind;
 
 /**
  * 我的笔记
@@ -24,15 +27,18 @@ import java.util.ArrayList;
 @MTFActivityFeature(layout = R.layout.activity_notebook_main, toolbar = R.id.toolbar,status_bar_color = R.color.colorPrimary)
 public class NoteBookActivity extends MTFBaseActivity {
 
+    @Bind(R.id.notebook_listView)
     ListView listView;
+
     ArrayList<Comment> arrayList;
+
     MyAdapter adapter;
+
     Comment comment;
 
     @Override
     public void initialize(Bundle savedInstanceState) {
         toolbar.setTitle("我的笔记");
-        listView = (ListView) findViewById(R.id.notebook_listView);
         addData();
         adapter = new MyAdapter(this);
         listView.setAdapter(adapter);

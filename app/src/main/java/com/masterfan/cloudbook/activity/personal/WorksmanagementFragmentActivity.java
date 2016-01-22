@@ -16,13 +16,15 @@ import com.masterfan.library.ui.annotation.MTFActivityFeature;
 
 import butterknife.Bind;
 
-
-@MTFActivityFeature(layout = R.layout.activity_book_friend, status_bar_color = R.color.colorPrimary)
-public class ActionTabBookFriendFragmentActivity extends MTFBaseFragmentActivity
+/**
+ * 作品管理
+ */
+@MTFActivityFeature(layout = R.layout.activity_works_management, toolbar = R.id.toolbar,status_bar_color = R.color.colorPrimary)
+public class WorksmanagementFragmentActivity extends MTFBaseFragmentActivity
         implements ActionBar.TabListener {
 
-    private WgzdFragment mWgzdFragment = new WgzdFragment();
-    private GzwdFragment mGzwdFragment = new GzwdFragment();
+    private RecentlyViewedFragment recentlyViewedFragment = new RecentlyViewedFragment();
+    private MyBookFragment myBookFragment = new MyBookFragment();
 
     private static final int TAB_INDEX_COUNT = 2;
 
@@ -37,11 +39,13 @@ public class ActionTabBookFriendFragmentActivity extends MTFBaseFragmentActivity
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;
 
-    private final String[] filters = new String[]{"我关注的", "关注我的"};
+    private final String[] filters = new String[]{"最近查看", "我的图书"};
 
 
     @Override
     public void initialize(Bundle savedInstanceState) {
+        toolbar.setTitle("作品管理");
+        toolbar.setLogo(getResources().getDrawable(R.mipmap.img_select));
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -84,53 +88,10 @@ public class ActionTabBookFriendFragmentActivity extends MTFBaseFragmentActivity
 
             }
         });
-//		setUpActionBar();
-//		setUpViewPager();
-//		setUpTabs();
     }
 
-    private void setUpActionBar() {
-        final ActionBar actionBar = getActionBar();
-        actionBar.setHomeButtonEnabled(false);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayShowHomeEnabled(false);
-    }
 
-    private void setUpViewPager() {
-        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        mViewPager = (ViewPager) findViewById(R.id.pager);
-        mViewPager.setAdapter(mViewPagerAdapter);
-        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                final ActionBar actionBar = getActionBar();
-                actionBar.setSelectedNavigationItem(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                switch (state) {
-                    case ViewPager.SCROLL_STATE_IDLE:
-                        break;
-                    case ViewPager.SCROLL_STATE_DRAGGING:
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
-    }
-
-    private void setUpTabs() {
-        final ActionBar actionBar = getActionBar();
-        for (int i = 0; i < mViewPagerAdapter.getCount(); ++i) {
-            actionBar.addTab(actionBar.newTab()
-                    .setText(mViewPagerAdapter.getPageTitle(i))
-                    .setTabListener(this));
-        }
-    }
 
     @Override
     protected void onDestroy() {
@@ -149,9 +110,9 @@ public class ActionTabBookFriendFragmentActivity extends MTFBaseFragmentActivity
             // TODO Auto-generated method stub
             switch (position) {
                 case TAB_INDEX_ONE:
-                    return mWgzdFragment;
+                    return recentlyViewedFragment;
                 case TAB_INDEX_TWO:
-                    return mGzwdFragment;
+                    return myBookFragment;
             }
             throw new IllegalStateException("No fragment at position " + position);
         }
@@ -167,10 +128,10 @@ public class ActionTabBookFriendFragmentActivity extends MTFBaseFragmentActivity
             String tabLabel = null;
             switch (position) {
                 case TAB_INDEX_ONE:
-                    tabLabel = getString(R.string.tab1);
+                    tabLabel = getString(R.string.s_recently_viewed);
                     break;
                 case TAB_INDEX_TWO:
-                    tabLabel = getString(R.string.tab2);
+                    tabLabel = getString(R.string.s_my_book);
                     break;
             }
             return tabLabel;

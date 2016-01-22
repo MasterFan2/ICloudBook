@@ -1,4 +1,4 @@
-package com.masterfan.cloudbook.activity.personal;
+package com.masterfan.cloudbook.activity.personal.entity;
 
 /**
  * 评论对象

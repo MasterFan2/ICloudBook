@@ -33,7 +33,7 @@ public class PersonalActivity  extends MTFBaseActivity {
 
     @OnClick(R.id.personal_my_book_friend_layout)
     public void onclickBookFriend(View view){
-        Intent intent = new Intent(this,ActionTabBookFriendFragmentActivity.class);
+        Intent intent = new Intent(this,BookFriendFragmentActivity.class);
         animStart(intent);
     }
 

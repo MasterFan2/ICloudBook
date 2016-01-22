@@ -1,6 +1,7 @@
-package com.masterfan.cloudbook.activity.personal;
+package com.masterfan.cloudbook.activity.personal.entity;
 
 /**
+ * 关注的人
  * Created by szj on 2016/1/21.
  */
 public class Person {
