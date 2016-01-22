@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.masterfan.cloudbook"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.masterfan.cloudbook">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".CloudBookApplication"
@@ -15,43 +16,40 @@
         <activity
             android:name=".activity.test.TestMainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".activity.launcher.LauncherActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity android:name=".activity.login.LoginActivity">
-        </activity>
+        <activity android:name=".activity.login.LoginActivity"></activity>
         <activity
             android:name=".activity.test.TestMaterialIconActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.test.TestRecyclerViewLinearLayoutActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.test.TestDownloadActivity"
             android:label="@string/title_activity_test_download"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".activity.main.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
+            android:theme="@style/AppTheme.NoActionBar"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <!-- 个人 start  -->
         <activity
-        android:name=".activity.personal.PersonalActivity"
-        android:label="@string/title_activity_test_download"
-        android:theme="@style/AppTheme.NoActionBar">
+            android:name=".activity.personal.PersonalActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar">
 
-    </activity>
+        </activity>
 
         <activity
             android:name=".activity.personal.NickNameActivity"
@@ -70,14 +68,12 @@
         <activity
             android:name=".activity.personal.UploadProtocolActivity"
             android:label="@string/title_activity_test_download"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
             android:name=".activity.personal.SelfIntroductionActivity"
             android:label="@string/title_activity_test_download"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <!-- 个人 end  -->
     </application>

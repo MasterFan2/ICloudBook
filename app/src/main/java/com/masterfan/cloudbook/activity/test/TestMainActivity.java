@@ -23,7 +23,6 @@ public class TestMainActivity extends MTFBaseActivity {
     @Override
     public void initialize(Bundle savedInstanceState) {
 
-        toolbar.setTitle("测试Main");
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
