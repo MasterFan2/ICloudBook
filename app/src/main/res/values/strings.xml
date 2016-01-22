@@ -13,7 +13,10 @@
     <!-- end home bottom -->
 
     <!-- personal start-->
-    <string name="tab1">我关注的</string>
-    <string name="tab2">关注我的</string>
+    <string name="s_my_attention">我关注的</string>
+    <string name="s_attention_my">关注我的</string>
+    <string name="s_recently_viewed">最近查看</string>
+    <string name="s_my_book">我的图书</string>
+    <string name="title_activity_my_upload">MyUploadActivity</string>
     <!-- end personal-->
 </resources>

@@ -9,7 +9,7 @@
         <item name="android:actionBarTabTextStyle">@style/MyActionBar</item>
     </style>
 
-    <style name="AppThemeGuanzhu" parent="@android:style/Theme.Holo">
+    <style name="AppThemeFragment" parent="@android:style/Theme.Holo">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

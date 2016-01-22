@@ -132,6 +132,7 @@
             />
 
         <TextView
+            android:id="@+id/personal_data_sex_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -361,7 +362,7 @@
         android:layout_height="1dp"
         android:background="#999999" />
     <LinearLayout
-        android:id="@+id/personal_data_zwjs_layout"
+        android:id="@+id/personal_data_self_introduction_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
