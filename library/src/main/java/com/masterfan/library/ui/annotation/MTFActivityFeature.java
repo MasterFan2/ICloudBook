@@ -8,7 +8,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MTFActivityFeature {
-	int toolbar() default 0;
 	int layout() default 0;
 	int status_bar_color() default 0;
 }
