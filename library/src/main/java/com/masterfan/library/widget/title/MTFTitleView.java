@@ -22,11 +22,6 @@ public class MTFTitleView extends RelativeLayout {
 
     private View titleView;
 
-    //title text color
-//    private int titleTextColor = 0xFFFFFF;
-//    private int titleBackgroundColor = 0xFF3F8AF8;
-
-
     private int rightButtonBackground = -1;
 
     public MTFTitleView(Context context) {
@@ -119,11 +114,6 @@ public class MTFTitleView extends RelativeLayout {
     }
 
     public void setRightBtnText(String text) {
-//        if (TextUtils.isEmpty(text)) {
-//            rightBtn.setText("  ");
-//        } else {
-//            rightBtn.setText(text);
-//        }
 
     }
 
@@ -132,7 +122,6 @@ public class MTFTitleView extends RelativeLayout {
     }
 
     public void hideRightBtn() {
-//        rightBtn.setText("   ");
         rightBtn.setEnabled(false);
         rightBtn.setVisibility(View.INVISIBLE);
     }
@@ -142,7 +131,6 @@ public class MTFTitleView extends RelativeLayout {
     }
 
     public void showRightBtn() {
-//        rightBtn.setText("ɾ��");
         rightBtn.setEnabled(true);
         rightBtn.setVisibility(View.VISIBLE);
     }
