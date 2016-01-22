@@ -1,4 +1,4 @@
-ICloudBook.iml
+*.iml
 .gradle
 /local.properties
 /.idea/workspace.xml

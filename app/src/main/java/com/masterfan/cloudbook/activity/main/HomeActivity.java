@@ -49,6 +49,8 @@ public class HomeActivity extends MTFBaseActivity {
     @Override
     public void initialize(Bundle savedInstanceState) {
 
+        toolbar.setTitle("首页");
+
         //fragment
         indexFragment       = new HomeIndexFragment();
         resourceFragment    = new HomeResourceFragment();

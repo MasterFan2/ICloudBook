@@ -22,6 +22,8 @@ public class TestMainActivity extends MTFBaseActivity {
 
     @Override
     public void initialize(Bundle savedInstanceState) {
+
+        toolbar.setTitle("测试Main");
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,22 +48,6 @@ public class TestMainActivity extends MTFBaseActivity {
     public void gotoDownload(View view){
         animStart(TestDownloadActivity.class);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     ///Menu .
     @Override

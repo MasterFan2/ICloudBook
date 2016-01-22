@@ -38,6 +38,7 @@ public abstract class MTFBaseActivity extends AppCompatActivity {
         if(activityFeature.toolbar() > 0) {
             toolbar = (Toolbar) findViewById(activityFeature.toolbar());
             setSupportActionBar(toolbar);
+
         }
         initialize(savedInstanceState);
     }
