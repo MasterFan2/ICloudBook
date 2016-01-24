@@ -15,7 +15,7 @@
         <activity
             android:name=".activity.test.TestMainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activity.launcher.LauncherActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -41,61 +41,60 @@
         </activity>
         <!-- 个人 start -->
         <activity
-            android:name=".activity.personal.PersonalActivity"
+            android:name=".activity.personal.ui.NickNameActivity"
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.personal.NickNameActivity"
+            android:name=".activity.personal.ui.PersonalDataActivity"
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.personal.PersonalDataActivity"
+            android:name=".activity.personal.ui.UploadProtocolActivity"
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.personal.UploadProtocolActivity"
+            android:name=".activity.personal.ui.SelfIntroductionActivity"
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.personal.SelfIntroductionActivity"
+            android:name=".activity.personal.ui.BirthdayActivity"
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.personal.BirthdayActivity"
+            android:name=".activity.personal.ui.EmailActivity"
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.personal.EmailActivity"
+            android:name=".activity.personal.ui.PhoneActivity"
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.personal.PhoneActivity"
+            android:name=".activity.personal.ui.UpdatePassWordActivity"
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.personal.UpdatePassWordActivity"
+            android:name=".activity.personal.ui.BookFriendFragmentActivity"
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.personal.BookFriendFragmentActivity"
+            android:name=".activity.personal.ui.NoteBookListActivity"
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activity.personal.CommentActivity"
-            android:label="@string/title_activity_test_download"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.personal.NoteBookActivity"
-            android:label="@string/title_activity_test_download"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
-            android:name=".activity.personal.MyUploadActivity"
+            android:name=".activity.personal.ui.MyUploadListActivity"
             android:label="@string/title_activity_my_upload"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.personal.ui.WorksmanagementFragmentActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".activity.personal.WorksmanagementFragmentActivity"
+            android:name=".activity.personal.ui.MessageListActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".activity.personal.ui.CommentListActivity"
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -103,8 +102,7 @@
         <activity
             android:name=".activity.login.SignupActivity"
             android:label="@string/title_activity_signup"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
