@@ -18,5 +18,6 @@
     <string name="s_recently_viewed">最近查看</string>
     <string name="s_my_book">我的图书</string>
     <string name="title_activity_my_upload">MyUploadActivity</string>
+    <string name="title_activity_class">ClassActivity</string>
     <!-- end personal-->
 </resources>
