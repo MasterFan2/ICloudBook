@@ -1,4 +1,4 @@
-package com.masterfan.cloudbook.activity.personal;
+package com.masterfan.cloudbook.activity.personal.ui;
 
 import android.os.Bundle;
 

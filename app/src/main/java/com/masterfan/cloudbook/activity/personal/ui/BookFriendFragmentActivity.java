@@ -1,4 +1,4 @@
-package com.masterfan.cloudbook.activity.personal;
+package com.masterfan.cloudbook.activity.personal.ui;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
@@ -9,22 +9,26 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 
 import com.masterfan.cloudbook.R;
+import com.masterfan.cloudbook.activity.personal.fragment.AttentionMineFragment;
+import com.masterfan.cloudbook.activity.personal.fragment.MineAttentionFragment;
 import com.masterfan.library.ui.MTFBaseFragmentActivity;
 import com.masterfan.library.ui.annotation.MTFActivityFeature;
 
 import butterknife.Bind;
 
 /**
- * 作品管理
+ * 我的书友
  */
-@MTFActivityFeature(layout = R.layout.activity_works_management, toolbar = R.id.toolbar,status_bar_color = R.color.colorPrimary)
-public class WorksmanagementFragmentActivity extends MTFBaseFragmentActivity
+@MTFActivityFeature(layout = R.layout.activity_book_friend,status_bar_color = R.color.colorPrimary)
+public class BookFriendFragmentActivity extends MTFBaseFragmentActivity
         implements ActionBar.TabListener {
 
-    private RecentlyViewedFragment recentlyViewedFragment = new RecentlyViewedFragment();
-    private MyBookFragment myBookFragment = new MyBookFragment();
+    private MineAttentionFragment mMineAttentionFragment = new MineAttentionFragment();
+    private AttentionMineFragment mAttentionMineFragment = new AttentionMineFragment();
+//
 
     private static final int TAB_INDEX_COUNT = 2;
 
@@ -39,13 +43,15 @@ public class WorksmanagementFragmentActivity extends MTFBaseFragmentActivity
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;
 
-    private final String[] filters = new String[]{"最近查看", "我的图书"};
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
+    private final String[] filters = new String[]{"我关注的", "关注我的"};
 
 
     @Override
     public void initialize(Bundle savedInstanceState) {
-        toolbar.setTitle("作品管理");
-        toolbar.setLogo(getResources().getDrawable(R.mipmap.img_select));
+        toolbar.setTitle("我的书友");
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
@@ -88,10 +94,53 @@ public class WorksmanagementFragmentActivity extends MTFBaseFragmentActivity
 
             }
         });
+//		setUpActionBar();
+//		setUpViewPager();
+//		setUpTabs();
     }
 
+    private void setUpActionBar() {
+        final ActionBar actionBar = getActionBar();
+        actionBar.setHomeButtonEnabled(false);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowHomeEnabled(false);
+    }
 
+    private void setUpViewPager() {
+        mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(mViewPagerAdapter);
+        mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                final ActionBar actionBar = getActionBar();
+                actionBar.setSelectedNavigationItem(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                switch (state) {
+                    case ViewPager.SCROLL_STATE_IDLE:
+                        break;
+                    case ViewPager.SCROLL_STATE_DRAGGING:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+    }
+
+    private void setUpTabs() {
+        final ActionBar actionBar = getActionBar();
+        for (int i = 0; i < mViewPagerAdapter.getCount(); ++i) {
+            actionBar.addTab(actionBar.newTab()
+                    .setText(mViewPagerAdapter.getPageTitle(i))
+                    .setTabListener(this));
+        }
+    }
 
     @Override
     protected void onDestroy() {
@@ -110,9 +159,9 @@ public class WorksmanagementFragmentActivity extends MTFBaseFragmentActivity
             // TODO Auto-generated method stub
             switch (position) {
                 case TAB_INDEX_ONE:
-                    return recentlyViewedFragment;
+                    return mMineAttentionFragment;
                 case TAB_INDEX_TWO:
-                    return myBookFragment;
+                    return mAttentionMineFragment;
             }
             throw new IllegalStateException("No fragment at position " + position);
         }
@@ -128,10 +177,10 @@ public class WorksmanagementFragmentActivity extends MTFBaseFragmentActivity
             String tabLabel = null;
             switch (position) {
                 case TAB_INDEX_ONE:
-                    tabLabel = getString(R.string.s_recently_viewed);
+                    tabLabel = getString(R.string.s_my_attention);
                     break;
                 case TAB_INDEX_TWO:
-                    tabLabel = getString(R.string.s_my_book);
+                    tabLabel = getString(R.string.s_attention_my);
                     break;
             }
             return tabLabel;
