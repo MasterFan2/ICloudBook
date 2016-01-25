@@ -52,43 +52,43 @@ import java.util.List;
  */
 public class WheelView extends View {
 	/** Scrolling duration */
-	private static final int SCROLLING_DURATION = 400;
+	private int SCROLLING_DURATION = 400;
 
 	/** Minimum delta for scrolling */
-	private static final int MIN_DELTA_FOR_SCROLLING = 1;
+	private int MIN_DELTA_FOR_SCROLLING = 1;
 
 	/** Current value & label text color */
-	private static final int VALUE_TEXT_COLOR = 0xFF29A861;
+	private int VALUE_TEXT_COLOR = 0xFF29A861;
 
 	/** Items text color */
-	private static final int ITEMS_TEXT_COLOR = 0xFF29A861;
+	private int ITEMS_TEXT_COLOR = 0xFF29A861;
 
 	/** Top and bottom shadows colors */
-	private static final int[] SHADOWS_COLORS = new int[] { 0xFF111111,
+	private int[] SHADOWS_COLORS = new int[] { 0xFF111111,
 			0x00AAAAAA, 0x00AAAAAA };
 
 	/** Additional items height (is added to standard text item height) */
-	private static final int ADDITIONAL_ITEM_HEIGHT = 15;
+	private int ADDITIONAL_ITEM_HEIGHT = 15;
 
 	/** Text size */
 	public int TEXT_SIZE;
 
 	/** Top and bottom items offset (to hide that) */
-	private final int ITEM_OFFSET = TEXT_SIZE / 5;
+	private int ITEM_OFFSET = TEXT_SIZE / 5;
 
 	/** Additional width for items layout */
-	private static final int ADDITIONAL_ITEMS_SPACE = 2;
+	private int ADDITIONAL_ITEMS_SPACE = 2;
 
 	/** Label offset ,   dip */
-	private static int LABEL_OFFSET_DIP = 20;
+	private int LABEL_OFFSET_DIP = 20;
 	/** Label offset */
-	private static int LABEL_OFFSET = 30;
+	private int LABEL_OFFSET = 30;
 
 	/** Left and right padding value */
-	private static final int PADDING = 10;
+	private int PADDING = 10;
 
 	/** Default count of visible items */
-	private static final int DEF_VISIBLE_ITEMS = 7;
+	private int DEF_VISIBLE_ITEMS = 7;
 
 	// Wheel Values
 	private WheelAdapter adapter = null;

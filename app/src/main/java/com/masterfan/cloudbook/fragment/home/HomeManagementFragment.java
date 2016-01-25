@@ -80,6 +80,23 @@ public class HomeManagementFragment extends MTFBaseFragment {
         d.show();
     }
 
+    @OnClick(R.id.dialog_btn31)
+    public void dialogClick31(View view) {
+        final String [] genders = {"男", "女", "不男不女"};
+        new MTFDialog.Builder(getActivity())
+                .title("请选择性别")
+                .items(genders)
+                .itemsCallbackSingleChoice(0, new MTFDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MTFDialog dialog, View itemView, int which, CharSequence text) {
+                        T.s(context, "你选择的是     [" + genders[which]+"]");
+                        return true;
+                    }
+                })
+                .positiveText("确认选择")
+                .show();
+    }
+
     @OnClick(R.id.dialog_btn4)
     public void dialogClick4(View view) {
         versionDialog.show(getFragmentManager(), TAG);
@@ -93,6 +110,30 @@ public class HomeManagementFragment extends MTFBaseFragment {
     @OnClick(R.id.dialog_btn6)
     public void dialogClick6(View view) {
         animStart(TestRecyclerViewLinearLayoutActivity.class);
+    }
+    @OnClick(R.id.dialog_btn61)
+    public void dialogClick61(View view) {
+        final String [] genders = {"Apple", "Android", "Windows", "Blackberry"};
+        new MTFDialog.Builder(getActivity())
+                .title("请选择系统")
+                .items(genders)
+                .itemsCallbackMultiChoice(new Integer[]{1, 3}, new MTFDialog.ListCallbackMultiChoice() {//设置选中项和回调
+                    @Override
+                    public boolean onSelection(MTFDialog dialog, Integer[] which, CharSequence[] text) {
+
+                        StringBuilder str = new StringBuilder();
+                        for (int i = 0; i < which.length; i++) {
+                            if (i > 0) str.append('\n');
+                            str.append(which[i]);
+                            str.append(": ");
+                            str.append(text[i]);
+                        }
+                        T.s(context, str.toString());
+                        return true; // allow selection
+                    }
+                })
+                .positiveText("确认选择")
+                .show();
     }
 
     @Override

@@ -21,7 +21,6 @@ import butterknife.ButterKnife;
  */
 public abstract class MTFBaseFragmentActivity extends FragmentActivity {
     public Activity context;
-    public Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

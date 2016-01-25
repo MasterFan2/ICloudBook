@@ -104,6 +104,7 @@
     <attr name="md_regular_font" format="string" />
     <!-- dialog end-->
 
+    <!-- Numberprogressbar -->
     <declare-styleable name="MTFNumberProgressBar">
         <attr name="progress_current" format="integer"/>
         <attr name="progress_max" format="integer"/>
@@ -124,14 +125,54 @@
             <enum name="invisible" value="1"/>
         </attr>
     </declare-styleable>
+    <!-- Numberprogressbar end -->
 
     <declare-styleable name="Themes">
         <attr name="numberProgressBarStyle" format="reference"/>
     </declare-styleable>
 
-
+    <!-- Tiles -->
     <declare-styleable name="sw_StarWarsTilesFrameLayout">
         <attr name="sw_animationDuration" format="integer" />
         <attr name="sw_numberOfTilesX" format="integer" />
     </declare-styleable>
+    <!-- Tiles  end -->
+
+    <!-- MaterialRippleLayout  -->
+    <declare-styleable name="MaterialRippleLayout">
+        <attr name="mr_rippleColor" format="color" localization="suggested" />
+        <attr name="rippleDimension" format="dimension" localization="suggested" />
+        <attr name="rippleOverlay" format="boolean" localization="suggested" />
+        <attr name="rippleAlpha" format="float" localization="suggested" />
+        <attr name="rippleDuration" format="integer" localization="suggested" />
+        <attr name="rippleFadeDuration" format="integer" localization="suggested" />
+        <attr name="rippleHover" format="boolean" localization="suggested" />
+        <attr name="rippleBackground" format="color" localization="suggested" />
+        <attr name="rippleDelayClick" format="boolean" localization="suggested" />
+        <attr name="ripplePersistent" format="boolean" localization="suggested" />
+        <attr name="rippleInAdapter" format="boolean" localization="suggested" />
+    </declare-styleable>
+    <!-- MaterialRippleLayout end -->
+
+    <!-- title View -->
+    <declare-styleable name="MasterTitleView">
+        <attr name="titleText" format="string" />
+        <attr name="titleTxtColor" format="color" />
+        <attr name="titleBackgroundColor" format="color" />
+        <attr name="titleBackground" format="reference" />
+        <attr name="leftButtonText" format="string" />
+        <attr name="leftButtonColor" format="color" />
+        <attr name="leftButtonHide" format="boolean" />
+        <attr name="leftButtonResource" format="reference" />
+        <attr name="rightButtonText" format="string" />
+        <attr name="rightButtonHide" format="boolean" />
+        <!--<attr name="rightButtonVisiblity">-->
+        <!--<enum name="Visible" value="0" />-->
+        <!--<enum name="InVisible" value="1" />-->
+        <!--</attr>-->
+        <!--<attr name="leftButtonBackground" format="color|reference" />-->
+        <attr name="rightButtonBackground" format="color|reference" />
+        <!--<attr name=""-->
+    </declare-styleable>
+    <!-- end title View -->
 </resources>
