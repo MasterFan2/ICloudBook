@@ -43,15 +43,12 @@ public class BookFriendFragmentActivity extends MTFBaseFragmentActivity
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;
 
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
 
     private final String[] filters = new String[]{"我关注的", "关注我的"};
 
 
     @Override
     public void initialize(Bundle savedInstanceState) {
-        toolbar.setTitle("我的书友");
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {

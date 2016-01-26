@@ -14,7 +14,7 @@ import com.masterfan.library.ui.annotation.MTFActivityFeature;
 /**
  * 班级
  */
-@MTFActivityFeature(layout = R.layout.activity_class)
+@MTFActivityFeature(layout = R.layout.activity_class, status_bar_color = R.color.colorPrimary)
 public class ClassActivity extends MTFBaseActivity {
     @Override
     public void initialize(Bundle savedInstanceState) {

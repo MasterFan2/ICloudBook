@@ -31,7 +31,7 @@ import butterknife.ButterKnife;
 /**
  * 消息列表
  */
-@MTFActivityFeature(layout=R.layout.activity_message_list)
+@MTFActivityFeature(layout=R.layout.activity_message_list, status_bar_color = R.color.colorPrimary)
 public class MessageListActivity extends MTFBaseActivity implements SwipeRefreshLayout.OnRefreshListener{
 
 

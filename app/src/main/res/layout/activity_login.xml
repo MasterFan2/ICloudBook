@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
     tools:context="com.masterfan.cloudbook.activity.login.LoginActivity">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <LinearLayout
-        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <com.masterfan.library.widget.title.MTFTitleView
+            android:id="@+id/titleView"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:titleText="登陆"
+            app:titleTxtColor="@android:color/white"
+            app:titleBackgroundColor="@color/colorPrimary"
+            />
         <ImageView
+            android:layout_marginTop="50dp"
             android:layout_width="wrap_content"
             android:src="@mipmap/logo"
             android:layout_gravity="center"

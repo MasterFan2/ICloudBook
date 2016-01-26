@@ -42,16 +42,12 @@ public class WorksmanagementFragmentActivity extends MTFBaseFragmentActivity
     @Bind(R.id.tabLayout)
     TabLayout tabLayout;
 
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-
 
     private final String[] filters = new String[]{"最近查看", "我的图书"};
 
 
     @Override
     public void initialize(Bundle savedInstanceState) {
-        toolbar.setTitle("作品管理");
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {

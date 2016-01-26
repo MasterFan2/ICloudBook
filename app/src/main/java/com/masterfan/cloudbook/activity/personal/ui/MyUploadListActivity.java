@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
 /**
  * 上传图书
  */
-@MTFActivityFeature(layout=R.layout.activity_my_upload)
+@MTFActivityFeature(layout=R.layout.activity_my_upload, status_bar_color = R.color.colorPrimary)
 public class MyUploadListActivity extends MTFBaseActivity implements SwipeRefreshLayout.OnRefreshListener{
 
 

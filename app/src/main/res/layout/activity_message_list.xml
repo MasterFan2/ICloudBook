@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context=".activity.personal.ui.MessageListActivity">
+    <com.masterfan.library.widget.title.MTFTitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:titleText="消息中心"
+        app:titleTxtColor="@android:color/white"
+        app:titleBackgroundColor="@color/colorPrimary"
+        />
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/message_list_recyclerView_refreshLayout"
         android:layout_width="match_parent"
@@ -13,4 +24,4 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </android.support.v4.widget.SwipeRefreshLayout>
-</RelativeLayout>
+</LinearLayout>

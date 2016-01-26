@@ -7,13 +7,14 @@
     android:background="#FFFFFF"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:background="@color/base_green"
+    <com.masterfan.library.widget.title.MTFTitleView
+        android:id="@+id/titleView"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
-
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="?attr/actionBarSize"
+        app:titleText="作品管理"
+        app:titleTxtColor="@android:color/white"
+        app:titleBackgroundColor="@color/colorPrimary"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"

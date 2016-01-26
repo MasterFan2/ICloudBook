@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 /**
  * 评论列表
  */
-@MTFActivityFeature(layout=R.layout.activity_comment_main)
+@MTFActivityFeature(layout=R.layout.activity_comment_main, status_bar_color = R.color.colorPrimary)
 public class CommentListActivity extends MTFBaseActivity implements SwipeRefreshLayout.OnRefreshListener{
 
 
