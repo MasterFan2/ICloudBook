@@ -18,10 +18,13 @@ import com.masterfan.cloudbook.fragment.home.HomeResourceFragment;
 import com.masterfan.library.ui.MTFBaseActivity;
 import com.masterfan.library.ui.MTFBaseFragmentActivity;
 import com.masterfan.library.ui.annotation.MTFActivityFeature;
+import com.masterfan.library.utils.T;
+import com.masterfan.library.widget.title.MTFTitleView;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
-@MTFActivityFeature(layout = R.layout.activity_home, status_bar_color = R.color.colorPrimary, toolbar = R.id.toolbar)
+@MTFActivityFeature(layout = R.layout.activity_home, status_bar_color = R.color.colorPrimary)
 public class HomeActivity extends MTFBaseActivity {
 
     private int index = 0;       //touched index
@@ -34,7 +37,9 @@ public class HomeActivity extends MTFBaseActivity {
     private HomePersonalFragment    personalFragment;
     private Fragment[] fragments;
 
-    //Layout
+    //bottom Layout
+    @Bind(R.id.titleView)
+    MTFTitleView titleView;
     @Bind(R.id.home_index_rl_layout)
     RelativeLayout indexLayout;
     @Bind(R.id.home_resource_rl_layout)
@@ -66,6 +71,8 @@ public class HomeActivity extends MTFBaseActivity {
         //layout
         layouts = new RelativeLayout[]{indexLayout, resourceLayout, managementLayout, personalLayout};
         layouts[0].setBackgroundColor(getResources().getColor(R.color.base_green_checked));
+
+        titleView.setTitleText("首页");
     }
 
     /**
@@ -75,19 +82,19 @@ public class HomeActivity extends MTFBaseActivity {
     public void onTabClicked(View view){
         switch (view.getId()){
             case R.id.home_index_rl_layout:
-                toolbar.setTitle("首页");
+                titleView.setTitleText("首页");
                 index = 0;
                 break;
             case R.id.home_resource_rl_layout:
-                toolbar.setTitle("资源");
+                titleView.setTitleText("资源");
                 index = 1;
                 break;
             case R.id.home_management_rl_layout:
-                toolbar.setTitle("管理");
+                titleView.setTitleText("管理");
                 index = 2;
                 break;
             case R.id.home_personal_rl_layout:
-                toolbar.setTitle("个人");
+                titleView.setTitleText("个人");
                 index = 3;
                 break;
         }
@@ -99,5 +106,15 @@ public class HomeActivity extends MTFBaseActivity {
             layouts[index].setBackgroundColor(getResources().getColor(R.color.base_green_checked));
             currentIndex = index;
         }
+    }
+
+    @OnClick(R.id.m_title_left_btn)
+    public void onBack(View view){
+        T.s(context, "返回");
+    }
+
+    @OnClick(R.id.m_title_right_btn)
+    public void onRight(View view){
+        T.s(context, "更多");
     }
 }

@@ -6,12 +6,11 @@ import com.masterfan.cloudbook.R;
 import com.masterfan.library.ui.MTFBaseActivity;
 import com.masterfan.library.ui.annotation.MTFActivityFeature;
 
-@MTFActivityFeature(layout = R.layout.activity_material_icon, status_bar_color = R.color.colorPrimary, toolbar = R.id.toolbar)
+@MTFActivityFeature(layout = R.layout.activity_material_icon, status_bar_color = R.color.colorPrimary)
 public class TestMaterialIconActivity extends MTFBaseActivity {
 
     @Override
     public void initialize(Bundle savedInstanceState) {
-        toolbar.setTitle("Material Icon ");
-        toolbar.setSubtitle("使用示例");
+
     }
 }

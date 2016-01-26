@@ -30,6 +30,12 @@
             android:layout_height="wrap_content"
             android:text="wait"
             />
+        <Button
+            android:id="@+id/dialog_btn31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="单选"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -41,6 +47,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="版本"
+            />
+        <Button
+            android:id="@+id/dialog_btn5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择日期"
+            />
+        <Button
+            android:id="@+id/dialog_btn6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="列表"
+            />
+        <Button
+            android:id="@+id/dialog_btn61"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="多选"
             />
     </LinearLayout>
 </LinearLayout>

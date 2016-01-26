@@ -21,7 +21,6 @@ import butterknife.ButterKnife;
  */
 public abstract class MTFBaseFragmentActivity extends FragmentActivity {
     public Activity context;
-    public Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +31,6 @@ public abstract class MTFBaseFragmentActivity extends FragmentActivity {
         if(activityFeature.status_bar_color() > 0 ) setStatusBarColor(activityFeature.status_bar_color());
         setContentView(activityFeature.layout());
         ButterKnife.bind(this);
-        if(activityFeature.toolbar() > 0) {
-            toolbar = (Toolbar) findViewById(activityFeature.toolbar());
-        }
         initialize(savedInstanceState);
     }
 

@@ -10,10 +10,10 @@ import com.masterfan.library.ui.annotation.MTFActivityFeature;
  * 个人
  * Created by Administrator on 2016/1/19 0019.
  */
-@MTFActivityFeature(layout = R.layout.activity_personal,toolbar = R.id.toolbar)
+@MTFActivityFeature(layout = R.layout.activity_personal)
 public class PersonalActivity  extends MTFBaseActivity {
     @Override
     public void initialize(Bundle savedInstanceState) {
-        toolbar.setTitle("个人");
+        
     }
 }
