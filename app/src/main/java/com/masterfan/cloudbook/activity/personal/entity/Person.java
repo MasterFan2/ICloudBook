@@ -6,19 +6,19 @@ package com.masterfan.cloudbook.activity.personal.entity;
  */
 public class Person {
     private String name;
-    private String zhiye;
-    private int shoucang;
-    private int yuedu;
-    private int pinglun;
-    private String jiyu;
+    private String occupation;//职业
+    private int collect;//收藏
+    private int read;//己读
+    private int comment;//评论
+    private String forMessage;//寄语
 
-    public Person(String name, String zhiye, int shoucang, int yuedu, int pinglun, String jiyu) {
+    public Person(String name, String occupation, int collect, int read, int comment, String forMessage) {
         this.name = name;
-        this.zhiye = zhiye;
-        this.shoucang = shoucang;
-        this.yuedu = yuedu;
-        this.pinglun = pinglun;
-        this.jiyu = jiyu;
+        this.occupation = occupation;
+        this.collect = collect;
+        this.read = read;
+        this.comment = comment;
+        this.forMessage = forMessage;
     }
 
     public Person() {
@@ -33,55 +33,44 @@ public class Person {
         this.name = name;
     }
 
-    public String getZhiye() {
-        return zhiye;
+    public String getOccupation() {
+        return occupation;
     }
 
-    public void setZhiye(String zhiye) {
-        this.zhiye = zhiye;
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
 
-    public int getShoucang() {
-        return shoucang;
+    public int getCollect() {
+        return collect;
     }
 
-    public void setShoucang(int shoucang) {
-        this.shoucang = shoucang;
+    public void setCollect(int collect) {
+        this.collect = collect;
     }
 
-    public int getYuedu() {
-        return yuedu;
+    public int getRead() {
+        return read;
     }
 
-    public void setYuedu(int yuedu) {
-        this.yuedu = yuedu;
+    public void setRead(int read) {
+        this.read = read;
     }
 
-    public int getPinglun() {
-        return pinglun;
+    public int getComment() {
+        return comment;
     }
 
-    public void setPinglun(int pinglun) {
-        this.pinglun = pinglun;
+    public void setComment(int comment) {
+        this.comment = comment;
     }
 
-    public String getJiyu() {
-        return jiyu;
+    public String getForMessage() {
+        return forMessage;
     }
 
-    public void setJiyu(String jiyu) {
-        this.jiyu = jiyu;
+    public void setForMessage(String forMessage) {
+        this.forMessage = forMessage;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", zhiye='" + zhiye + '\'' +
-                ", shoucang=" + shoucang +
-                ", yuedu=" + yuedu +
-                ", pinglun=" + pinglun +
-                ", jiyu='" + jiyu + '\'' +
-                '}';
-    }
 }
