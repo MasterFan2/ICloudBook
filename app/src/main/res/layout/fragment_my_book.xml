@@ -5,7 +5,7 @@
     android:orientation="vertical"
      >
     <LinearLayout
-        android:background="@drawable/bg_textview_1"
+        android:background="@drawable/bg_textview_one"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,7 +13,7 @@
         >
         <LinearLayout
             android:id="@+id/my_book_my_collect_layout"
-            android:background="@drawable/bg_textview_all_1"
+            android:background="@drawable/bg_textview_all_one"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent">
@@ -26,7 +26,7 @@
         </LinearLayout>
         <LinearLayout
             android:id="@+id/my_book_book_friend_recommend_layout"
-            android:background="@drawable/bg_textview_1"
+
             android:layout_width="0dp"
             android:layout_marginLeft="-2dp"
             android:layout_weight="1"
@@ -34,13 +34,14 @@
             <TextView
                 android:layout_width="match_parent"
                 android:text="书友推荐"
+
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/my_book_my_recommend_layout"
-            android:background="@drawable/bg_textview_1"
+            android:background="@drawable/bg_textview_one"
             android:layout_width="0dp"
             android:layout_marginLeft="-2dp"
             android:layout_weight="1"
@@ -54,9 +55,6 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragment_my_book_listview"></ListView>
+    <include layout="@layout/comment"/>
 
 </LinearLayout>

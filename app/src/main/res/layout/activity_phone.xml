@@ -12,7 +12,7 @@
         app:popupTheme="@style/AppTheme.PopupOverlay"/>
     <LinearLayout
         android:layout_margin="10dp"
-        android:background="@drawable/bg_gray_5"
+        android:background="@drawable/bg_gray_text_view_five"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">

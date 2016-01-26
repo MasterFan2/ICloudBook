@@ -15,7 +15,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/ietm_book_friend_title_img_imageView"
+            android:id="@+id/item_book_friend_title_img_imageView"
             android:src="@mipmap/ic_launcher"
             android:layout_width="100dp"
             android:layout_height="150dp" />
@@ -27,42 +27,42 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/ietm_book_friend_name_textview"
+                android:id="@+id/item_book_friend_name_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:text="吴承恩"></TextView>
 
             <TextView
-                android:id="@+id/ietm_book_friend_zhiyi_textview"
+                android:id="@+id/item_book_friend_occupation_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:text="作家"></TextView>
 
             <TextView
-                android:id="@+id/ietm_book_friend_shoucang_textview"
+                android:id="@+id/item_book_friend_collect_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:text="收藏:12"></TextView>
 
             <TextView
-                android:id="@+id/ietm_book_friend_yuedu_textview"
+                android:id="@+id/item_book_friend_read_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:text="阅读:12"></TextView>
 
             <TextView
-                android:id="@+id/ietm_book_friend_pinglun_textview"
+                android:id="@+id/item_book_friend_comment_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:text="评论:12"></TextView>
 
             <TextView
-                android:id="@+id/ietm_book_friend_jiyu_textview"
+                android:id="@+id/item_book_friend_message_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -77,24 +77,24 @@
             android:layout_gravity="center"
             android:orientation="vertical">
                 <TextView
-                    android:id="@+id/ietm_book_friend_guanzhu_textview"
+                    android:id="@+id/item_book_friend_attention_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:padding="5dp"
                     android:layout_margin="5dp"
-                    android:background="@drawable/bg_textview_5"
+                    android:background="@drawable/bg_textview_two"
                     android:gravity="center"
                     android:text="取消关注" />
 
 
                 <TextView
                     android:layout_margin="5dp"
-                    android:id="@+id/ietm_book_friend_siliao_textview"
+                    android:id="@+id/item_book_friend_private_call_textview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/bg_textview_5"
+                    android:background="@drawable/bg_textview_two"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="私聊" />

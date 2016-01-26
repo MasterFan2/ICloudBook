@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:background="@drawable/textview_bg_green_3"
+                    android:background="@drawable/bg_textview_green_three"
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="继续阅读"></TextView>
@@ -119,7 +119,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_gray_1_3"
+                    android:background="@drawable/bg_gray_text_view_three"
                     android:gravity="center"
                     android:padding="3dp"
                     android:text="删除"></TextView>

@@ -15,7 +15,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/item_works_management_title_img"
+            android:id="@+id/item_recently_viewed_title_img"
             android:src="@mipmap/ic_launcher"
             android:layout_width="100dp"
             android:layout_height="150dp" />
@@ -28,7 +28,7 @@
 
             <TextView
                 android:layout_weight="1"
-                android:id="@+id/item_works_management_book_name_textview"
+                android:id="@+id/item_recently_viewed_bookname_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center|left"
@@ -43,7 +43,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/item_works_management_writer_textview"
+                    android:id="@+id/item_recently_viewed_writer_textview"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                         android:layout_gravity="left"
                         android:text="己读:"></TextView>
                     <TextView
-                        android:id="@+id/item_works_management_has_read_textview"
+                        android:id="@+id/item_recently_viewed_has_read_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -88,7 +88,7 @@
                         android:layout_gravity="left"
                         android:text="收藏:"></TextView>
                     <TextView
-                        android:id="@+id/item_works_management_collect_textview"
+                        android:id="@+id/item_recently_viewed_collect_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -108,7 +108,7 @@
                     android:layout_gravity="left"
                     android:text="下载:"></TextView>
                 <TextView
-                    android:id="@+id/item_works_management_download_textview"
+                    android:id="@+id/item_recently_viewed_download_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -134,7 +134,7 @@
                         android:layout_gravity="left"
                         android:text="阅读:"></TextView>
                     <TextView
-                        android:id="@+id/item_works_management_read_textview"
+                        android:id="@+id/item_recently_viewed_read_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -154,7 +154,7 @@
                         android:layout_gravity="left"
                         android:text="评论:"></TextView>
                     <TextView
-                        android:id="@+id/item_works_management_comment_textview"
+                        android:id="@+id/item_recently_viewed_comment_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
@@ -173,7 +173,7 @@
                 android:layout_gravity="center|center"
                 android:text="最近查看时间："></TextView>
                 <TextView
-                    android:id="@+id/item_works_management_time_textview"
+                    android:id="@+id/item_recently_viewed_time_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|center"
@@ -192,17 +192,17 @@
                     android:layout_height="wrap_content"
                     android:text=""></TextView>
                 <TextView
-                    android:id="@+id/item_works_management_continue_read_textview"
+                    android:id="@+id/item_recently_viewed_continue_read_textview"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:padding="3dp"
-                    android:background="@drawable/textview_bg_green_3"
+                    android:background="@drawable/bg_textview_green_three"
                     android:text="继续阅读"></TextView>
                 <TextView
-                    android:id="@+id/item_works_management_delete_textview"
+                    android:id="@+id/item_recently_viewed_delete_textview"
                     android:layout_marginLeft="10dp"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -210,7 +210,7 @@
                     android:padding="3dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/bg_gray_1_3"
+                    android:background="@drawable/bg_gray_text_view_three"
                     android:text="删除"></TextView>
             </LinearLayout>
         </LinearLayout>

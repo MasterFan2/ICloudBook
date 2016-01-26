@@ -10,21 +10,21 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/item_comment_book_name_textview"
+        android:id="@+id/item_notebook_book_name_textview"
         android:layout_width="match_parent"
         android:text="《西游记》"
         android:layout_gravity="left"
         android:layout_height="wrap_content"></TextView>
 
     <TextView
-        android:id="@+id/item_comment_content_textview"
+        android:id="@+id/item_notebook_content_textview"
         android:layout_width="match_parent"
         android:layout_gravity="left"
         android:text="大家好啊都在呢啊，什么时候一起吃个饭啊"
         android:layout_height="wrap_content"></TextView>
 
     <TextView
-        android:id="@+id/item_comment_time_textview"
+        android:id="@+id/item_notebook_time_textview"
         android:layout_width="wrap_content"
         android:layout_gravity="right"
         android:text="2016-1-21 10:24:39"

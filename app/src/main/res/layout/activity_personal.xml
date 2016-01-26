@@ -222,6 +222,7 @@
 
         <!-- -->
         <LinearLayout
+            android:id="@+id/personal_message_center_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
