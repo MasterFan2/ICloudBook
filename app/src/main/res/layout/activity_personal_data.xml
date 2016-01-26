@@ -47,7 +47,7 @@
         android:layout_height="1dp"
         android:background="#999999" />
     <LinearLayout
-
+        android:id="@+id/personal_data_name_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -61,6 +61,7 @@
             />
 
         <TextView
+            android:id="@+id/personal_data_name_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -119,6 +120,7 @@
         android:layout_height="1dp"
         android:background="#999999" />
     <LinearLayout
+        android:id="@+id/personal_data_sex_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -187,6 +189,7 @@
         android:layout_height="1dp"
         android:background="#999999" />
     <LinearLayout
+        android:id="@+id/personal_data_class_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -321,6 +324,7 @@
         android:orientation="horizontal"
         android:padding="10dp">
         <LinearLayout
+            android:id="@+id/personal_data_for_message_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="9"
@@ -333,6 +337,7 @@
                 />
 
             <TextView
+                android:id="@+id/personal_data_for_message_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
