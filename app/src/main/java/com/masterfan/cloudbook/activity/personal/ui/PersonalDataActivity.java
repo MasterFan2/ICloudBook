@@ -41,6 +41,15 @@ public class PersonalDataActivity extends MTFBaseActivity {
     @Bind(R.id.personal_data_login_password_layout)
     LinearLayout loginPassWordLayout;
 
+    @Bind(R.id.personal_data_class_layout)
+    LinearLayout classLayout;
+
+    @Bind(R.id.personal_data_name_layout)
+    LinearLayout nameLayout;
+
+    @Bind(R.id.personal_data_for_message_layout)
+    LinearLayout forMessageLayout;
+
     @Bind(R.id.personal_data_sex_textview)
     TextView sexTxt;
 
@@ -103,6 +112,36 @@ public class PersonalDataActivity extends MTFBaseActivity {
     @OnClick(R.id.personal_data_login_password_layout)
     public void setOnclickLoginPassword(View view){
         Intent intent = new Intent(this,UpdatePassWordActivity.class);
+        if(intent != null){
+            startActivityForResult(intent, 0);
+        }else{
+            Log.i("AAAA","intent==null");
+        }
+    }
+
+    @OnClick(R.id.personal_data_class_layout)
+    public void setOnclickClass(View view){
+        Intent intent = new Intent(this,ClassActivity.class);
+        if(intent != null){
+            startActivityForResult(intent, 0);
+        }else{
+            Log.i("AAAA","intent==null");
+        }
+    }
+
+    @OnClick(R.id.personal_data_name_layout)
+    public void setOnclickName(View view){
+        Intent intent = new Intent(this,NameActivity.class);
+        if(intent != null){
+            startActivityForResult(intent, 0);
+        }else{
+            Log.i("AAAA","intent==null");
+        }
+    }
+
+    @OnClick(R.id.personal_data_for_message_layout)
+    public void setOnclickForMessage(View view){
+        Intent intent = new Intent(this,ForMessageActivity.class);
         if(intent != null){
             startActivityForResult(intent, 0);
         }else{

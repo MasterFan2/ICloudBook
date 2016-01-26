@@ -9,12 +9,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.masterfan.cloudbook.R;
 import com.masterfan.cloudbook.activity.personal.entity.Comment;
-import com.masterfan.cloudbook.activity.personal.entity.MessageListEntity;
 import com.masterfan.library.ui.MTFBaseActivity;
 import com.masterfan.library.ui.annotation.MTFActivityFeature;
 import com.masterfan.library.utils.S;

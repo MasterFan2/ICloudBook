@@ -11,6 +11,9 @@ import com.masterfan.cloudbook.R;
 import com.masterfan.library.ui.MTFBaseActivity;
 import com.masterfan.library.ui.annotation.MTFActivityFeature;
 
+/**
+ * 班级
+ */
 @MTFActivityFeature(layout = R.layout.activity_class)
 public class ClassActivity extends MTFBaseActivity {
     @Override
