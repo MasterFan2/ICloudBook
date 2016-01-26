@@ -19,7 +19,14 @@
         <activity
             android:name=".activity.launcher.LauncherActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activity.login.LoginActivity" />
+
+        <activity android:name=".activity.login.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.test.TestMaterialIconActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -33,11 +40,7 @@
         <activity
             android:name=".activity.main.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <!-- 个人 start -->
         <activity
@@ -88,16 +91,27 @@
             android:name=".activity.personal.ui.WorksmanagementFragmentActivity"
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activity.personal.ui.MessageListActivity"
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".activity.personal.ui.CommentListActivity"
+        <activity
+            android:name=".activity.personal.ui.CommentListActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.personal.ui.ClassActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.personal.ui.ForMessageActivity"
             android:label="@string/title_activity_test_download"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".activity.personal.ui.NameActivity"
+            android:label="@string/title_activity_test_download"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- 个人 end -->
         <activity
             android:name=".activity.login.SignupActivity"
