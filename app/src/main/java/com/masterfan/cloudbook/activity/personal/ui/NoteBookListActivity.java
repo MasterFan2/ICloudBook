@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 /**
  * 摘录笔记列表
  */
-@MTFActivityFeature(layout=R.layout.activity_notebook_main)
+@MTFActivityFeature(layout=R.layout.activity_notebook)
 public class NoteBookListActivity extends MTFBaseActivity implements SwipeRefreshLayout.OnRefreshListener{
 
 
