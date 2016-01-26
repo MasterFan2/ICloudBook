@@ -1,0 +1,26 @@
+bookType  书箱类型
+status 状态
+check 检查，审核
+self introduction   自我介绍
+nickName 呢称
+BookFriend 书友
+Brithday 生日
+comment 评论
+Email 电子邮件
+mine attention  我的关注
+attention mine 关注我的
+notebook 笔记本
+person 人
+personal 个人
+personData 个人资料
+phone 电话
+writer 作者
+collect 收藏
+has read 己读
+download  下载
+upload  上传
+recommend  推荐
+circular  圆形
+occupation 职业
+
+PS：toolbar没有显示是因为在页面里面加的控件没有设置id,所以找不到它
