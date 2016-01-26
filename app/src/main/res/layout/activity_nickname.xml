@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
-        android:background="@drawable/bk_gray_5"
+        android:background="@drawable/bg_gray_text_view_five"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:orientation="vertical">
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -29,7 +31,7 @@
     </LinearLayout>
     <Button
         android:textColor="@color/white"
-        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
         android:background="@drawable/btn_bg_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

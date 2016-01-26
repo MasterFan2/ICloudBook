@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,6 +47,7 @@
         android:layout_height="1dp"
         android:background="#999999" />
     <LinearLayout
+        android:id="@+id/personal_data_name_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -53,6 +61,7 @@
             />
 
         <TextView
+            android:id="@+id/personal_data_name_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -76,6 +85,7 @@
 
     <!-- -->
     <LinearLayout
+        android:id="@+id/personal_data_nick_name_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -89,6 +99,7 @@
             />
 
         <TextView
+            android:id="@+id/personal_data_nick_name_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -109,6 +120,7 @@
         android:layout_height="1dp"
         android:background="#999999" />
     <LinearLayout
+        android:id="@+id/personal_data_sex_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -122,6 +134,7 @@
             />
 
         <TextView
+            android:id="@+id/personal_data_sex_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -142,6 +155,7 @@
         android:layout_height="1dp"
         android:background="#999999" />
     <LinearLayout
+        android:id="@+id/personal_data_birthday_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -175,6 +189,7 @@
         android:layout_height="1dp"
         android:background="#999999" />
     <LinearLayout
+        android:id="@+id/personal_data_class_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -208,6 +223,7 @@
         android:layout_height="1dp"
         android:background="#999999" />
     <LinearLayout
+        android:id="@+id/personal_data_phone_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -241,6 +257,7 @@
         android:layout_height="1dp"
         android:background="#999999" />
     <LinearLayout
+        android:id="@+id/personal_data_email_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -274,6 +291,7 @@
         android:layout_height="1dp"
         android:background="#999999" />
     <LinearLayout
+        android:id="@+id/personal_data_login_password_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -306,6 +324,7 @@
         android:orientation="horizontal"
         android:padding="10dp">
         <LinearLayout
+            android:id="@+id/personal_data_for_message_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="9"
@@ -318,6 +337,7 @@
                 />
 
             <TextView
+                android:id="@+id/personal_data_for_message_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -347,6 +367,7 @@
         android:layout_height="1dp"
         android:background="#999999" />
     <LinearLayout
+        android:id="@+id/personal_data_self_introduction_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

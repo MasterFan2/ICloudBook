@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="facsimileterminal1.www.facsimilemedia.com.redbook.MainActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/item_notebook_book_name_textview"
+        android:layout_width="match_parent"
+        android:text="《西游记》"
+        android:layout_gravity="left"
+        android:layout_height="wrap_content"></TextView>
+
+    <TextView
+        android:id="@+id/item_notebook_content_textview"
+        android:layout_width="match_parent"
+        android:layout_gravity="left"
+        android:text="大家好啊都在呢啊，什么时候一起吃个饭啊"
+        android:layout_height="wrap_content"></TextView>
+
+    <TextView
+        android:id="@+id/item_notebook_time_textview"
+        android:layout_width="wrap_content"
+        android:layout_gravity="right"
+        android:text="2016-1-21 10:24:39"
+        android:layout_height="wrap_content"></TextView>
+</LinearLayout>

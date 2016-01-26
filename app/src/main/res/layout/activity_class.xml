@@ -11,33 +11,52 @@
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay"/>
     <LinearLayout
-        android:layout_margin="10dp"
         android:background="@drawable/bg_gray_text_view_five"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
         <RelativeLayout
+
             android:layout_width="fill_parent"
             android:padding="15dp"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/update_nickname_num"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:hint="自我介绍"
-                android:maxLines="5"
-                android:lines="2"
-                android:maxLength="200"
+                android:hint="2016级"
+                android:maxLines="1"
+                android:maxLength="20"
                 android:textColor="#666666"
                 android:background="@null"
                 />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="0/200"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@drawable/bg_gray_text_view_five"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+
+            android:layout_width="fill_parent"
+            android:padding="15dp"
+            android:layout_height="wrap_content">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:hint="1班"
+                android:maxLines="1"
+                android:maxLength="20"
+                android:textColor="#666666"
+                android:background="@null"
+                />
+
         </RelativeLayout>
     </LinearLayout>
     <Button
