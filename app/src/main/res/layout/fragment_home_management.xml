@@ -4,67 +4,284 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/dialog_btn"
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/home_meanagement_read_statistics_layout"
+            android:padding="10dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="弹窗"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@mipmap/img_yuedu_tongji"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="@dimen/text_size_25"
+                android:layout_weight="6"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:text="阅读情况统计"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:src="@mipmap/img_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
             />
 
-        <Button
-            android:id="@+id/dialog_btn2"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/home_meanagement_book_read_management_layout"
+            android:padding="10dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="弹窗2"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@mipmap/img_yuedu_gnanli"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="@dimen/text_size_25"
+                android:layout_weight="6"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:text="图书阅读情况管理"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:src="@mipmap/img_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
             />
 
-        <Button
-            android:id="@+id/dialog_btn3"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/home_meanagement_user_read_management_layout"
+            android:padding="10dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="wait"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@mipmap/img_yonghu_yuedu_guanli"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="@dimen/text_size_25"
+                android:layout_weight="6"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:text="用户阅读情况管理"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:src="@mipmap/img_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
             />
-        <Button
-            android:id="@+id/dialog_btn31"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:id="@+id/home_meanagement_user_account_management_layout"
+            android:padding="10dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="单选"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@mipmap/img_yonghu_zhanghao_guanli"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="@dimen/text_size_25"
+                android:layout_weight="6"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:text="用户账号管理"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:src="@mipmap/img_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            />
+        <LinearLayout
+            android:id="@+id/home_meanagement_teacher_booth_management_layout"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@mipmap/img_jiaoshi_zhantai"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="@dimen/text_size_25"
+                android:layout_weight="6"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:text="老师展台管理"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:src="@mipmap/img_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            />
+
+        <LinearLayout
+            android:id="@+id/home_meanagement_upload_library_audit_management_layout"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@mipmap/img_shenhe_guanli"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="@dimen/text_size_25"
+                android:layout_weight="6"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:text="上传图书审核管理"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:src="@mipmap/img_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            />
+
+        <LinearLayout
+            android:id="@+id/home_meanagement_book_data_management_layout"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@mipmap/img_zhonghe_shuju_guanli"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="@dimen/text_size_25"
+                android:layout_weight="6"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:text="图书综合数据管理"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:src="@mipmap/img_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
+            />
+
+        <LinearLayout
+            android:id="@+id/home_meanagement_class_read_management_layout"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@mipmap/img_banji_yuedu_guanli"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:textSize="@dimen/text_size_25"
+                android:layout_weight="6"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:text="班级阅读情况管理"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:src="@mipmap/img_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"
             />
     </LinearLayout>
+    </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/dialog_btn4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="版本"
-            />
-        <Button
-            android:id="@+id/dialog_btn5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="选择日期"
-            />
-        <Button
-            android:id="@+id/dialog_btn6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="列表"
-            />
-        <Button
-            android:id="@+id/dialog_btn61"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="多选"
-            />
-    </LinearLayout>
 </LinearLayout>
