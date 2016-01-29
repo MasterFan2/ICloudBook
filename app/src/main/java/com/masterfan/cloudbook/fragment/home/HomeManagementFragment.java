@@ -1,8 +1,11 @@
 package com.masterfan.cloudbook.fragment.home;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 import com.masterfan.cloudbook.R;
+import com.masterfan.cloudbook.activity.manamgment.ui.ClassReadFragmentActivity;
+import com.masterfan.cloudbook.activity.manamgment.ui.UserReadManagementActivity;
 import com.masterfan.library.ui.MTFBaseFragment;
 import com.masterfan.library.ui.annotation.MTFFragmentFeature;
 import com.masterfan.library.utils.T;
@@ -58,7 +61,10 @@ public class HomeManagementFragment extends MTFBaseFragment {
 
     @OnClick(R.id.home_meanagement_user_read_management_layout)
     public void onclickcView(View view){
-        T.s(getActivity(),"c");
+        Intent intent = new Intent(getActivity(), UserReadManagementActivity.class);
+        if(intent != null){
+            startActivity(intent);
+        }
     }
 
     @OnClick(R.id.home_meanagement_user_account_management_layout)
@@ -83,6 +89,9 @@ public class HomeManagementFragment extends MTFBaseFragment {
 
     @OnClick(R.id.home_meanagement_class_read_management_layout)
     public void onclickhView(View view){
-        T.s(getActivity(),"h");
+        Intent intent = new Intent(getActivity(), ClassReadFragmentActivity.class);
+        if(intent != null){
+            startActivity(intent);
+        }
     }
 }

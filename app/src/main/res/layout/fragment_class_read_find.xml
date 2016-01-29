@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+        android:padding="10dp"
+    android:orientation="horizontal">
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="8"
+            android:textSize="@dimen/text_size_20"
+            android:text="请选择年级"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@mipmap/img_select_bottom"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="8"
+            android:textSize="@dimen/text_size_20"
+            android:text="请选择班级"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@mipmap/img_select_bottom"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="8"
+            android:textSize="@dimen/text_size_20"
+            android:text="请选择开始时间"
+            android:layout_height="wrap_content" />
+        <ImageView
+
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="8"
+            android:textSize="@dimen/text_size_20"
+            android:text="请选择结束时间"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line"
+        />
+
+    <Button
+        android:id="@+id/fragment_class_read_find_button"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:textSize="@dimen/text_size_20"
+        android:background="@drawable/btn_bg_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="查询"
+        />
+
+</LinearLayout>
