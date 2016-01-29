@@ -91,7 +91,8 @@
         android:layout_height="1dp"
         android:background="@color/green_line"/>
     <android.support.v4.widget.SwipeRefreshLayout
-        android:padding="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:id="@+id/class_read_list_recyclerView_refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
