@@ -144,11 +144,13 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:visibility="gone"
             android:background="@color/line"
             />
         <LinearLayout
             android:id="@+id/home_meanagement_teacher_booth_management_layout"
             android:padding="10dp"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -159,6 +161,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
             <TextView
+
                 android:textSize="@dimen/text_size_25"
                 android:layout_weight="6"
                 android:layout_marginLeft="10dp"
@@ -181,7 +184,7 @@
             />
 
         <LinearLayout
-            android:id="@+id/home_meanagement_upload_library_audit_management_layout"
+            android:id="@+id/home_meanagement_upload_book_audit_management_layout"
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -214,22 +214,22 @@ public class MyBookListFragment extends MTFBaseFragment implements SwipeRefreshL
 
 	@OnClick(R.id.my_book_my_collect_layout)
 	public void onChickMyCollect(View view){
-		myCollectLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_all_one));
-		bookFriendRecommendLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_one));
-		myRecommendLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_one));
+		myCollectLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_green_all_one));
+		bookFriendRecommendLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_green_one));
+		myRecommendLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_green_one));
 	}
 
 	@OnClick(R.id.my_book_book_friend_recommend_layout)
 	public void onChickBookFriendRecommend(View view){
-		myCollectLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_one));
-		bookFriendRecommendLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_all_one));
-		myRecommendLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_one));
+		myCollectLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_green_one));
+		bookFriendRecommendLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_green_all_one));
+		myRecommendLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_green_one));
 	}
 
 	@OnClick(R.id.my_book_my_recommend_layout)
 	public void onChickMyRecommend(View view){
-		myCollectLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_one));
-		bookFriendRecommendLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_one));
-		myRecommendLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_all_one));
+		myCollectLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_green_one));
+		bookFriendRecommendLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_green_one));
+		myRecommendLayout.setBackground(getActivity().getResources().getDrawable(R.drawable.bg_textview_green_all_one));
 	}
 }

@@ -5,7 +5,7 @@
     android:orientation="vertical"
      >
     <LinearLayout
-        android:background="@drawable/bg_textview_one"
+        android:background="@drawable/bg_textview_green_one"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,7 +13,7 @@
         >
         <LinearLayout
             android:id="@+id/my_book_my_collect_layout"
-            android:background="@drawable/bg_textview_all_one"
+            android:background="@drawable/bg_textview_green_all_one"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent">
@@ -41,7 +41,7 @@
         </LinearLayout>
         <LinearLayout
             android:id="@+id/my_book_my_recommend_layout"
-            android:background="@drawable/bg_textview_one"
+            android:background="@drawable/bg_textview_green_one"
             android:layout_width="0dp"
             android:layout_marginLeft="-2dp"
             android:layout_weight="1"

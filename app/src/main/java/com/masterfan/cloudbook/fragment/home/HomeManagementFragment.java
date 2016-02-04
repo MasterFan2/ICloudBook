@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
 import com.masterfan.cloudbook.R;
+import com.masterfan.cloudbook.activity.manamgment.ui.ReadStatisticsActivity;
 import com.masterfan.cloudbook.activity.manamgment.ui.ClassReadFragmentActivity;
 import com.masterfan.cloudbook.activity.manamgment.ui.UserReadManagementActivity;
+import com.masterfan.cloudbook.activity.manamgment.ui.UploadBookAuditManagementActivity;
 import com.masterfan.library.ui.MTFBaseFragment;
 import com.masterfan.library.ui.annotation.MTFFragmentFeature;
 import com.masterfan.library.utils.T;
@@ -35,7 +37,7 @@ public class HomeManagementFragment extends MTFBaseFragment {
     @Bind(R.id.home_meanagement_teacher_booth_management_layout)
     LinearLayout teacherBoothManagementLayout;//老师展台管理
 
-    @Bind(R.id.home_meanagement_upload_library_audit_management_layout)
+    @Bind(R.id.home_meanagement_upload_book_audit_management_layout)
     LinearLayout bookAuditManagementLayout;//上传图书审核管理
 
     @Bind(R.id.home_meanagement_book_data_management_layout)
@@ -51,7 +53,10 @@ public class HomeManagementFragment extends MTFBaseFragment {
 
     @OnClick(R.id.home_meanagement_read_statistics_layout)
     public void onclickaView(View view){
-        T.s(getActivity(),"a");
+        Intent intent = new Intent(getActivity(), ReadStatisticsActivity.class);
+        if(intent != null){
+            startActivity(intent);
+        }
     }
 
     @OnClick(R.id.home_meanagement_book_read_management_layout)
@@ -77,9 +82,12 @@ public class HomeManagementFragment extends MTFBaseFragment {
         T.s(getActivity(),"e");
     }
 
-    @OnClick(R.id.home_meanagement_upload_library_audit_management_layout)
+    @OnClick(R.id.home_meanagement_upload_book_audit_management_layout)
     public void onclickfView(View view){
-        T.s(getActivity(),"f");
+        Intent intent = new Intent(getActivity(), UploadBookAuditManagementActivity.class);
+        if(intent != null){
+            startActivity(intent);
+        }
     }
 
     @OnClick(R.id.home_meanagement_book_data_management_layout)
