@@ -8,6 +8,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="资源"
+        android:text="课件"
         android:id="@+id/textView"/>
 </LinearLayout>
