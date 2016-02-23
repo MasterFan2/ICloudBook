@@ -10,7 +10,7 @@ import com.masterfan.library.ui.annotation.MTFActivityFeature;
  * 阅读情况统计
  * Created by Administrator on 2016/2/5 0005.
  */
-@MTFActivityFeature(layout = R.layout.activity_read_qingkuang_tongji)
+@MTFActivityFeature(layout = R.layout.activity_read_qingkuang_tongji,status_bar_color = R.color.colorPrimary)
 public class ReadStatisticsActivity extends MTFBaseActivity {
 
     @Override

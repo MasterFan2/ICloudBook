@@ -8,6 +8,7 @@ import com.masterfan.cloudbook.activity.manamgment.ui.BookDataManagementActivity
 import com.masterfan.cloudbook.activity.manamgment.ui.BookReadManagementActivity;
 import com.masterfan.cloudbook.activity.manamgment.ui.ReadStatisticsActivity;
 import com.masterfan.cloudbook.activity.manamgment.ui.ClassReadFragmentActivity;
+import com.masterfan.cloudbook.activity.manamgment.ui.UserAccountManagementFragmentActivity;
 import com.masterfan.cloudbook.activity.manamgment.ui.UserReadManagementActivity;
 import com.masterfan.cloudbook.activity.manamgment.ui.UploadBookAuditManagementActivity;
 import com.masterfan.library.ui.MTFBaseFragment;
@@ -79,7 +80,10 @@ public class HomeManagementFragment extends MTFBaseFragment {
 
     @OnClick(R.id.home_meanagement_user_account_management_layout)
     public void onclickdView(View view){
-        T.s(getActivity(),"d");
+        Intent intent = new Intent(getActivity(), UserAccountManagementFragmentActivity.class);
+        if(intent != null){
+            startActivity(intent);
+        }
     }
 
     @OnClick(R.id.home_meanagement_teacher_booth_management_layout)
