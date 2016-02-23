@@ -51,7 +51,7 @@
             android:layout_weight="1"
             android:background="@drawable/bg_textview_green_one"
             android:padding="10dp"
-            android:text="请选择图书类别" />
+            android:text="开始时间" />
 
         <TextView
             android:id="@+id/book_read_management_end_time_textview"

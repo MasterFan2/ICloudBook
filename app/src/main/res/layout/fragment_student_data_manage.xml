@@ -56,18 +56,17 @@
         />
 
     <LinearLayout
-        android:id="@+id/fragment_class_read_start_time_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:orientation="horizontal">
-        <TextView
-            android:id="@+id/fragment_class_read_start_time_textview"
+        <EditText
             android:layout_gravity="center"
             android:layout_width="0dp"
             android:layout_weight="8"
             android:textSize="@dimen/text_size_20"
-            android:text="请选择开始时间"
+            android:hint="请输入姓名"
+            android:background="@null"
             android:layout_height="wrap_content" />
         <ImageView
 
@@ -84,25 +83,23 @@
         />
 
     <LinearLayout
-        android:id="@+id/fragment_class_read_end_time_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/fragment_class_read_end_time_textview"
             android:layout_gravity="center"
             android:layout_width="0dp"
             android:layout_weight="8"
             android:textSize="@dimen/text_size_20"
-            android:text="请选择结束时间"
+            android:text="请选择状态"
             android:layout_height="wrap_content" />
         <ImageView
             android:layout_width="0dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            />
+            android:src="@mipmap/img_select_bottom"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -111,14 +108,14 @@
         />
 
     <Button
-        android:id="@+id/fragment_class_read_find_button"
+        android:id="@+id/fragment_student_data_manage_find_button"
         android:textColor="@color/white"
         android:layout_marginTop="20dp"
         android:textSize="@dimen/text_size_20"
         android:background="@drawable/btn_bg_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="查询"
+        android:text="搜索"
         />
 
 </LinearLayout>
