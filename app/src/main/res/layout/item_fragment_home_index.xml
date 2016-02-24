@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="facsimileterminal1.www.facsimilemedia.com.redbook.MainActivity">
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:scaleType="fitXY"
+                android:id="@+id/item_fragment_home_index_book_img"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:src="@mipmap/ic_launcher" />
+            <TextView
+                android:id="@+id/item_fragment_home_index_book_name_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:gravity="center|left"
+                android:text="西游记"></TextView>
+
+                <TextView
+                    android:id="@+id/item_fragment_home_index_writer_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center|left"
+                    android:layout_gravity="left"
+                    android:textSize="15sp"
+                    android:text="吴承恩"></TextView>
+        </LinearLayout>
+</LinearLayout>

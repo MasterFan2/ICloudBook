@@ -43,15 +43,17 @@ public class ClassReadListActivity extends MTFBaseActivity implements SwipeRefre
     @Bind(R.id.class_read_list_recyclerView_refreshLayout)
     SwipeRefreshLayout refreshLayout;
 
+    private ArrayList<ClassRead> dataList = new ArrayList<>();
+
+    @Bind(R.id.class_read_list_recyclerView)
+    RecyclerView recyclerView;
+
     private final int PAGE_COUNT = 33;//总大小
     private final int PAGE_SIZE  = 10;//每页大小
     private final int PAGE_INDEX = 1; //第几页
     private int currentSize = 0;
     //recyclerView data
-    private ArrayList<ClassRead> dataList = new ArrayList<>();
 
-    @Bind(R.id.class_read_list_recyclerView)
-    RecyclerView recyclerView;
 
 
     @Override
