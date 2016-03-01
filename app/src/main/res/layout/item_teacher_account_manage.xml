@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:background="@drawable/bg_textview_gray_five"
+            android:background="@drawable/bg_textview_black_five"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

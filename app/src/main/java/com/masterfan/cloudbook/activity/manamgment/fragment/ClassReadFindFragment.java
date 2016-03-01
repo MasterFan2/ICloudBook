@@ -2,46 +2,27 @@ package com.masterfan.cloudbook.activity.manamgment.fragment;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.masterfan.cloudbook.R;
 import com.masterfan.cloudbook.Util.DialogUtils;
 import com.masterfan.cloudbook.activity.manamgment.ui.ClassReadListActivity;
-import com.masterfan.cloudbook.activity.manamgment.ui.PersonReadListActivity;
-import com.masterfan.cloudbook.activity.personal.entity.Person;
 import com.masterfan.library.ui.MTFBaseFragment;
 import com.masterfan.library.ui.annotation.MTFFragmentFeature;
-import com.masterfan.library.utils.S;
-import com.masterfan.library.utils.T;
-import com.masterfan.library.widget.recyclerview.MTFEndlessRecyclerOnScrollListener;
-import com.masterfan.library.widget.recyclerview.MTFLoadingFooter;
-import com.masterfan.library.widget.recyclerview.MTFRecyclerViewAdapterWrapper;
-import com.masterfan.library.widget.recyclerview.MTFRecyclerViewStateUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -96,7 +77,7 @@ public class ClassReadFindFragment extends MTFBaseFragment{
 	 * @param tag 1:选择开始时间；2：选择结束时间
 	 */
 	private void showTimeDialog(final int tag) {
-		View view = getActivity().getLayoutInflater().inflate(R.layout.activity_datatime_layout, null);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_datatime_layout, null);
 		final DatePicker datePicker = (DatePicker) view.findViewById(R.id.date_picker);
 		/**关闭DatePicker、TimePicker、NumberPicker的可编辑模式*/
 		datePicker.setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);

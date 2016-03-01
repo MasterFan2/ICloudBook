@@ -172,6 +172,7 @@
             />
 
         <TextView
+            android:id="@+id/person_data_birthday_textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

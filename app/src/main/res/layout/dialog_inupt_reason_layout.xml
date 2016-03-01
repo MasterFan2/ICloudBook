@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="300dp"
+    android:orientation="vertical"
+    android:background="@drawable/while_shape_per"
+    >
+
+    <RelativeLayout
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_textview_gray_five"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        >
+        <EditText
+            android:id="@+id/dialog_input_season_edittext"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="5"
+            android:maxLines="5"
+            android:maxLength="200"
+            android:layout_gravity="center"
+            android:gravity="left|top"
+            android:hint="请输入不通过的理由"/>
+        <TextView
+            android:id="@+id/dialog_input_season_count_textview"
+            android:layout_width="wrap_content"
+            android:text="0/200"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+             />
+       </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="2dip"
+        android:layout_marginRight="2dip"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/dialog_input_season_no_textview"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_textview_gray_all_five"
+            android:gravity="center"
+            android:text="取消"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/dialog_input_season_yes_textview"
+            android:layout_width="0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_textview_green_all_five"
+            android:gravity="center"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:text="确定"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,18 +1,26 @@
 package com.masterfan.cloudbook.activity.manamgment.ui;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.masterfan.cloudbook.R;
+import com.masterfan.cloudbook.Util.DialogUtils;
 import com.masterfan.cloudbook.activity.manamgment.entity.UploadBookAudit;
 import com.masterfan.cloudbook.activity.personal.entity.MessageListEntity;
 import com.masterfan.library.ui.MTFBaseActivity;
@@ -25,6 +33,8 @@ import com.masterfan.library.widget.recyclerview.MTFRecyclerViewAdapterWrapper;
 import com.masterfan.library.widget.recyclerview.MTFRecyclerViewStateUtils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -52,6 +62,15 @@ public class UploadBookAuditManagementActivity extends MTFBaseActivity implement
 
     @Bind(R.id.upload_book_audit_manage_list_recyclerView)
     RecyclerView recyclerView;
+
+
+    private CharSequence temp;//监听前的文本
+    private int editStart;//光标开始位置
+    private int editEnd;//光标结束位置
+    private final int charMaxNum = 200;
+    EditText editText;
+    TextView mTvAvailableCharNum;
+    private String TAG="AAAA";
 
 
     @Override
@@ -137,6 +156,34 @@ public class UploadBookAuditManagementActivity extends MTFBaseActivity implement
         handler.sendEmptyMessageDelayed(1, 2000);
     }
 
+    private void showTimeDialog(final int tag) {
+        View view = getLayoutInflater().inflate(R.layout.dialog_inupt_reason_layout, null);
+
+        final Dialog dialog = DialogUtils.showCustomDialogNoTitle(this, view);
+        TextView aTxt = (TextView) dialog.findViewById(R.id.dialog_input_season_no_textview);//取消
+        TextView bTxt = (TextView) dialog.findViewById(R.id.dialog_input_season_yes_textview);//确定
+        mTvAvailableCharNum = (TextView) dialog.findViewById(R.id.dialog_input_season_count_textview);//统计字数
+        editText = (EditText) dialog.findViewById(R.id.dialog_input_season_edittext);
+        editText.addTextChangedListener(new EditChangedListener());
+        final String[] str = new String[1];
+        dialog.show();
+        aTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        bTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                str[0] = editText.getText().toString().trim();
+                T.s(UploadBookAuditManagementActivity.this,tag+"----"+str[0]);
+                Log.i("AAAA", tag + "----" + str[0]);
+                dialog.dismiss();
+            }
+        });
+    }
+
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MTFViewHolder> {
 
         @Override
@@ -155,13 +202,14 @@ public class UploadBookAuditManagementActivity extends MTFBaseActivity implement
             holder.trueTxt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    T.s(UploadBookAuditManagementActivity.this,dataList.get(position).getBookName()+ "通过审核 ");
+                    T.s(UploadBookAuditManagementActivity.this, dataList.get(position).getBookName() + "通过审核 ");
+
                 }
             });
             holder.falseTxt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    T.s(UploadBookAuditManagementActivity.this,dataList.get(position).getBookName()+"不通过审核 ");
+                    showTimeDialog(position);
                 }
             });
         }
@@ -201,4 +249,32 @@ public class UploadBookAuditManagementActivity extends MTFBaseActivity implement
             }
         }
     }
+    private boolean DEBUG = true;
+    class EditChangedListener implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            if (DEBUG)
+                Log.i(TAG, "输入文本之前的状态");
+            temp = s;
+        }
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (DEBUG)
+                Log.i(TAG, "输入文字中的状态，count是一次性输入字符数");
+            mTvAvailableCharNum.setText("" + (charMaxNum - s.length()) + " / 200");
+
+        }
+        @Override
+        public void afterTextChanged(Editable s) {
+            if (DEBUG)
+                Log.i(TAG, "输入文字后的状态");
+            /** 得到光标开始和结束位置 ,超过最大数后记录刚超出的数字索引进行控制 */
+            editStart = editText.getSelectionStart();
+            editEnd = editText.getSelectionEnd();
+            if (temp.length() > charMaxNum) {
+                s.delete(editStart - 1, editEnd);
+            }
+
+        }
+    };
 }

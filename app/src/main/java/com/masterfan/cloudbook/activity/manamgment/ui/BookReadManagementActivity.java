@@ -77,7 +77,7 @@ public class BookReadManagementActivity extends MTFBaseActivity{
      * @param tag 1:选择开始时间；2：选择结束时间
      */
     private void showTimeDialog(final int tag) {
-        View view = getLayoutInflater().inflate(R.layout.activity_datatime_layout, null);
+        View view = getLayoutInflater().inflate(R.layout.dialog_datatime_layout, null);
         final DatePicker datePicker = (DatePicker) view.findViewById(R.id.date_picker);
         /**关闭DatePicker、TimePicker、NumberPicker的可编辑模式*/
         datePicker.setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);

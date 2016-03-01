@@ -118,7 +118,7 @@
                 android:layout_width="0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:background="@drawable/bg_textview_green_all_one"
+                android:background="@drawable/bg_textview_green_all_five"
                 android:gravity="center"
                 android:layout_marginLeft="10dip"
                 android:layout_marginRight="10dip"

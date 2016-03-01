@@ -5,7 +5,7 @@
     <string name="title_activity_home">HomeActivity</string>
 
     <!-- home bottom -->
-    <string name="home_index">首页</string>
+    <string name="home_index">读书</string>
     <string name="home_resource">课件</string>
     <string name="home_personal">个人</string>
     <string name="home_management">管理</string>

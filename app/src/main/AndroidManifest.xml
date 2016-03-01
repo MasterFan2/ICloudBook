@@ -56,13 +56,10 @@
         <activity
             android:name=".activity.personal.ui.SelfIntroductionActivity"
             android:label="@string/title_activity_test_download"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" /><![CDATA[
         android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".activity.personal.ui.BirthdayActivity"
-            android:label="@string/title_activity_test_download"
-            android:theme="@style/AppTheme.NoActionBar" />
         android:theme="@style/AppTheme.NoActionBar" />
+        ]]>
         <activity
             android:name=".activity.personal.ui.EmailActivity"
             android:label="@string/title_activity_test_download"
