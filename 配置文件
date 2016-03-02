@@ -5,7 +5,7 @@ self introduction   自我介绍
 nickName 呢称
 BookFriend 书友
 Brithday 生日
-comment 评论
+
 Email 电子邮件
 mine attention  我的关注
 attention mine 关注我的
@@ -15,6 +15,7 @@ personal 个人
 personData 个人资料
 phone 电话
 writer 作者
+comment 评论
 collect 收藏
 has read 己读
 download  下载
@@ -22,5 +23,47 @@ upload  上传
 recommend  推荐
 circular  圆形
 occupation 职业
+About Our 关于我们
+问题反馈  Problemfeedback
+版本更新 Version Update
+版权声明 copyright notice
 
-PS：toolbar没有显示是因为在页面里面加的控件没有设置id,所以找不到它
+
+
+2016-1-27 1:35:28  新增
+ AboutOurActivity   关于我们
+ CopyrightNoticeActivity    版权声明
+ VersionUpdateActivity  版本更新
+ ProblemfeedbackActivity    问题反馈
+ --------------------------------------
+read_statistics   阅读统计
+book_read_management  图书阅读管理
+user_read_management  用户阅读管理
+userAccountManagement  用户账号管理
+teacher Booth Management  老师展台管理
+book Audit Management  上传图书审核管理
+book Data Management  图书综合数据管理
+class Read Management  班级阅读管理
+reason  原因
+
+Upload reason  上传理由
+2016-2-24 1:43:13 管理--图书阅读情况页面添加选择时间控件
+                  管理--班级阅读情况页面添加选择时间控件
+                  管理--添加用户账号管理页面
+
+2016-3-1 22:19:58  统计的要做的
+                         1.阅读【看书文字阅读】
+                         2.差阅读详情界面
+                                        3.首页改成”读书“    包括标题
+                         4.课件详情界面
+                         5.课件、读书列表 界面显示的内容项。
+                         6.Android      rar和zip  解压
+                         7.图表示例【曲线和柱状】。
+                                        8.差审核管理弹窗。
+                                        9.个人中心， 生日修改改为滑动选择
+                         10.班级、年级添加pop弹窗选择。
+                                        11.修改头像弹窗以级逻辑代码
+
+
+2016-3-2 0:21:13  完成 3，8，9
+2016-3-2 21:55:05 课件页面仿照读书页面界面出来了，修改头像弹窗并修改完成,PDF阅读导进来了
