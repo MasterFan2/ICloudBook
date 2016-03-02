@@ -19,4 +19,24 @@
 
 
     <color name="base_green_checked">#42C17A</color>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--!!-->
+
+    <color name="base_text">#3a3a3a</color>
+    <color name="crop__selector_pressed">#1a000000</color>
+    <color name="crop__selector_focused">#77000000</color>
+
+    <color name="crop__button_bar">#f3f3f3</color>
+    <color name="crop__button_text">#666666</color>
 </resources>

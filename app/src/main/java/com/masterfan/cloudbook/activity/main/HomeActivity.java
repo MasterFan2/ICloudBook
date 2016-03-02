@@ -67,7 +67,7 @@ public class HomeActivity extends MTFBaseActivity {
         layouts = new RelativeLayout[]{indexLayout, resourceLayout, managementLayout, personalLayout};
         layouts[0].setBackgroundColor(getResources().getColor(R.color.base_green_checked));
 
-        titleView.setTitleText("首页");
+        titleView.setTitleText(getResources().getString(R.string.home_index));
     }
 
     /**
@@ -77,19 +77,19 @@ public class HomeActivity extends MTFBaseActivity {
     public void onTabClicked(View view){
         switch (view.getId()){
             case R.id.home_index_rl_layout:
-                titleView.setTitleText("首页");
+                titleView.setTitleText(getResources().getString(R.string.home_index));
                 index = 0;
                 break;
             case R.id.home_resource_rl_layout:
-                titleView.setTitleText("资源");
+                titleView.setTitleText(getResources().getString(R.string.home_resource));
                 index = 1;
                 break;
             case R.id.home_management_rl_layout:
-                titleView.setTitleText("管理");
+                titleView.setTitleText(getResources().getString(R.string.home_management));
                 index = 2;
                 break;
             case R.id.home_personal_rl_layout:
-                titleView.setTitleText("个人");
+                titleView.setTitleText(getResources().getString(R.string.home_personal));
                 index = 3;
                 break;
         }

@@ -3,6 +3,8 @@ package com.masterfan.cloudbook.activity.personal.ui;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -10,17 +12,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.masterfan.cloudbook.R;
 import com.masterfan.cloudbook.Util.DialogUtils;
+import com.masterfan.cloudbook.activity.personal.util.DialogLoadingUtil;
+import com.masterfan.cloudbook.activity.personal.util.GetPictureBack;
+import com.masterfan.cloudbook.activity.personal.util.ImageUploadGetUrl;
 import com.masterfan.library.dialog.normal.MTFDialog;
 import com.masterfan.library.ui.MTFBaseActivity;
 import com.masterfan.library.ui.annotation.MTFActivityFeature;
 import com.masterfan.library.utils.T;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,7 +41,7 @@ import butterknife.OnClick;
  * Created by Administrator on 2016/1/20 0020.
  */
 @MTFActivityFeature(layout = R.layout.activity_personal_data, status_bar_color = R.color.colorPrimary)
-public class PersonalDataActivity extends MTFBaseActivity {
+public class PersonalDataActivity extends MTFBaseActivity implements GetPictureBack {
 
     @Bind(R.id.personal_data_nick_name_layout)
     LinearLayout nickNameLayout;
@@ -69,14 +76,23 @@ public class PersonalDataActivity extends MTFBaseActivity {
     @Bind(R.id.person_data_birthday_textview)
     TextView birthdayTxt;
 
+    @Bind(R.id.personal_data_head_imageView)
+    ImageView headImage;
 
+    private DialogLoadingUtil dialogLoadingUtil;
 
+    private ImageUploadGetUrl getPictureUtil;
 
     @Override
     public void initialize(Bundle savedInstanceState) {
 
     }
 
+    @OnClick(R.id.personal_data_head_imageView)
+    public void setHeadImage(View view){
+        getPictureUtil = new ImageUploadGetUrl(PersonalDataActivity.this);
+        getPictureUtil.showdiaViewwithAspect(PersonalDataActivity.this,PersonalDataActivity.this.findViewById(R.id.personal_data_head_imageView),1,1);
+    }
     @OnClick(R.id.personal_data_nick_name_layout)
     public void setOnclickNickName(View view) {
         Intent intent = new Intent(this, NickNameActivity.class);
@@ -286,5 +302,28 @@ public class PersonalDataActivity extends MTFBaseActivity {
 
         }
 
+    }
+
+    @Override
+    public void getBack(String url) {
+        Log.i("AAAA","getBack 收到返回了，图片地址："+url);
+        Bitmap bitmap = BitmapFactory.decodeFile(url);
+        // imageView.setImageURI(Uri.fromFile(new File(filePath)));
+        headImage.setImageBitmap(bitmap);
+        File file2 = new File(url);
+        if(file2 == null){
+            T.s(PersonalDataActivity.this, "图片保存失败");
+            return;
+        }
+        // myProfileModel.uploadImg(pushImgListener, file2);//这里就是上传图片了
+        Log.i("AAAA","图片地址："+file2.getPath());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(getPictureUtil != null){
+            getPictureUtil.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

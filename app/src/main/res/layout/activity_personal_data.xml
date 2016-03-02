@@ -38,7 +38,8 @@
             android:src="@mipmap/bg_person"
             />
 
-        <ImageView
+        <com.masterfan.cloudbook.activity.personal.widget.CircleImageView
+            android:id="@+id/personal_data_head_imageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_gravity="center"

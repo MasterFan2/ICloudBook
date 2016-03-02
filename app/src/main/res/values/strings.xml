@@ -21,4 +21,17 @@
     <string name="title_activity_class">ClassActivity</string>
     <string name="title_activity_book_data_management">BookDataManagementActivity</string>
     <!-- end personal-->
+
+    <!-- !!-->
+    <string name="msg_no_camera">没有系统相机</string>
+    <string name="folder_all">所有照片</string>
+    <string name="preview">预览</string>
+    <string name="msg_amount_limit">已经达到最高选择数量</string>
+
+    <string name="crop__saving">正在保存照片…</string>
+    <string name="crop__wait">请等待…</string>
+    <string name="crop__pick_error">无效的图片</string>
+    <string name="on_processing">请稍等...</string>
+    <string name="crop__done">完成</string>
+    <string name="crop__cancel">取消</string>
 </resources>

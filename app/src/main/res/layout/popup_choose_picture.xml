@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        />
+
+    <LinearLayout
+        android:id="@+id/pop_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        >
+        <Button
+            android:id="@+id/pop_take_photo_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/base_text"
+            android:background="@android:color/white"
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:text="拍照"
+            android:textStyle="bold"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/base_line"/>
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/pop_choose_album_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/base_text"
+            android:background="@android:color/white"
+            android:text="从相册选择"
+            android:textSize="15sp"
+            android:padding="10dp"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_marginTop="15dip"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/base_text"
+            android:background="@android:color/white"
+            android:padding="10dp"
+            android:text="取消"
+            android:textSize="15sp"
+            android:textStyle="bold"
+
+            />
+    </LinearLayout>
+</LinearLayout>

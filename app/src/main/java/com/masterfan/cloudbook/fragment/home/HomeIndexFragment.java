@@ -1,5 +1,6 @@
 package com.masterfan.cloudbook.fragment.home;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.masterfan.cloudbook.R;
 import com.masterfan.cloudbook.activity.home.entity.FragmentIndexBookEntity;
+import com.masterfan.cloudbook.activity.home.ui.MPDFViewActivity;
 import com.masterfan.cloudbook.activity.manamgment.entity.ClassRead;
 import com.masterfan.library.ui.MTFBaseFragment;
 import com.masterfan.library.ui.annotation.MTFFragmentFeature;
@@ -169,7 +171,13 @@ public class HomeIndexFragment extends MTFBaseFragment implements SwipeRefreshLa
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            holder.bookImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(),MPDFViewActivity.class);
+                    startActivity(intent);
+                }
+            });
 
         }
 

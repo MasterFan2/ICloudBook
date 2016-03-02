@@ -2,12 +2,17 @@ package com.masterfan.cloudbook.activity.manamgment.fragment;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListPopupWindow;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -25,14 +30,26 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
+
+
 /**
  *班级阅读查询
  */
 @MTFFragmentFeature(layout = R.layout.fragment_class_read_find)
 public class ClassReadFindFragment extends MTFBaseFragment{
 
+	private ListPopupWindow mFolderPopupWindow;
+
 	private String starttime = "";
 	private String endtime = "";
+
+
+
+	@Bind(R.id.fragment_class_read_find_select_nianji_layout)
+	LinearLayout nianjiLayout;
+
+	@Bind(R.id.fragment_class_read_find_select_banji_layout)
+	LinearLayout banjiLayout;
 
 	@Bind(R.id.fragment_class_read_start_time_layout)
 	LinearLayout startLayout;
@@ -61,6 +78,20 @@ public class ClassReadFindFragment extends MTFBaseFragment{
 			startActivity(intent);
 		}
 	}
+
+	@OnClick(R.id.fragment_class_read_find_select_nianji_layout)
+	public void onclickNianji(View view){
+		Log.i("AAAA","onclickNianji");
+
+	}
+
+
+	@OnClick(R.id.fragment_class_read_find_select_banji_layout)
+	public void onclickBanji(View view){
+		Log.i("AAAA","onclickBanji");
+
+	}
+
 
 	@OnClick(R.id.fragment_class_read_start_time_layout)
 	public void onclickStartTimeBtn(View view){
@@ -176,5 +207,7 @@ public class ClassReadFindFragment extends MTFBaseFragment{
 		}
 
 	}
+
+
 
 }
