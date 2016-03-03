@@ -261,7 +261,7 @@ public class UploadBookAuditManagementActivity extends MTFBaseActivity implement
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             if (DEBUG)
                 Log.i(TAG, "输入文字中的状态，count是一次性输入字符数");
-            mTvAvailableCharNum.setText("" + (charMaxNum - s.length()) + " / 200");
+            mTvAvailableCharNum.setText("" + (s.length()) + " / 200");
 
         }
         @Override

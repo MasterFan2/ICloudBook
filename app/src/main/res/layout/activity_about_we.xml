@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们有关于我们"/>
+            android:text="关于我们关于我们关于我们关于我们"/>
     </LinearLayout>
     </ScrollView>
 </LinearLayout>

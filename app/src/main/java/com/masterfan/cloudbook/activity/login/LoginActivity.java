@@ -39,14 +39,16 @@ public class LoginActivity extends MTFBaseActivity {
       public void onclickLoginBtn(View view){
         Intent intent = new Intent(this, HomeActivity.class);
         if(intent != null){
-            startActivity(intent);
+            animStart(intent);
+            animFinish();
         }
     }
     @OnClick(R.id.login_forget_password_textview)
     public void onclickForgetTxt(View view){
         Intent intent = new Intent(this, HomeActivity.class);
         if(intent != null){
-            startActivity(intent);
+            animStart(intent);
+            animFinish();
         }
     }
 }

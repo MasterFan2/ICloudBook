@@ -1,4 +1,4 @@
-package com.masterfan.cloudbook.activity.home;
+package com.masterfan.cloudbook.activity.home.ui;
 
 import android.os.Bundle;
 import android.view.View;

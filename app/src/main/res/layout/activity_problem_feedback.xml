@@ -24,18 +24,19 @@
             android:padding="15dp"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/update_nickname_num"
+                android:id="@+id/problem_feedback_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="left|top"
                 android:hint="请输入你要反馈的内容，我们会根据你提供的问题尽快做出修改"
-                android:maxLines="5"
-                android:lines="2"
+                android:lines="7"
+                android:maxLines="7"
                 android:maxLength="200"
                 android:textColor="#666666"
                 android:background="@null"
                 />
                 <TextView
+                    android:id="@+id/problem_feedback_textview"
                     android:layout_width="wrap_content"
                     android:text="0/200"
                     android:layout_alignParentBottom="true"
@@ -44,6 +45,7 @@
         </RelativeLayout>
     </LinearLayout>
     <Button
+        android:id="@+id/problem_feedback_btn"
         android:textColor="@color/white"
         android:layout_margin="10dp"
         android:background="@drawable/btn_bg_save"
