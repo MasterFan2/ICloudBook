@@ -51,4 +51,16 @@
         android:layout_height="wrap_content"
         android:text="保存"
         />
+    <com.masterfan.library.widget.probutton.MTFProcessButton
+        android:id="@+id/progress_btn"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="click to download."
+        app:pb_colorComplete="@color/green"
+        app:pb_colorProgress="@color/colorPrimaryDark"
+        app:pb_textComplete="下载完成"
+        app:pb_textProgress="下载中..."
+        />
 </LinearLayout>
