@@ -24,6 +24,7 @@ public class SelfIntroductionActivity extends MTFBaseActivity {
     @Bind(R.id.progress_btn)
     MTFProcessButton btn;
 
+
     private int count = 0;
 
     @OnClick(R.id.progress_btn)
