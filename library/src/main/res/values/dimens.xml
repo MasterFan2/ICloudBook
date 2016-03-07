@@ -74,4 +74,9 @@
     <dimen name="md_listitem_vertical_margin">12dp</dimen>
     <dimen name="md_listitem_vertical_margin_choice">8dp</dimen>
 
+
+    <!-- progressBtn-->
+    <dimen name="corner_radius">2dp</dimen>
+    <dimen name="layer_padding">3dp</dimen>
+    <!-- progressBtn end -->
 </resources>
