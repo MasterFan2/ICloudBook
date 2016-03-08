@@ -1,0 +1,2398 @@
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/listener/OnPageChangeListener.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/listener/OnPageChangeListener.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/listener/OnPageChangeListener.java	(revision )
+@@ -16,7 +16,7 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf.listener;
++package com.masterfan.pdflibrary.pdfview.listener;
+ 
+ /**
+  * Implements this interface to receive events from IPDFView
+Index: PdfLibrary/src/main/java/org/vudroid/core/Page.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/Page.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/Page.java	(revision )
+@@ -0,0 +1,101 @@
++package org.vudroid.core;
++
++import android.graphics.Canvas;
++import android.graphics.Color;
++import android.graphics.Paint;
++import android.graphics.RectF;
++import android.text.TextPaint;
++
++class Page {
++    final int index;
++    RectF bounds;
++    private PageTreeNode node;
++    private DocumentView documentView;
++    private final TextPaint textPaint = textPaint();
++    private final Paint fillPaint = fillPaint();
++    private final Paint strokePaint = strokePaint();
++
++    Page(DocumentView documentView, int index) {
++        this.documentView = documentView;
++        this.index = index;
++        node = new PageTreeNode(documentView, new RectF(0, 0, 1, 1), this, 1, null);
++    }
++
++    private float aspectRatio;
++
++    float getPageHeight(int mainWidth, float zoom) {
++        return mainWidth / getAspectRatio() * zoom;
++    }
++
++    public int getTop() {
++        return Math.round(bounds.top);
++    }
++
++    public void draw(Canvas canvas) {
++        if (!isVisible()) {
++            return;
++        }
++        canvas.drawRect(bounds, fillPaint);
++
++        canvas.drawText("Page " + (index + 1), bounds.centerX(), bounds.centerY(), textPaint);
++        node.draw(canvas);
++        canvas.drawLine(bounds.left, bounds.top, bounds.right, bounds.top, strokePaint);
++        canvas.drawLine(bounds.left, bounds.bottom, bounds.right, bounds.bottom, strokePaint);
++    }
++
++    private Paint strokePaint() {
++        final Paint strokePaint = new Paint();
++        strokePaint.setColor(Color.BLACK);
++        strokePaint.setStyle(Paint.Style.STROKE);
++        strokePaint.setStrokeWidth(2);
++        return strokePaint;
++    }
++
++    private Paint fillPaint() {
++        final Paint fillPaint = new Paint();
++        fillPaint.setColor(Color.GRAY);
++        fillPaint.setStyle(Paint.Style.FILL);
++        return fillPaint;
++    }
++
++    private TextPaint textPaint() {
++        final TextPaint paint = new TextPaint();
++        paint.setColor(Color.BLACK);
++        paint.setAntiAlias(true);
++        paint.setTextSize(24);
++        paint.setTextAlign(Paint.Align.CENTER);
++        return paint;
++    }
++
++    public float getAspectRatio() {
++        return aspectRatio;
++    }
++
++    public void setAspectRatio(float aspectRatio) {
++        if (this.aspectRatio != aspectRatio) {
++            this.aspectRatio = aspectRatio;
++            documentView.invalidatePageSizes();
++        }
++    }
++
++    public boolean isVisible() {
++        return RectF.intersects(documentView.getViewRect(), bounds);
++    }
++
++    public void setAspectRatio(int width, int height) {
++        setAspectRatio(width * 1.0f / height);
++    }
++
++    void setBounds(RectF pageBounds) {
++        bounds = pageBounds;
++        node.invalidateNodeBounds();
++    }
++
++    public void updateVisibility() {
++        node.updateVisibility();
++    }
++
++    public void invalidate() {
++        node.invalidate();
++    }
++}
+Index: PdfLibrary/src/main/java/org/vudroid/core/multitouch/MultiTouchZoomImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/multitouch/MultiTouchZoomImpl.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/multitouch/MultiTouchZoomImpl.java	(revision )
+@@ -0,0 +1,47 @@
++package org.vudroid.core.multitouch;
++
++import android.view.MotionEvent;
++
++import org.vudroid.core.models.ZoomModel;
++
++public class MultiTouchZoomImpl implements MultiTouchZoom {
++    private final ZoomModel zoomModel;
++    private boolean resetLastPointAfterZoom;
++    private float lastZoomDistance;
++
++    public MultiTouchZoomImpl(ZoomModel zoomModel) {
++        this.zoomModel = zoomModel;
++    }
++
++    public boolean onTouchEvent(MotionEvent ev) {
++        if ((ev.getAction() & MotionEvent.ACTION_POINTER_DOWN) == MotionEvent.ACTION_POINTER_DOWN) {
++            lastZoomDistance = getZoomDistance(ev);
++            return true;
++        }
++        if ((ev.getAction() & MotionEvent.ACTION_POINTER_UP) == MotionEvent.ACTION_POINTER_UP) {
++            lastZoomDistance = 0;
++            zoomModel.commit();
++            resetLastPointAfterZoom = true;
++            return true;
++        }
++        if (ev.getAction() == MotionEvent.ACTION_MOVE && lastZoomDistance != 0) {
++            float zoomDistance = getZoomDistance(ev);
++            zoomModel.setZoom(zoomModel.getZoom() * zoomDistance / lastZoomDistance);
++            lastZoomDistance = zoomDistance;
++            return true;
++        }
++        return false;
++    }
++
++    private float getZoomDistance(MotionEvent ev) {
++        return (float) Math.sqrt(Math.pow(ev.getX(0) - ev.getX(1), 2) + Math.pow(ev.getY(0) - ev.getY(1), 2));
++    }
++
++    public boolean isResetLastPointAfterZoom() {
++        return resetLastPointAfterZoom;
++    }
++
++    public void setResetLastPointAfterZoom(boolean resetLastPointAfterZoom) {
++        this.resetLastPointAfterZoom = resetLastPointAfterZoom;
++    }
++}
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/DecodingAsyncTask.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/DecodingAsyncTask.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/DecodingAsyncTask.java	(revision )
+@@ -16,13 +16,10 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf;
++package com.masterfan.pdflibrary.pdfview;
+ 
+ import android.net.Uri;
+ import android.os.AsyncTask;
+-import android.util.Log;
+-
+-import com.joanzapata.pdfview.PDFView;
+ 
+ import org.vudroid.core.DecodeService;
+ import org.vudroid.core.DecodeServiceBase;
+Index: PdfLibrary/src/main/java/org/vudroid/core/DocumentView.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/DocumentView.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/DocumentView.java	(revision )
+@@ -0,0 +1,331 @@
++package org.vudroid.core;
++
++import android.content.Context;
++import android.graphics.Canvas;
++import android.graphics.RectF;
++import android.view.KeyEvent;
++import android.view.MotionEvent;
++import android.view.VelocityTracker;
++import android.view.View;
++import android.widget.Scroller;
++
++import org.vudroid.core.events.ZoomListener;
++import org.vudroid.core.models.CurrentPageModel;
++import org.vudroid.core.models.DecodingProgressModel;
++import org.vudroid.core.models.ZoomModel;
++import org.vudroid.core.multitouch.MultiTouchZoom;
++
++import java.util.HashMap;
++import java.util.Map;
++
++public class DocumentView extends View implements ZoomListener {
++    final ZoomModel zoomModel;
++    private final CurrentPageModel currentPageModel;
++    DecodeService decodeService;
++    private final HashMap<Integer, Page> pages = new HashMap<Integer, Page>();
++    private boolean isInitialized = false;
++    private int pageToGoTo;
++    private float lastX;
++    private float lastY;
++    private VelocityTracker velocityTracker;
++    private final Scroller scroller;
++    DecodingProgressModel progressModel;
++    private RectF viewRect;
++    private boolean inZoom;
++    private long lastDownEventTime;
++    private static final int DOUBLE_TAP_TIME = 500;
++    private MultiTouchZoom multiTouchZoom;
++
++    public DocumentView(Context context, final ZoomModel zoomModel, DecodingProgressModel progressModel, CurrentPageModel currentPageModel) {
++        super(context);
++        this.zoomModel = zoomModel;
++        this.progressModel = progressModel;
++        this.currentPageModel = currentPageModel;
++        setKeepScreenOn(true);
++        scroller = new Scroller(getContext());
++        setFocusable(true);
++        setFocusableInTouchMode(true);
++        initMultiTouchZoomIfAvailable(zoomModel);
++    }
++
++    private void initMultiTouchZoomIfAvailable(ZoomModel zoomModel) {
++        try {
++            multiTouchZoom = (MultiTouchZoom) Class.forName("org.vudroid.core.multitouch.MultiTouchZoomImpl").getConstructor(ZoomModel.class).newInstance(zoomModel);
++        } catch (Exception e) {
++            System.out.println("Multi touch zoom is not available: " + e);
++        }
++    }
++
++    public void setDecodeService(DecodeService decodeService) {
++        this.decodeService = decodeService;
++    }
++
++    private void init() {
++        if (isInitialized) {
++            return;
++        }
++        final int width = decodeService.getEffectivePagesWidth();
++        final int height = decodeService.getEffectivePagesHeight();
++        for (int i = 0; i < decodeService.getPageCount(); i++) {
++            pages.put(i, new Page(this, i));
++            pages.get(i).setAspectRatio(width, height);
++        }
++        isInitialized = true;
++        invalidatePageSizes();
++        goToPageImpl(pageToGoTo);
++    }
++
++    private void goToPageImpl(final int toPage) {
++        scrollTo(0, pages.get(toPage).getTop());
++    }
++
++    @Override
++    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
++        super.onScrollChanged(l, t, oldl, oldt);
++        // bounds could be not updated
++        post(new Runnable() {
++            public void run() {
++                currentPageModel.setCurrentPageIndex(getCurrentPage());
++            }
++        });
++        if (inZoom) {
++            return;
++        }
++        // on scrollChanged can be called from scrollTo just after new layout applied so we should wait for relayout
++        post(new Runnable() {
++            public void run() {
++                updatePageVisibility();
++            }
++        });
++    }
++
++    private void updatePageVisibility() {
++        for (Page page : pages.values()) {
++            page.updateVisibility();
++        }
++    }
++
++    public void commitZoom() {
++        for (Page page : pages.values()) {
++            page.invalidate();
++        }
++        inZoom = false;
++    }
++
++    public void showDocument() {
++        // use post to ensure that document view has width and height before decoding begin
++        post(new Runnable() {
++            public void run() {
++                init();
++                updatePageVisibility();
++            }
++        });
++    }
++
++    public void goToPage(int toPage) {
++        if (isInitialized) {
++            goToPageImpl(toPage);
++        } else {
++            pageToGoTo = toPage;
++        }
++    }
++
++    public int getCurrentPage() {
++        for (Map.Entry<Integer, Page> entry : pages.entrySet()) {
++            if (entry.getValue().isVisible()) {
++                return entry.getKey();
++            }
++        }
++        return 0;
++    }
++
++    public void zoomChanged(float newZoom, float oldZoom) {
++        inZoom = true;
++        stopScroller();
++        final float ratio = newZoom / oldZoom;
++        invalidatePageSizes();
++        scrollTo((int) ((getScrollX() + getWidth() / 2) * ratio - getWidth() / 2), (int) ((getScrollY() + getHeight() / 2) * ratio - getHeight() / 2));
++        postInvalidate();
++    }
++
++    @Override
++    public boolean onTouchEvent(MotionEvent ev) {
++        super.onTouchEvent(ev);
++
++        if (multiTouchZoom != null) {
++            if (multiTouchZoom.onTouchEvent(ev)) {
++                return true;
++            }
++
++            if (multiTouchZoom.isResetLastPointAfterZoom()) {
++                setLastPosition(ev);
++                multiTouchZoom.setResetLastPointAfterZoom(false);
++            }
++        }
++
++        if (velocityTracker == null) {
++            velocityTracker = VelocityTracker.obtain();
++        }
++        velocityTracker.addMovement(ev);
++
++        switch (ev.getAction()) {
++            case MotionEvent.ACTION_DOWN:
++                stopScroller();
++                setLastPosition(ev);
++                if (ev.getEventTime() - lastDownEventTime < DOUBLE_TAP_TIME) {
++                    zoomModel.toggleZoomControls();
++                } else {
++                    lastDownEventTime = ev.getEventTime();
++                }
++                break;
++            case MotionEvent.ACTION_MOVE:
++                scrollBy((int) (lastX - ev.getX()), (int) (lastY - ev.getY()));
++                setLastPosition(ev);
++                break;
++            case MotionEvent.ACTION_UP:
++                velocityTracker.computeCurrentVelocity(1000);
++                scroller.fling(getScrollX(), getScrollY(), (int) -velocityTracker.getXVelocity(), (int) -velocityTracker.getYVelocity(), getLeftLimit(), getRightLimit(), getTopLimit(), getBottomLimit());
++                velocityTracker.recycle();
++                velocityTracker = null;
++
++                break;
++        }
++        return true;
++    }
++
++    private void setLastPosition(MotionEvent ev) {
++        lastX = ev.getX();
++        lastY = ev.getY();
++    }
++
++    @Override
++    public boolean dispatchKeyEvent(KeyEvent event) {
++        if (event.getAction() == KeyEvent.ACTION_DOWN) {
++            switch (event.getKeyCode()) {
++                case KeyEvent.KEYCODE_DPAD_RIGHT:
++                    lineByLineMoveTo(1);
++                    return true;
++                case KeyEvent.KEYCODE_DPAD_LEFT:
++                    lineByLineMoveTo(-1);
++                    return true;
++                case KeyEvent.KEYCODE_DPAD_DOWN:
++                    verticalDpadScroll(1);
++                    return true;
++                case KeyEvent.KEYCODE_DPAD_UP:
++                    verticalDpadScroll(-1);
++                    return true;
++            }
++        }
++        return super.dispatchKeyEvent(event);
++    }
++
++    private void verticalDpadScroll(int direction) {
++        scroller.startScroll(getScrollX(), getScrollY(), 0, direction * getHeight() / 2);
++        invalidate();
++    }
++
++    private void lineByLineMoveTo(int direction) {
++        if (direction == 1 ? getScrollX() == getRightLimit() : getScrollX() == getLeftLimit()) {
++            scroller.startScroll(getScrollX(), getScrollY(), direction * (getLeftLimit() - getRightLimit()), (int) (direction * pages.get(getCurrentPage()).bounds.height() / 50));
++        } else {
++            scroller.startScroll(getScrollX(), getScrollY(), direction * getWidth() / 2, 0);
++        }
++        invalidate();
++    }
++
++    private int getTopLimit() {
++        return 0;
++    }
++
++    private int getLeftLimit() {
++        return 0;
++    }
++
++    private int getBottomLimit() {
++        return (int) pages.get(pages.size() - 1).bounds.bottom - getHeight();
++    }
++
++    private int getRightLimit() {
++        return (int) (getWidth() * zoomModel.getZoom()) - getWidth();
++    }
++
++    @Override
++    public void scrollTo(int x, int y) {
++        super.scrollTo(Math.min(Math.max(x, getLeftLimit()), getRightLimit()), Math.min(Math.max(y, getTopLimit()), getBottomLimit()));
++        viewRect = null;
++    }
++
++    RectF getViewRect() {
++        if (viewRect == null) {
++            viewRect = new RectF(getScrollX(), getScrollY(), getScrollX() + getWidth(), getScrollY() + getHeight());
++        }
++        return viewRect;
++    }
++
++    @Override
++    public void computeScroll() {
++        if (scroller.computeScrollOffset()) {
++            scrollTo(scroller.getCurrX(), scroller.getCurrY());
++        }
++    }
++
++    @Override
++    protected void onDraw(Canvas canvas) {
++        super.onDraw(canvas);
++        for (Page page : pages.values()) {
++            page.draw(canvas);
++        }
++    }
++
++    @Override
++    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
++        super.onLayout(changed, left, top, right, bottom);
++        float scrollScaleRatio = getScrollScaleRatio();
++        invalidatePageSizes();
++        invalidateScroll(scrollScaleRatio);
++        commitZoom();
++    }
++
++    void invalidatePageSizes() {
++        if (!isInitialized) {
++            return;
++        }
++        float heightAccum = 0;
++        int width = getWidth();
++        float zoom = zoomModel.getZoom();
++        for (int i = 0; i < pages.size(); i++) {
++            Page page = pages.get(i);
++            float pageHeight = page.getPageHeight(width, zoom);
++            page.setBounds(new RectF(0, heightAccum, width * zoom, heightAccum + pageHeight));
++            heightAccum += pageHeight;
++        }
++    }
++
++    private void invalidateScroll(float ratio) {
++        if (!isInitialized) {
++            return;
++        }
++        stopScroller();
++        final Page page = pages.get(0);
++        if (page == null || page.bounds == null) {
++            return;
++        }
++        scrollTo((int) (getScrollX() * ratio), (int) (getScrollY() * ratio));
++    }
++
++    private float getScrollScaleRatio() {
++        final Page page = pages.get(0);
++        if (page == null || page.bounds == null) {
++            return 0;
++        }
++        final float v = zoomModel.getZoom();
++        return getWidth() * v / page.bounds.width();
++    }
++
++    private void stopScroller() {
++        if (!scroller.isFinished()) {
++            scroller.abortAnimation();
++        }
++    }
++
++}
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/PDFView.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/PDFView.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/PDFView.java	(revision )
+@@ -16,7 +16,7 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf;
++package com.masterfan.pdflibrary.pdfview;
+ 
+ import android.content.Context;
+ import android.graphics.*;
+@@ -26,21 +26,21 @@
+ import android.os.Environment;
+ import android.util.AttributeSet;
+ import android.view.SurfaceView;
+-import com.joanzapata.pdfview.exception.FileNotFoundException;
+-import com.joanzapata.pdfview.listener.OnDrawListener;
+-import com.joanzapata.pdfview.listener.OnLoadCompleteListener;
+-import com.joanzapata.pdfview.listener.OnPageChangeListener;
+-import com.joanzapata.pdfview.model.PagePart;
+-import com.joanzapata.pdfview.util.ArrayUtils;
+-import com.joanzapata.pdfview.util.Constants;
+-import com.joanzapata.pdfview.util.FileUtils;
+-import com.joanzapata.pdfview.util.NumberUtils;
++
++import com.masterfan.pdflibrary.pdfview.exception.FileNotFoundException;
++import com.masterfan.pdflibrary.pdfview.listener.OnDrawListener;
++import com.masterfan.pdflibrary.pdfview.listener.OnLoadCompleteListener;
++import com.masterfan.pdflibrary.pdfview.listener.OnPageChangeListener;
++import com.masterfan.pdflibrary.pdfview.model.PagePart;
++import com.masterfan.pdflibrary.pdfview.util.ArrayUtils;
++import com.masterfan.pdflibrary.pdfview.util.Constants;
++import com.masterfan.pdflibrary.pdfview.util.NumberUtils;
++
+ import org.vudroid.core.DecodeService;
+ 
+ import java.io.File;
+ import java.io.IOException;
+ 
+-import static com.joanzapata.pdfview.util.Constants.Cache.CACHE_SIZE;
+ 
+ /**
+  * @author Joan Zapata
+@@ -491,10 +491,10 @@
+         // Loop through the pages like [...][4][2][0][1][3][...]
+         // loading as many parts as it can.
+         int parts = 0;
+-        for (int i = 0; i <= Constants.LOADED_SIZE / 2 && parts < CACHE_SIZE; i++) {
+-            parts += loadPage(index + i, CACHE_SIZE - parts);
+-            if (i != 0 && parts < CACHE_SIZE) {
+-                parts += loadPage(index - i, CACHE_SIZE - parts);
++        for (int i = 0; i <= Constants.LOADED_SIZE / 2 && parts < (int) Math.pow(7, 2d); i++) {
++            parts += loadPage(index + i, (int) Math.pow(7, 2d) - parts);
++            if (i != 0 && parts < (int) Math.pow(7, 2d)) {
++                parts += loadPage(index - i, (int) Math.pow(7, 2d) - parts);
+             }
+         }
+ 
+Index: PdfLibrary/src/main/java/org/vudroid/pdfdroid/codec/PdfPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/pdfdroid/codec/PdfPage.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/pdfdroid/codec/PdfPage.java	(revision )
+@@ -0,0 +1,122 @@
++package org.vudroid.pdfdroid.codec;
++
++import android.graphics.Bitmap;
++import android.graphics.Matrix;
++import android.graphics.Rect;
++import android.graphics.RectF;
++
++import org.vudroid.core.codec.CodecPage;
++
++import java.nio.ByteBuffer;
++
++public class PdfPage implements CodecPage
++{
++    private long pageHandle;
++    private long docHandle;
++
++    private PdfPage(long pageHandle, long docHandle)
++    {
++        this.pageHandle = pageHandle;
++        this.docHandle = docHandle;
++    }
++
++    public boolean isDecoding()
++    {
++        return false;  //TODO
++    }
++
++    public void waitForDecode()
++    {
++        //TODO
++    }
++
++    public int getWidth()
++    {
++        return (int) getMediaBox().width();
++    }
++
++    public int getHeight()
++    {
++        return (int) getMediaBox().height();
++    }
++
++    public Bitmap renderBitmap(int width, int height, RectF pageSliceBounds)
++    {
++        Matrix matrix = new Matrix();
++        matrix.postScale(width / getMediaBox().width(), -height / getMediaBox().height());
++        matrix.postTranslate(0, height);
++        matrix.postTranslate(-pageSliceBounds.left*width, -pageSliceBounds.top*height);
++        matrix.postScale(1/pageSliceBounds.width(), 1/pageSliceBounds.height());
++        return render(new Rect(0,0,width,height), matrix);
++    }
++
++    static PdfPage createPage(long dochandle, int pageno)
++    {
++        return new PdfPage(open(dochandle, pageno), dochandle);
++    }
++
++    @Override
++    protected void finalize() throws Throwable
++    {
++        recycle();
++        super.finalize();
++    }
++
++    public synchronized void recycle() {
++        if (pageHandle != 0) {
++            free(pageHandle);
++            pageHandle = 0;
++        }
++    }
++
++    private RectF getMediaBox()
++    {
++        float[] box = new float[4];
++        getMediaBox(pageHandle, box);
++        return new RectF(box[0], box[1], box[2], box[3]);
++    }
++
++    public Bitmap render(Rect viewbox, Matrix matrix)
++	{
++        int[] mRect = new int[4];
++        mRect[0] = viewbox.left;
++		mRect[1] = viewbox.top;
++		mRect[2] = viewbox.right;
++		mRect[3] = viewbox.bottom;
++
++        float[] matrixSource = new float[9];
++        float[] matrixArray = new float[6];
++        matrix.getValues(matrixSource);
++		matrixArray[0] = matrixSource[0];
++		matrixArray[1] = matrixSource[3];
++		matrixArray[2] = matrixSource[1];
++		matrixArray[3] = matrixSource[4];
++		matrixArray[4] = matrixSource[2];
++		matrixArray[5] = matrixSource[5];
++
++        int width = viewbox.width();
++        int height = viewbox.height();
++        int[] bufferarray = new int[width * height];
++        nativeCreateView(docHandle, pageHandle, mRect, matrixArray, bufferarray);
++        return Bitmap.createBitmap(bufferarray, width, height, Bitmap.Config.RGB_565);
++        /*ByteBuffer buffer = ByteBuffer.allocateDirect(width * height * 2);
++        render(docHandle, docHandle, mRect, matrixArray, buffer, ByteBuffer.allocateDirect(width * height * 8));
++        final Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
++        bitmap.copyPixelsFromBuffer(buffer);
++        return bitmap;*/
++	}
++
++    private static native void getMediaBox(long handle, float[] mediabox);
++
++    private static native void free(long handle);
++
++    private static native long open(long dochandle, int pageno);
++
++    private static native void render(long dochandle, long pagehandle,
++		int[] viewboxarray, float[] matrixarray,
++		ByteBuffer byteBuffer, ByteBuffer tempBuffer);
++
++    private native void nativeCreateView(long dochandle, long pagehandle,
++		int[] viewboxarray, float[] matrixarray,
++		int[] bufferarray);
++}
+Index: PdfLibrary/src/main/java/org/vudroid/pdfdroid/codec/PdfDocument.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/pdfdroid/codec/PdfDocument.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/pdfdroid/codec/PdfDocument.java	(revision )
+@@ -0,0 +1,50 @@
++package org.vudroid.pdfdroid.codec;
++
++import org.vudroid.core.codec.CodecDocument;
++import org.vudroid.core.codec.CodecPage;
++
++public class PdfDocument implements CodecDocument
++{
++    private long docHandle;
++    private static final int FITZMEMORY = 512 * 1024;
++
++    private PdfDocument(long docHandle)
++    {
++        this.docHandle = docHandle;
++    }
++
++    public CodecPage getPage(int pageNumber)
++    {
++        return PdfPage.createPage(docHandle, pageNumber + 1);
++    }
++
++    public int getPageCount()
++    {
++        return getPageCount(docHandle);
++    }
++
++    static PdfDocument openDocument(String fname, String pwd)
++    {
++        return new PdfDocument(open(FITZMEMORY, fname, pwd));
++    }
++
++    private static native long open(int fitzmemory, String fname, String pwd);
++
++    private static native void free(long handle);
++
++    private static native int getPageCount(long handle);
++
++    @Override
++    protected void finalize() throws Throwable
++    {
++        recycle();
++        super.finalize();
++    }
++
++    public synchronized void recycle() {
++        if (docHandle != 0) {
++            free(docHandle);
++            docHandle = 0;
++        }
++    }
++}
+Index: PdfLibrary/src/main/java/org/vudroid/core/events/Event.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/events/Event.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/events/Event.java	(revision )
+@@ -0,0 +1,6 @@
++package org.vudroid.core.events;
++
++public interface Event<T>
++{
++    void dispatchOn(Object listener);
++}
+Index: PdfLibrary/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/AndroidManifest.xml	(revision )
++++ PdfLibrary/src/main/AndroidManifest.xml	(revision )
+@@ -0,0 +1,11 @@
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="com.masterfan.pdflibrary">
++
++    <application
++        android:allowBackup="true"
++        android:label="@string/app_name"
++        android:supportsRtl="true">
++
++    </application>
++
++</manifest>
+Index: PdfLibrary/src/main/java/org/vudroid/core/events/BringUpZoomControlsEvent.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/events/BringUpZoomControlsEvent.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/events/BringUpZoomControlsEvent.java	(revision )
+@@ -0,0 +1,10 @@
++package org.vudroid.core.events;
++
++public class BringUpZoomControlsEvent extends SafeEvent<BringUpZoomControlsListener>
++{
++    @Override
++    public void dispatchSafely(BringUpZoomControlsListener listener)
++    {
++        listener.toggleZoomControls();
++    }
++}
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/exception/FileNotFoundException.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/exception/FileNotFoundException.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/exception/FileNotFoundException.java	(revision )
+@@ -16,7 +16,7 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf.exception;
++package com.masterfan.pdflibrary.pdfview.exception;
+ 
+ public class FileNotFoundException extends RuntimeException {
+ 
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/CacheManager.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/CacheManager.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/CacheManager.java	(revision )
+@@ -16,16 +16,16 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf;
++package com.masterfan.pdflibrary.pdfview;
+ 
+ import android.graphics.RectF;
+-import com.joanzapata.pdfview.model.PagePart;
+ 
++import com.masterfan.pdflibrary.pdfview.model.PagePart;
++
+ import java.util.Comparator;
+ import java.util.PriorityQueue;
+ import java.util.Vector;
+ 
+-import static com.joanzapata.pdfview.util.Constants.Cache.*;
+ 
+ class CacheManager {
+ 
+@@ -36,8 +36,8 @@
+     private Vector<PagePart> thumbnails;
+ 
+     public CacheManager() {
+-        activeCache = new PriorityQueue<PagePart>(CACHE_SIZE, new PagePartComparator());
+-        passiveCache = new PriorityQueue<PagePart>(CACHE_SIZE, new PagePartComparator());
++        activeCache = new PriorityQueue<PagePart>((int) Math.pow(7, 2d), new PagePartComparator());
++        passiveCache = new PriorityQueue<PagePart>( (int) Math.pow(7, 2d), new PagePartComparator());
+         thumbnails = new Vector<PagePart>();
+     }
+ 
+@@ -58,12 +58,12 @@
+ 
+     private void makeAFreeSpace() {
+ 
+-        while ((activeCache.size() + passiveCache.size()) >= CACHE_SIZE &&
++        while ((activeCache.size() + passiveCache.size()) >= (int) Math.pow(7, 2d) &&
+                 !passiveCache.isEmpty()) {
+             passiveCache.poll().getRenderedBitmap().recycle();
+         }
+ 
+-        while ((activeCache.size() + passiveCache.size()) >= CACHE_SIZE &&
++        while ((activeCache.size() + passiveCache.size()) >= (int) Math.pow(7, 2d) &&
+                 !activeCache.isEmpty()) {
+             activeCache.poll().getRenderedBitmap().recycle();
+         }
+@@ -72,7 +72,7 @@
+     public void cacheThumbnail(PagePart part) {
+ 
+         // If cache too big, remove and recycle
+-        if (thumbnails.size() >= THUMBNAILS_CACHE_SIZE) {
++        if (thumbnails.size() >= 4) {
+             thumbnails.remove(0).getRenderedBitmap().recycle();
+         }
+ 
+@@ -150,4 +150,4 @@
+         }
+     }
+ 
+-}
++}
+\ No newline at end of file
+Index: PdfLibrary/src/main/java/org/vudroid/core/codec/CodecDocument.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/codec/CodecDocument.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/codec/CodecDocument.java	(revision )
+@@ -0,0 +1,9 @@
++package org.vudroid.core.codec;
++
++public interface CodecDocument {
++    CodecPage getPage(int pageNumber);
++
++    int getPageCount();
++
++    void recycle();
++}
+Index: PdfLibrary/src/main/java/org/vudroid/core/models/DecodingProgressModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/models/DecodingProgressModel.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/models/DecodingProgressModel.java	(revision )
+@@ -0,0 +1,26 @@
++package org.vudroid.core.models;
++
++import org.vudroid.core.events.DecodingProgressListener;
++import org.vudroid.core.events.EventDispatcher;
++
++public class DecodingProgressModel extends EventDispatcher
++{
++    private int currentlyDecoding;
++
++    public void increase()
++    {
++        currentlyDecoding++;
++        dispatchChanged();
++    }
++
++    private void dispatchChanged()
++    {
++        dispatch(new DecodingProgressListener.DecodingProgressEvent(currentlyDecoding));
++    }
++
++    public void decrease()
++    {
++        currentlyDecoding--;
++        dispatchChanged();
++    }
++}
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/util/DragPinchListener.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/util/DragPinchListener.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/util/DragPinchListener.java	(revision )
+@@ -16,7 +16,7 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf.util;
++package com.masterfan.pdflibrary.pdfview.util;
+ 
+ import android.graphics.PointF;
+ import android.view.MotionEvent;
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/model/PagePart.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/model/PagePart.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/model/PagePart.java	(revision )
+@@ -16,7 +16,7 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf.model;
++package com.masterfan.pdflibrary.pdfview.model;
+ 
+ import android.graphics.Bitmap;
+ import android.graphics.RectF;
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/SpiralLoopManager.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/SpiralLoopManager.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/SpiralLoopManager.java	(revision )
+@@ -16,7 +16,7 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf;
++package com.masterfan.pdflibrary.pdfview;
+ 
+ /**
+  * This class allows to run a loop like :
+Index: PdfLibrary/src/main/java/org/vudroid/core/events/BringUpZoomControlsListener.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/events/BringUpZoomControlsListener.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/events/BringUpZoomControlsListener.java	(revision )
+@@ -0,0 +1,6 @@
++package org.vudroid.core.events;
++
++public interface BringUpZoomControlsListener
++{
++    public void toggleZoomControls();
++}
+Index: PdfLibrary/src/main/java/org/vudroid/pdfdroid/codec/PdfContext.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/pdfdroid/codec/PdfContext.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/pdfdroid/codec/PdfContext.java	(revision )
+@@ -0,0 +1,28 @@
++package org.vudroid.pdfdroid.codec;
++
++import android.content.ContentResolver;
++
++import org.vudroid.core.VuDroidLibraryLoader;
++import org.vudroid.core.codec.CodecContext;
++import org.vudroid.core.codec.CodecDocument;
++
++public class PdfContext implements CodecContext
++{
++    static
++    {
++        VuDroidLibraryLoader.load();
++    }
++
++    public CodecDocument openDocument(String fileName)
++    {
++        return PdfDocument.openDocument(fileName, "");
++    }
++
++    public void setContentResolver(ContentResolver contentResolver)
++    {
++        //TODO
++    }
++
++    public void recycle() {
++    }
++}
+Index: PdfLibrary/src/main/java/org/vudroid/core/VuDroidLibraryLoader.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/VuDroidLibraryLoader.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/VuDroidLibraryLoader.java	(revision )
+@@ -0,0 +1,16 @@
++package org.vudroid.core;
++
++public class VuDroidLibraryLoader
++{
++    private static boolean alreadyLoaded = false;
++
++    public static void load()
++    {
++        if (alreadyLoaded)
++        {
++            return;
++        }
++        System.loadLibrary("vudroid");
++        alreadyLoaded = true;
++    }
++}
+Index: PdfLibrary/src/main/java/org/vudroid/core/DecodeService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/DecodeService.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/DecodeService.java	(revision )
+@@ -0,0 +1,43 @@
++package org.vudroid.core;
++
++import android.content.ContentResolver;
++import android.graphics.Bitmap;
++import android.graphics.RectF;
++import android.net.Uri;
++import android.view.View;
++
++import org.vudroid.core.codec.CodecPage;
++
++public interface DecodeService
++{
++    void setContentResolver(ContentResolver contentResolver);
++
++    void setContainerView(View containerView);
++
++    void open(Uri fileUri);
++
++    void decodePage(Object decodeKey, int pageNum, DecodeCallback decodeCallback, float zoom, RectF pageSliceBounds);
++
++    void stopDecoding(Object decodeKey);
++
++    int getEffectivePagesWidth();
++
++    int getEffectivePagesHeight();
++
++    int getPageCount();
++
++    int getPageWidth(int pageIndex);
++
++    int getPageHeight(int pageIndex);
++    
++    CodecPage getPage(int pageIndex);
++    
++    void recycle();
++    
++    
++
++    public interface DecodeCallback
++    {
++        void decodeComplete(Bitmap bitmap);
++    }
++}
+Index: PdfLibrary/src/main/java/org/vudroid/core/utils/PathFromUri.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/utils/PathFromUri.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/utils/PathFromUri.java	(revision )
+@@ -0,0 +1,22 @@
++package org.vudroid.core.utils;
++
++import android.content.ContentResolver;
++import android.database.Cursor;
++import android.net.Uri;
++
++public class PathFromUri
++{
++    public static String retrieve(ContentResolver resolver, Uri uri)
++    {
++        if (uri.getScheme().equals("file"))
++        {
++            return uri.getPath();
++        }
++        final Cursor cursor = resolver.query(uri, new String[]{"_data"}, null, null, null);
++        if (cursor.moveToFirst())
++        {
++            return cursor.getString(0);
++        }
++        throw new RuntimeException("Can't retrieve path from uri: " + uri.toString());
++    }
++}
+Index: PdfLibrary/src/main/java/org/vudroid/core/events/EventDispatcher.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/events/EventDispatcher.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/events/EventDispatcher.java	(revision )
+@@ -0,0 +1,27 @@
++package org.vudroid.core.events;
++
++import java.util.ArrayList;
++
++@SuppressWarnings("rawtypes")
++public class EventDispatcher
++{
++    private final ArrayList<Object> listeners = new ArrayList<Object>();
++
++	public void dispatch(Event event)
++    {
++        for (Object listener : listeners)
++        {
++            event.dispatchOn(listener);
++        }
++    }
++
++    public void addEventListener(Object listener)
++    {
++        listeners.add(listener);
++    }
++
++    public void removeEventListener(Object listener)
++    {
++        listeners.remove(listener);
++    }
++}
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/listener/OnDrawListener.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/listener/OnDrawListener.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/listener/OnDrawListener.java	(revision )
+@@ -16,7 +16,7 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf.listener;
++package com.masterfan.pdflibrary.pdfview.listener;
+ 
+ import android.graphics.Canvas;
+ 
+Index: PdfLibrary/src/main/java/org/vudroid/core/PageTreeNode.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/PageTreeNode.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/PageTreeNode.java	(revision )
+@@ -0,0 +1,275 @@
++package org.vudroid.core;
++
++import android.graphics.Bitmap;
++import android.graphics.Canvas;
++import android.graphics.Matrix;
++import android.graphics.Paint;
++import android.graphics.Rect;
++import android.graphics.RectF;
++
++import java.lang.ref.SoftReference;
++
++class PageTreeNode {
++    private static final int SLICE_SIZE = 65535;
++    private Bitmap bitmap;
++    private SoftReference<Bitmap> bitmapWeakReference;
++    private boolean decodingNow;
++    private final RectF pageSliceBounds;
++    private final Page page;
++    private PageTreeNode[] children;
++    private final int treeNodeDepthLevel;
++    private Matrix matrix = new Matrix();
++    private final Paint bitmapPaint = new Paint();
++    private DocumentView documentView;
++    private boolean invalidateFlag;
++    private Rect targetRect;
++    private RectF targetRectF;
++
++    PageTreeNode(DocumentView documentView, RectF localPageSliceBounds, Page page, int treeNodeDepthLevel, PageTreeNode parent) {
++        this.documentView = documentView;
++        this.pageSliceBounds = evaluatePageSliceBounds(localPageSliceBounds, parent);
++        this.page = page;
++        this.treeNodeDepthLevel = treeNodeDepthLevel;
++    }
++
++    public void updateVisibility() {
++        invalidateChildren();
++        if (children != null) {
++            for (PageTreeNode child : children) {
++                child.updateVisibility();
++            }
++        }
++        if (isVisible()) {
++            if (!thresholdHit()) {
++                if (getBitmap() != null && !invalidateFlag) {
++                    restoreBitmapReference();
++                } else {
++                    decodePageTreeNode();
++                }
++            }
++        }
++        if (!isVisibleAndNotHiddenByChildren()) {
++            stopDecodingThisNode();
++            setBitmap(null);
++        }
++    }
++
++    public void invalidate() {
++        invalidateChildren();
++        invalidateRecursive();
++        updateVisibility();
++    }
++
++    private void invalidateRecursive() {
++        invalidateFlag = true;
++        if (children != null) {
++            for (PageTreeNode child : children) {
++                child.invalidateRecursive();
++            }
++        }
++        stopDecodingThisNode();
++    }
++
++    void invalidateNodeBounds() {
++        targetRect = null;
++        targetRectF = null;
++        if (children != null) {
++            for (PageTreeNode child : children) {
++                child.invalidateNodeBounds();
++            }
++        }
++    }
++
++
++    void draw(Canvas canvas) {
++        if (getBitmap() != null) {
++            canvas.drawBitmap(getBitmap(), new Rect(0, 0, getBitmap().getWidth(), getBitmap().getHeight()), getTargetRect(), bitmapPaint);
++        }
++        if (children == null) {
++            return;
++        }
++        for (PageTreeNode child : children) {
++            child.draw(canvas);
++        }
++    }
++
++    private boolean isVisible() {
++        return RectF.intersects(documentView.getViewRect(), getTargetRectF());
++    }
++
++    private RectF getTargetRectF() {
++        if (targetRectF == null) {
++            targetRectF = new RectF(getTargetRect());
++        }
++        return targetRectF;
++    }
++
++    private void invalidateChildren() {
++        if (thresholdHit() && children == null && isVisible()) {
++            final int newThreshold = treeNodeDepthLevel * 2;
++            children = new PageTreeNode[]
++                    {
++                            new PageTreeNode(documentView, new RectF(0, 0, 0.5f, 0.5f), page, newThreshold, this),
++                            new PageTreeNode(documentView, new RectF(0.5f, 0, 1.0f, 0.5f), page, newThreshold, this),
++                            new PageTreeNode(documentView, new RectF(0, 0.5f, 0.5f, 1.0f), page, newThreshold, this),
++                            new PageTreeNode(documentView, new RectF(0.5f, 0.5f, 1.0f, 1.0f), page, newThreshold, this)
++                    };
++        }
++        if (!thresholdHit() && getBitmap() != null || !isVisible()) {
++            recycleChildren();
++        }
++    }
++
++    private boolean thresholdHit() {
++        float zoom = documentView.zoomModel.getZoom();
++        int mainWidth = documentView.getWidth();
++        float height = page.getPageHeight(mainWidth, zoom);
++        return (mainWidth * zoom * height) / (treeNodeDepthLevel * treeNodeDepthLevel) > SLICE_SIZE;
++    }
++
++    public Bitmap getBitmap() {
++        return bitmapWeakReference != null ? bitmapWeakReference.get() : null;
++    }
++
++    private void restoreBitmapReference() {
++        setBitmap(getBitmap());
++    }
++
++    private void decodePageTreeNode() {
++        if (isDecodingNow()) {
++            return;
++        }
++        setDecodingNow(true);
++        documentView.decodeService.decodePage(this, page.index, new DecodeService.DecodeCallback() {
++            public void decodeComplete(final Bitmap bitmap) {
++                documentView.post(new Runnable() {
++                    public void run() {
++                        setBitmap(bitmap);
++                        invalidateFlag = false;
++                        setDecodingNow(false);
++                        page.setAspectRatio(documentView.decodeService.getPageWidth(page.index), documentView.decodeService.getPageHeight(page.index));
++                        invalidateChildren();
++                    }
++                });
++            }
++        }, documentView.zoomModel.getZoom(), pageSliceBounds);
++    }
++
++    private RectF evaluatePageSliceBounds(RectF localPageSliceBounds, PageTreeNode parent) {
++        if (parent == null) {
++            return localPageSliceBounds;
++        }
++        final Matrix matrix = new Matrix();
++        matrix.postScale(parent.pageSliceBounds.width(), parent.pageSliceBounds.height());
++        matrix.postTranslate(parent.pageSliceBounds.left, parent.pageSliceBounds.top);
++        final RectF sliceBounds = new RectF();
++        matrix.mapRect(sliceBounds, localPageSliceBounds);
++        return sliceBounds;
++    }
++
++    private void setBitmap(Bitmap bitmap) {
++        if (bitmap != null && bitmap.getWidth() == -1 && bitmap.getHeight() == -1) {
++            return;
++        }
++        if (this.bitmap != bitmap) {
++            if (bitmap != null) {
++                if (this.bitmap != null) {
++                    this.bitmap.recycle();
++                }
++                bitmapWeakReference = new SoftReference<Bitmap>(bitmap);
++                documentView.postInvalidate();
++            }
++            this.bitmap = bitmap;
++        }
++    }
++
++    private boolean isDecodingNow() {
++        return decodingNow;
++    }
++
++    private void setDecodingNow(boolean decodingNow) {
++        if (this.decodingNow != decodingNow) {
++            this.decodingNow = decodingNow;
++            if (decodingNow) {
++                documentView.progressModel.increase();
++            } else {
++                documentView.progressModel.decrease();
++            }
++        }
++    }
++
++    private Rect getTargetRect() {
++        if (targetRect == null) {
++            matrix.reset();
++            matrix.postScale(page.bounds.width(), page.bounds.height());
++            matrix.postTranslate(page.bounds.left, page.bounds.top);
++            RectF targetRectF = new RectF();
++            matrix.mapRect(targetRectF, pageSliceBounds);
++            targetRect = new Rect((int) targetRectF.left, (int) targetRectF.top, (int) targetRectF.right, (int) targetRectF.bottom);
++        }
++        return targetRect;
++    }
++
++    private void stopDecodingThisNode() {
++        if (!isDecodingNow()) {
++            return;
++        }
++        documentView.decodeService.stopDecoding(this);
++        setDecodingNow(false);
++    }
++
++    private boolean isHiddenByChildren() {
++        if (children == null) {
++            return false;
++        }
++        for (PageTreeNode child : children) {
++            if (child.getBitmap() == null) {
++                return false;
++            }
++        }
++        return true;
++    }
++
++    private void recycleChildren() {
++        if (children == null) {
++            return;
++        }
++        for (PageTreeNode child : children) {
++            child.recycle();
++        }
++        if (!childrenContainBitmaps()) {
++            children = null;
++        }
++    }
++
++    private boolean containsBitmaps() {
++        return getBitmap() != null || childrenContainBitmaps();
++    }
++
++    private boolean childrenContainBitmaps() {
++        if (children == null) {
++            return false;
++        }
++        for (PageTreeNode child : children) {
++            if (child.containsBitmaps()) {
++                return true;
++            }
++        }
++        return false;
++    }
++
++    private void recycle() {
++        stopDecodingThisNode();
++        setBitmap(null);
++        if (children != null) {
++            for (PageTreeNode child : children) {
++                child.recycle();
++            }
++        }
++    }
++
++    private boolean isVisibleAndNotHiddenByChildren() {
++        return isVisible() && !isHiddenByChildren();
++    }
++
++}
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/util/NumberUtils.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/util/NumberUtils.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/util/NumberUtils.java	(revision )
+@@ -16,7 +16,7 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf.util;
++package com.masterfan.pdflibrary.pdfview.util;
+ 
+ public class NumberUtils {
+ 
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/listener/OnLoadCompleteListener.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/listener/OnLoadCompleteListener.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/listener/OnLoadCompleteListener.java	(revision )
+@@ -16,7 +16,7 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf.listener;
++package com.masterfan.pdflibrary.pdfview.listener;
+ 
+ /**
+  * Implements this interface to receive events from IPDFView
+Index: PdfLibrary/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/res/values/strings.xml	(revision )
++++ PdfLibrary/src/main/res/values/strings.xml	(revision )
+@@ -0,0 +1,3 @@
++<resources>
++    <string name="app_name">PdfLibrary</string>
++</resources>
+Index: PdfLibrary/src/main/java/org/vudroid/core/events/ZoomListener.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/events/ZoomListener.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/events/ZoomListener.java	(revision )
+@@ -0,0 +1,17 @@
++package org.vudroid.core.events;
++
++public interface ZoomListener
++{
++    void zoomChanged(float newZoom, float oldZoom);
++
++    void commitZoom();
++
++    public class CommitZoomEvent extends SafeEvent<ZoomListener>
++    {
++        @Override
++        public void dispatchSafely(ZoomListener listener)
++        {
++            listener.commitZoom();
++        }
++    }
++}
+Index: PdfLibrary/src/main/java/org/vudroid/core/events/DecodingProgressListener.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/events/DecodingProgressListener.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/events/DecodingProgressListener.java	(revision )
+@@ -0,0 +1,22 @@
++package org.vudroid.core.events;
++
++public interface DecodingProgressListener
++{
++    void decodingProgressChanged(int currentlyDecoding);
++
++    public class DecodingProgressEvent extends SafeEvent<DecodingProgressListener>
++    {
++        private final int currentlyDecoding;
++
++        public DecodingProgressEvent(int currentlyDecoding)
++        {
++            this.currentlyDecoding = currentlyDecoding;
++        }
++
++        @Override
++        public void dispatchSafely(DecodingProgressListener listener)
++        {
++            listener.decodingProgressChanged(currentlyDecoding);
++        }
++    }
++}
+Index: PdfLibrary/src/main/java/org/vudroid/core/codec/CodecPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/codec/CodecPage.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/codec/CodecPage.java	(revision )
+@@ -0,0 +1,19 @@
++package org.vudroid.core.codec;
++
++import android.graphics.Bitmap;
++import android.graphics.RectF;
++
++public interface CodecPage
++{
++    boolean isDecoding();
++
++    void waitForDecode();
++
++    int getWidth();
++
++    int getHeight();
++
++    Bitmap renderBitmap(int width, int height, RectF pageSliceBounds);
++
++    void recycle();
++}
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/util/FileUtils.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/util/FileUtils.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/util/FileUtils.java	(revision )
+@@ -16,7 +16,7 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf.util;
++package com.masterfan.pdflibrary.pdfview.util;
+ 
+ import android.content.Context;
+ 
+Index: PdfLibrary/src/main/java/org/vudroid/core/events/ZoomChangedEvent.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/events/ZoomChangedEvent.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/events/ZoomChangedEvent.java	(revision )
+@@ -0,0 +1,19 @@
++package org.vudroid.core.events;
++
++public class ZoomChangedEvent extends SafeEvent<ZoomListener>
++{
++    private final float newZoom;
++    private final float oldZoom;
++
++    public ZoomChangedEvent(float newZoom, float oldZoom)
++    {
++        this.newZoom = newZoom;
++        this.oldZoom = oldZoom;
++    }
++
++    @Override
++    public void dispatchSafely(ZoomListener listener)
++    {
++        listener.zoomChanged(newZoom, oldZoom);
++    }
++}
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/AnimationManager.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/AnimationManager.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/AnimationManager.java	(revision )
+@@ -16,7 +16,7 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf;
++package com.masterfan.pdflibrary.pdfview;
+ 
+ import android.animation.Animator;
+ import android.animation.Animator.AnimatorListener;
+@@ -24,8 +24,6 @@
+ import android.animation.ValueAnimator.AnimatorUpdateListener;
+ import android.graphics.PointF;
+ import android.view.animation.DecelerateInterpolator;
+-
+-import com.joanzapata.pdfview.PDFView;
+ 
+ /**
+  * @author Joan Zapata
+Index: PdfLibrary/src/main/java/org/vudroid/core/events/CurrentPageListener.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/events/CurrentPageListener.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/events/CurrentPageListener.java	(revision )
+@@ -0,0 +1,22 @@
++package org.vudroid.core.events;
++
++public interface CurrentPageListener
++{
++    void currentPageChanged(int pageIndex);
++
++    public class CurrentPageChangedEvent extends SafeEvent<CurrentPageListener>
++    {
++        private final int pageIndex;
++
++        public CurrentPageChangedEvent(int pageIndex)
++        {
++            this.pageIndex = pageIndex;
++        }
++
++        @Override
++        public void dispatchSafely(CurrentPageListener listener)
++        {
++            listener.currentPageChanged(pageIndex);
++        }
++    }
++}
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/util/ArrayUtils.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/util/ArrayUtils.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/util/ArrayUtils.java	(revision )
+@@ -16,7 +16,7 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf.util;
++package com.masterfan.pdflibrary.pdfview.util;
+ 
+ import java.util.ArrayList;
+ import java.util.List;
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/DragPinchManager.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/DragPinchManager.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/DragPinchManager.java	(revision )
+@@ -16,23 +16,19 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf;
++package com.masterfan.pdflibrary.pdfview;
+ 
+ import android.graphics.PointF;
+-import com.joanzapata.pdfview.PDFView;
+-import com.joanzapata.pdfview.util.DragPinchListener;
+-import com.joanzapata.pdfview.util.DragPinchListener.OnDoubleTapListener;
+-import com.joanzapata.pdfview.util.DragPinchListener.OnDragListener;
+-import com.joanzapata.pdfview.util.DragPinchListener.OnPinchListener;
+ 
+-import static com.joanzapata.pdfview.util.Constants.Pinch.*;
++import com.masterfan.pdflibrary.pdfview.util.DragPinchListener;
+ 
++
+ /**
+  * @author Joan Zapata
+  *         This Manager takes care of moving the PDFView,
+  *         set its zoom track user actions.
+  */
+-class DragPinchManager implements OnDragListener, OnPinchListener, OnDoubleTapListener {
++class DragPinchManager implements DragPinchListener.OnDragListener, DragPinchListener.OnPinchListener, DragPinchListener.OnDoubleTapListener {
+ 
+     private PDFView pdfView;
+ 
+@@ -44,7 +40,7 @@
+     private float startDragY;
+ 
+     private boolean isSwipeEnabled;
+-    
++
+     private boolean swipeVertical;
+ 
+     public DragPinchManager(PDFView pdfView) {
+@@ -57,7 +53,7 @@
+         dragPinchListener.setOnDoubleTapListener(this);
+         pdfView.setOnTouchListener(dragPinchListener);
+     }
+-    
++
+     public void enableDoubletap(boolean enableDoubletap){
+         if (enableDoubletap) {
+             dragPinchListener.setOnDoubleTapListener(this);
+@@ -65,14 +61,14 @@
+             dragPinchListener.setOnDoubleTapListener(null);
+         }
+     }
+-    
++
+     @Override
+     public void onPinch(float dr, PointF pivot) {
+         float wantedZoom = pdfView.getZoom() * dr;
+-        if (wantedZoom < MINIMUM_ZOOM) {
+-            dr = MINIMUM_ZOOM / pdfView.getZoom();
+-        } else if (wantedZoom > MAXIMUM_ZOOM) {
+-            dr = MAXIMUM_ZOOM / pdfView.getZoom();
++        if (wantedZoom < 1) {
++            dr = 1 / pdfView.getZoom();
++        } else if (wantedZoom > 10) {
++            dr = 10 / pdfView.getZoom();
+         }
+         pdfView.zoomCenteredRelativeTo(dr, pivot);
+     }
+@@ -95,12 +91,12 @@
+     public void endDrag(float x, float y) {
+         if (!isZooming()) {
+             if (isSwipeEnabled) {
+-            	float distance;
+-            	if (swipeVertical)
+-            		distance = y - startDragY;
+-            	else
+-	                distance = x - startDragX;
+-            	
++                float distance;
++                if (swipeVertical)
++                    distance = y - startDragY;
++                else
++                    distance = x - startDragX;
++
+                 long time = System.currentTimeMillis() - startDragTime;
+                 int diff = distance > 0 ? -1 : +1;
+ 
+@@ -124,8 +120,8 @@
+     }
+ 
+     private boolean isQuickMove(float dx, long dt) {
+-        return Math.abs(dx) >= QUICK_MOVE_THRESHOLD_DISTANCE && //
+-                dt <= QUICK_MOVE_THRESHOLD_TIME;
++        return Math.abs(dx) >= 50 && //
++                dt <= 250;
+     }
+ 
+     public void setSwipeEnabled(boolean isSwipeEnabled) {
+@@ -139,8 +135,9 @@
+         }
+     }
+ 
+-	public void setSwipeVertical(boolean swipeVertical) {
+-		this.swipeVertical = swipeVertical;
+-	}
++    public void setSwipeVertical(boolean swipeVertical) {
++        this.swipeVertical = swipeVertical;
++    }
+ 
+ }
++
+Index: PdfLibrary/src/main/java/org/vudroid/core/events/SafeEvent.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/events/SafeEvent.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/events/SafeEvent.java	(revision )
+@@ -0,0 +1,36 @@
++package org.vudroid.core.events;
++
++import java.lang.reflect.Method;
++
++public abstract class SafeEvent<T> implements Event<T>
++{
++    private final Class<?> listenerType;
++
++    protected SafeEvent()
++    {
++        listenerType = getListenerType();
++    }
++
++    private Class<?> getListenerType()
++    {
++        for (Method method : getClass().getMethods())
++        {
++            if ("dispatchSafely".equals(method.getName()) && !method.isSynthetic())
++            {
++                return method.getParameterTypes()[0];
++            }
++        }
++        throw new RuntimeException("Couldn't find dispatchSafely method");
++    }
++
++    @SuppressWarnings({"unchecked"})
++    public final void dispatchOn(Object listener)
++    {
++        if (listenerType.isAssignableFrom(listener.getClass()))
++        {
++            dispatchSafely((T) listener);
++        }
++    }
++
++    public abstract void dispatchSafely(T listener);
++}
+Index: PdfLibrary/src/main/java/org/vudroid/core/DecodeServiceBase.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/DecodeServiceBase.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/DecodeServiceBase.java	(revision )
+@@ -0,0 +1,279 @@
++package org.vudroid.core;
++
++import android.content.ContentResolver;
++import android.graphics.Bitmap;
++import android.graphics.RectF;
++import android.net.Uri;
++import android.util.Log;
++import android.view.View;
++
++import org.vudroid.core.codec.CodecContext;
++import org.vudroid.core.codec.CodecDocument;
++import org.vudroid.core.codec.CodecPage;
++import org.vudroid.core.utils.PathFromUri;
++
++import java.io.IOException;
++import java.lang.ref.SoftReference;
++import java.util.HashMap;
++import java.util.LinkedList;
++import java.util.Map;
++import java.util.Queue;
++import java.util.concurrent.ConcurrentHashMap;
++import java.util.concurrent.ExecutorService;
++import java.util.concurrent.Executors;
++import java.util.concurrent.Future;
++
++public class DecodeServiceBase implements DecodeService
++{
++    private static final int PAGE_POOL_SIZE = 16;
++    private final CodecContext codecContext;
++
++    private View containerView;
++    private CodecDocument document;
++    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
++    public static final String DECODE_SERVICE = "ViewDroidDecodeService";
++    private final Map<Object, Future<?>> decodingFutures = new ConcurrentHashMap<Object, Future<?>>();
++    private final HashMap<Integer, SoftReference<CodecPage>> pages = new HashMap<Integer, SoftReference<CodecPage>>();
++    private ContentResolver contentResolver;
++    private Queue<Integer> pageEvictionQueue = new LinkedList<Integer>();
++    private boolean isRecycled;
++
++    public DecodeServiceBase(CodecContext codecContext)
++    {
++        this.codecContext = codecContext;
++    }
++
++    public void setContentResolver(ContentResolver contentResolver)
++    {
++        this.contentResolver = contentResolver;
++        codecContext.setContentResolver(contentResolver);
++    }
++
++    public void setContainerView(View containerView)
++    {
++        this.containerView = containerView;
++    }
++
++    public void open(Uri fileUri)
++    {
++        document = codecContext.openDocument(PathFromUri.retrieve(contentResolver, fileUri));
++    }
++
++    public void decodePage(Object decodeKey, int pageNum, final DecodeCallback decodeCallback, float zoom, RectF pageSliceBounds)
++    {
++        final DecodeTask decodeTask = new DecodeTask(pageNum, decodeCallback, zoom, decodeKey, pageSliceBounds);
++        synchronized (decodingFutures)
++        {
++            if (isRecycled) {
++                return;
++            }
++            final Future<?> future = executorService.submit(new Runnable()
++            {
++                public void run()
++                {
++                    try
++                    {
++                        Thread.currentThread().setPriority(Thread.NORM_PRIORITY-1);
++                        performDecode(decodeTask);
++                    }
++                    catch (IOException e)
++                    {
++                        Log.e(DECODE_SERVICE, "Decode fail", e);
++                    }
++                }
++            });
++            final Future<?> removed = decodingFutures.put(decodeKey, future);
++            if (removed != null)
++            {
++                removed.cancel(false);
++            }
++        }
++    }
++
++    public void stopDecoding(Object decodeKey)
++    {
++        final Future<?> future = decodingFutures.remove(decodeKey);
++        if (future != null)
++        {
++            future.cancel(false);
++        }
++    }
++
++    private void performDecode(DecodeTask currentDecodeTask)
++            throws IOException
++    {
++        if (isTaskDead(currentDecodeTask))
++        {
++            Log.d(DECODE_SERVICE, "Skipping decode task for page " + currentDecodeTask.pageNumber);
++            return;
++        }
++        Log.d(DECODE_SERVICE, "Starting decode of page: " + currentDecodeTask.pageNumber);
++        CodecPage vuPage = getPage(currentDecodeTask.pageNumber);
++        preloadNextPage(currentDecodeTask.pageNumber);
++
++        if (isTaskDead(currentDecodeTask))
++        {
++            return;
++        }
++        Log.d(DECODE_SERVICE, "Start converting map to bitmap");
++        float scale = calculateScale(vuPage) * currentDecodeTask.zoom;
++        final Bitmap bitmap = vuPage.renderBitmap(getScaledWidth(currentDecodeTask, vuPage, scale), getScaledHeight(currentDecodeTask, vuPage, scale), currentDecodeTask.pageSliceBounds);
++        Log.d(DECODE_SERVICE, "Converting map to bitmap finished");
++        if (isTaskDead(currentDecodeTask))
++        {
++            bitmap.recycle();
++            return;
++        }
++        finishDecoding(currentDecodeTask, bitmap);
++    }
++
++    private int getScaledHeight(DecodeTask currentDecodeTask, CodecPage vuPage, float scale)
++    {
++        return Math.round(getScaledHeight(vuPage, scale) * currentDecodeTask.pageSliceBounds.height());
++    }
++
++    private int getScaledWidth(DecodeTask currentDecodeTask, CodecPage vuPage, float scale)
++    {
++        return Math.round(getScaledWidth(vuPage, scale) * currentDecodeTask.pageSliceBounds.width());
++    }
++
++    private int getScaledHeight(CodecPage vuPage, float scale)
++    {
++        return (int) (scale * vuPage.getHeight());
++    }
++
++    private int getScaledWidth(CodecPage vuPage, float scale)
++    {
++        return (int) (scale * vuPage.getWidth());
++    }
++
++    private float calculateScale(CodecPage codecPage)
++    {
++        return 1.0f * getTargetWidth() / codecPage.getWidth();
++    }
++
++    private void finishDecoding(DecodeTask currentDecodeTask, Bitmap bitmap)
++    {
++        updateImage(currentDecodeTask, bitmap);
++        stopDecoding(currentDecodeTask.pageNumber);
++    }
++
++    private void preloadNextPage(int pageNumber) throws IOException
++    {
++        final int nextPage = pageNumber + 1;
++        if (nextPage >= getPageCount())
++        {
++            return;
++        }
++        getPage(nextPage);
++    }
++
++    public CodecPage getPage(int pageIndex)
++    {
++        if (!pages.containsKey(pageIndex) || pages.get(pageIndex).get() == null)
++        {
++            pages.put(pageIndex, new SoftReference<CodecPage>(document.getPage(pageIndex)));
++            pageEvictionQueue.remove(pageIndex);
++            pageEvictionQueue.offer(pageIndex);
++            if (pageEvictionQueue.size() > PAGE_POOL_SIZE) {
++                Integer evictedPageIndex = pageEvictionQueue.poll();
++                CodecPage evictedPage = pages.remove(evictedPageIndex).get();
++                if (evictedPage != null) {
++                    evictedPage.recycle();
++                }
++            }
++        }
++        return pages.get(pageIndex).get();
++    }
++
++    @SuppressWarnings("unused")
++	private void waitForDecode(CodecPage vuPage)
++    {
++        vuPage.waitForDecode();
++    }
++
++    private int getTargetWidth()
++    {
++        return containerView.getWidth();
++    }
++
++    public int getEffectivePagesWidth()
++    {
++        final CodecPage page = getPage(0);
++        return getScaledWidth(page, calculateScale(page));
++    }
++
++    public int getEffectivePagesHeight()
++    {
++        final CodecPage page = getPage(0);
++        return getScaledHeight(page, calculateScale(page));
++    }
++
++    public int getPageWidth(int pageIndex)
++    {
++        return getPage(pageIndex).getWidth();
++    }
++
++    public int getPageHeight(int pageIndex)
++    {
++        return getPage(pageIndex).getHeight();
++    }
++
++    private void updateImage(final DecodeTask currentDecodeTask, Bitmap bitmap)
++    {
++        currentDecodeTask.decodeCallback.decodeComplete(bitmap);
++    }
++
++    private boolean isTaskDead(DecodeTask currentDecodeTask)
++    {
++        synchronized (decodingFutures)
++        {
++            return !decodingFutures.containsKey(currentDecodeTask.decodeKey);
++        }
++    }
++
++    public int getPageCount()
++    {
++        return document.getPageCount();
++    }
++
++    private class DecodeTask
++    {
++        private final Object decodeKey;
++        private final int pageNumber;
++        private final float zoom;
++        private final DecodeCallback decodeCallback;
++        private final RectF pageSliceBounds;
++
++        private DecodeTask(int pageNumber, DecodeCallback decodeCallback, float zoom, Object decodeKey, RectF pageSliceBounds)
++        {
++            this.pageNumber = pageNumber;
++            this.decodeCallback = decodeCallback;
++            this.zoom = zoom;
++            this.decodeKey = decodeKey;
++            this.pageSliceBounds = pageSliceBounds;
++        }
++    }
++
++    public void recycle() {
++        synchronized (decodingFutures) {
++            isRecycled = true;
++        }
++        for (Object key : decodingFutures.keySet()) {
++            stopDecoding(key);
++        }
++        executorService.submit(new Runnable() {
++            public void run() {
++                for (SoftReference<CodecPage> codecPageSoftReference : pages.values()) {
++                    CodecPage page = codecPageSoftReference.get();
++                    if (page != null) {
++                        page.recycle();
++                    }
++                }
++                document.recycle();
++                codecContext.recycle();
++            }
++        });
++        executorService.shutdown();
++    }
++}
+Index: PdfLibrary/src/main/java/org/vudroid/core/models/ZoomModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/models/ZoomModel.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/models/ZoomModel.java	(revision )
+@@ -0,0 +1,70 @@
++package org.vudroid.core.models;
++
++import org.vudroid.core.events.BringUpZoomControlsEvent;
++import org.vudroid.core.events.EventDispatcher;
++import org.vudroid.core.events.ZoomChangedEvent;
++import org.vudroid.core.events.ZoomListener;
++
++public class ZoomModel extends EventDispatcher
++{
++    private float zoom = 1.0f;
++    private static final float INCREMENT_DELTA = 0.05f;
++    private boolean horizontalScrollEnabled;
++    private boolean isCommited;
++
++    public void setZoom(float zoom)
++    {
++        zoom = Math.max(zoom, 1.0f);
++        if (this.zoom != zoom)
++        {
++            float oldZoom = this.zoom;
++            this.zoom = zoom;
++            isCommited = false;
++            dispatch(new ZoomChangedEvent(zoom, oldZoom));
++        }
++    }
++
++    public float getZoom()
++    {
++        return zoom;
++    }
++
++    public void increaseZoom()
++    {
++        setZoom(getZoom() + INCREMENT_DELTA);
++    }
++
++    public void decreaseZoom()
++    {
++        setZoom(getZoom() - INCREMENT_DELTA);
++    }
++
++    public void toggleZoomControls()
++    {
++        dispatch(new BringUpZoomControlsEvent());
++    }
++
++    public void setHorizontalScrollEnabled(boolean horizontalScrollEnabled)
++    {
++        this.horizontalScrollEnabled = horizontalScrollEnabled;
++    }
++
++    public boolean isHorizontalScrollEnabled()
++    {
++        return horizontalScrollEnabled;
++    }
++
++    public boolean canDecrement()
++    {
++        return zoom > 1.0f;
++    }
++
++    public void commit()
++    {
++        if (!isCommited)
++        {
++            isCommited = true;
++            dispatch(new ZoomListener.CommitZoomEvent());
++        }
++    }
++}
+Index: PdfLibrary/src/test/java/com/masterfan/pdflibrary/ExampleUnitTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/test/java/com/masterfan/pdflibrary/ExampleUnitTest.java	(revision )
++++ PdfLibrary/src/test/java/com/masterfan/pdflibrary/ExampleUnitTest.java	(revision )
+@@ -0,0 +1,15 @@
++package com.masterfan.pdflibrary;
++
++import org.junit.Test;
++
++import static org.junit.Assert.*;
++
++/**
++ * To work on unit tests, switch the Test Artifact in the Build Variants view.
++ */
++public class ExampleUnitTest {
++    @Test
++    public void addition_isCorrect() throws Exception {
++        assertEquals(4, 2 + 2);
++    }
++}
+\ No newline at end of file
+Index: PdfLibrary/src/main/java/org/vudroid/core/models/CurrentPageModel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/models/CurrentPageModel.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/models/CurrentPageModel.java	(revision )
+@@ -0,0 +1,18 @@
++package org.vudroid.core.models;
++
++import org.vudroid.core.events.CurrentPageListener;
++import org.vudroid.core.events.EventDispatcher;
++
++public class CurrentPageModel extends EventDispatcher
++{
++    private int currentPageIndex;
++
++    public void setCurrentPageIndex(int currentPageIndex)
++    {
++        if (this.currentPageIndex != currentPageIndex)
++        {
++            this.currentPageIndex = currentPageIndex;
++            dispatch(new CurrentPageListener.CurrentPageChangedEvent(currentPageIndex));
++        }
++    }
++}
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/util/Constants.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/util/Constants.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/util/Constants.java	(revision )
+@@ -16,7 +16,7 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf.util;
++package com.masterfan.pdflibrary.pdfview.util;
+ 
+ public interface Constants {
+ 
+Index: PdfLibrary/src/main/java/org/vudroid/core/utils/MD5StringUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/utils/MD5StringUtil.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/utils/MD5StringUtil.java	(revision )
+@@ -0,0 +1,32 @@
++package org.vudroid.core.utils;
++
++import java.security.MessageDigest;
++import java.security.NoSuchAlgorithmException;
++
++public class MD5StringUtil
++{
++    private static final MessageDigest digest;
++
++    static
++    {
++        try
++        {
++            digest = MessageDigest.getInstance("MD5");
++        }
++        catch (NoSuchAlgorithmException e)
++        {
++            throw new RuntimeException(e);
++        }
++    }
++
++    public static String md5StringFor(String s)
++    {
++        final byte[] hash = digest.digest(s.getBytes());
++        final StringBuilder builder = new StringBuilder();
++        for (byte b : hash)
++        {
++            builder.append(Integer.toString(b & 0xFF, 16));    
++        }
++        return builder.toString();
++    }
++}
+Index: PdfLibrary/src/main/java/org/vudroid/core/codec/CodecContext.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/codec/CodecContext.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/codec/CodecContext.java	(revision )
+@@ -0,0 +1,12 @@
++package org.vudroid.core.codec;
++
++import android.content.ContentResolver;
++
++public interface CodecContext
++{
++    CodecDocument openDocument(String fileName);
++
++    void setContentResolver(ContentResolver contentResolver);
++
++    void recycle();
++}
+Index: app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/RenderingAsyncTask.java
+===================================================================
+--- app/src/main/java/com/masterfan/cloudbook/wedgit/pdf/RenderingAsyncTask.java	(revision dcad5ad4a278a5bee381257178bca9cf0564e7cc)
++++ PdfLibrary/src/main/java/com/masterfan/pdflibrary/pdfview/RenderingAsyncTask.java	(revision )
+@@ -16,13 +16,14 @@
+  * You should have received a copy of the GNU General Public License
+  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-package com.masterfan.cloudbook.wedgit.pdf;
++package com.masterfan.pdflibrary.pdfview;
+ 
+ import android.graphics.Bitmap;
+ import android.graphics.RectF;
+ import android.os.AsyncTask;
+ 
+-import com.joanzapata.pdfview.model.PagePart;
++
++import com.masterfan.pdflibrary.pdfview.model.PagePart;
+ 
+ import org.vudroid.core.DecodeService;
+ import org.vudroid.core.codec.CodecPage;
+Index: PdfLibrary/src/main/java/org/vudroid/core/multitouch/MultiTouchZoom.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- PdfLibrary/src/main/java/org/vudroid/core/multitouch/MultiTouchZoom.java	(revision )
++++ PdfLibrary/src/main/java/org/vudroid/core/multitouch/MultiTouchZoom.java	(revision )
+@@ -0,0 +1,11 @@
++package org.vudroid.core.multitouch;
++
++import android.view.MotionEvent;
++
++public interface MultiTouchZoom {
++    boolean onTouchEvent(MotionEvent ev);
++
++    boolean isResetLastPointAfterZoom();
++
++    void setResetLastPointAfterZoom(boolean resetLastPointAfterZoom);
++}
