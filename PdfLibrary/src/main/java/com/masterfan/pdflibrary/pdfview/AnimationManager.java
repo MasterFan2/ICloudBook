@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Android-pdfview.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.masterfan.cloudbook.wedgit.pdf;
+package com.masterfan.pdflibrary.pdfview;
 
 import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
@@ -24,8 +24,6 @@ import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.graphics.PointF;
 import android.view.animation.DecelerateInterpolator;
-
-import com.joanzapata.pdfview.PDFView;
 
 /**
  * @author Joan Zapata
