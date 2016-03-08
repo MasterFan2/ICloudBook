@@ -23,7 +23,7 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent" >
 
-    <com.joanzapata.pdfview.PDFView
+    <com.masterfan.pdflibrary.pdfview.PDFView
         android:id="@+id/pdfView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

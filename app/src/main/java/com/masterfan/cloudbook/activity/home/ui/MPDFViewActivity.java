@@ -1,16 +1,14 @@
 package com.masterfan.cloudbook.activity.home.ui;
 
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 
-import com.joanzapata.pdfview.PDFView;
-import com.joanzapata.pdfview.listener.OnLoadCompleteListener;
-import com.joanzapata.pdfview.listener.OnPageChangeListener;
 import com.masterfan.cloudbook.R;
+import com.masterfan.pdflibrary.pdfview.PDFView;
+import com.masterfan.pdflibrary.pdfview.listener.OnLoadCompleteListener;
+import com.masterfan.pdflibrary.pdfview.listener.OnPageChangeListener;
 
 import java.io.File;
 
