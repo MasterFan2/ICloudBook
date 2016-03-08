@@ -30,6 +30,7 @@ public class BookDetailActivity extends MTFBaseActivity {
     @Bind(R.id.book_detail_start_down_load_textview)
     MTFProcessButton downloadTxt;
 
+    //开始
     private int count = 0;
 
     @Override
