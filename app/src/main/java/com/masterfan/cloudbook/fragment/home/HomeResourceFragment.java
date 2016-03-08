@@ -1,5 +1,6 @@
 package com.masterfan.cloudbook.fragment.home;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.masterfan.cloudbook.R;
 import com.masterfan.cloudbook.activity.home.entity.FragmentIndexBookEntity;
+import com.masterfan.cloudbook.activity.home.ui.BookDetailActivity;
 import com.masterfan.library.ui.MTFBaseFragment;
 import com.masterfan.library.ui.annotation.MTFFragmentFeature;
 import com.masterfan.library.utils.S;
@@ -161,7 +163,13 @@ public class HomeResourceFragment extends MTFBaseFragment implements SwipeRefres
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+            holder.bookImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(),BookDetailActivity.class);
+                    startActivity(intent);
+                }
+            });
 
         }
 

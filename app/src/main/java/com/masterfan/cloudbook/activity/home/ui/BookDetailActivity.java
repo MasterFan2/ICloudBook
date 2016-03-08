@@ -2,6 +2,8 @@ package com.masterfan.cloudbook.activity.home.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,6 +11,7 @@ import com.masterfan.cloudbook.R;
 import com.masterfan.cloudbook.activity.personal.util.T;
 import com.masterfan.library.ui.MTFBaseActivity;
 import com.masterfan.library.ui.annotation.MTFActivityFeature;
+import com.masterfan.library.widget.probutton.MTFProcessButton;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -25,7 +28,10 @@ public class BookDetailActivity extends MTFBaseActivity {
 
 
     @Bind(R.id.book_detail_start_down_load_textview)
-    TextView downloadTxt;
+    MTFProcessButton downloadTxt;
+
+    private int count = 0;
+
     @Override
     public void initialize(Bundle savedInstanceState) {
 
@@ -39,6 +45,42 @@ public class BookDetailActivity extends MTFBaseActivity {
 
     @OnClick(R.id.book_detail_start_down_load_textview)
     public void onclickDownLoad(View view){
-        T.s(BookDetailActivity.this,"开始下载...");
+        new Thread(){
+            @Override
+            public void run() {
+                while (count < 100) {
+                    count += 8;
+                    if(count >= 100)
+                        count = 100;
+                    Message msg = handler.obtainMessage(1, count, 0);
+                    msg.sendToTarget();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Message msg = handler.obtainMessage(0, count, 0);
+                msg.sendToTarget();
+            }
+        }.start();
+        downloadTxt.setProgress(50);
     }
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    downloadTxt.setProgress(msg.arg1);
+                    downloadTxt.setText("下载中    "+ msg.arg1 +"%");
+                    break;
+                case 0:
+                    downloadTxt.setText("下载完成");
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 }

@@ -24,7 +24,7 @@
             android:padding="15dp"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/update_nickname_num"
+                android:id="@+id/self_introduction_content_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -36,6 +36,7 @@
                 android:background="@null"
                 />
                 <TextView
+                    android:id="@+id/self_introduction_num_textview"
                     android:layout_width="wrap_content"
                     android:text="0/200"
                     android:layout_alignParentBottom="true"
@@ -44,6 +45,7 @@
         </RelativeLayout>
     </LinearLayout>
     <Button
+        android:id="@+id/self_introduction_save_button"
         android:textColor="@color/white"
         android:layout_margin="10dp"
         android:background="@drawable/btn_bg_save"
@@ -51,16 +53,5 @@
         android:layout_height="wrap_content"
         android:text="保存"
         />
-    <com.masterfan.library.widget.probutton.MTFProcessButton
-        android:id="@+id/progress_btn"
-        android:layout_width="match_parent"
-        android:layout_margin="10dp"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:text="click to download."
-        app:pb_colorComplete="@color/green"
-        app:pb_colorProgress="@color/colorPrimaryDark"
-        app:pb_textComplete="下载完成"
-        app:pb_textProgress="下载中..."
-        />
+
 </LinearLayout>
