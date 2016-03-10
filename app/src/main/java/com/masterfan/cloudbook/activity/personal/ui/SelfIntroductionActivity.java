@@ -6,6 +6,7 @@ import android.os.Message;
 import android.view.View;
 
 import com.masterfan.cloudbook.R;
+import com.masterfan.cloudbook.activity.test.TestDropDownActivity;
 import com.masterfan.library.ui.MTFBaseActivity;
 import com.masterfan.library.ui.annotation.MTFActivityFeature;
 import com.masterfan.library.widget.listview.MTFProgress;
@@ -25,6 +26,11 @@ public class SelfIntroductionActivity extends MTFBaseActivity {
     MTFProcessButton btn;
 
     private int count = 0;
+
+    @OnClick(R.id.dropdown_btn)
+    public void dropclick(View view ) {
+        animStart(TestDropDownActivity.class);
+    }
 
     @OnClick(R.id.progress_btn)
     public void click(View view) {

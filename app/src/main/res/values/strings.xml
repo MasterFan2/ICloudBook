@@ -19,5 +19,6 @@
     <string name="s_my_book">我的图书</string>
     <string name="title_activity_my_upload">MyUploadActivity</string>
     <string name="title_activity_class">ClassActivity</string>
+    <string name="title_activity_test_drop_down">TestDropDownActivity</string>
     <!-- end personal-->
 </resources>
