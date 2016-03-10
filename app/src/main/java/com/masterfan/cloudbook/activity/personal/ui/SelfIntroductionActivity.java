@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.masterfan.library.ui.MTFBaseActivity;
 import com.masterfan.library.ui.annotation.MTFActivityFeature;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 /**
  * 自我介绍
@@ -25,6 +27,9 @@ public class SelfIntroductionActivity extends MTFBaseActivity {
 
     @Bind(R.id.self_introduction_save_button)
     Button btn;
+
+    @Bind(R.id.self_introduction_content_edittext)
+    EditText contentEdit;
 
     private int count = 0;
 
@@ -82,8 +87,5 @@ public class SelfIntroductionActivity extends MTFBaseActivity {
         }
     };
 
-    @Override
-    public void initialize(Bundle savedInstanceState) {
 
-    }
 }
