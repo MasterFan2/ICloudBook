@@ -2,6 +2,7 @@ package com.masterfan.cloudbook.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,7 +50,7 @@ public class LoginActivity extends MTFBaseActivity {
 //            animFinish();
 //        }
         HttpClient.getInstance().login("ajian", "123456", 1, callback);
-
+        Log.i("AAAA", "HttpClient.getInstance().login(\"ajian\", \"123456\", 1, callback);" );
     }
 
     private Callback<UserResp> callback = new Callback<UserResp>() {
@@ -58,15 +59,17 @@ public class LoginActivity extends MTFBaseActivity {
             if (userResp.getCode() == 200) {
                 if(userResp.getUser() != null) {
                     S.o(userResp.getUser().toString());
+                    Log.i("AAAA",""+userResp.getUser().toString());
                 }
             }else {
                 //error
+                Log.i("AAAA","userResp.getCode()=="+userResp.getCode());
             }
         }
 
         @Override
         public void failure(RetrofitError error) {
-
+            Log.i("AAAA","error"+error.toString());
         }
     };
 

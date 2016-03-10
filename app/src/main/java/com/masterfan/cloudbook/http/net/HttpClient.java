@@ -1,6 +1,7 @@
 package com.masterfan.cloudbook.http.net;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.masterfan.cloudbook.http.bean.UserResp;
 import com.squareup.okhttp.OkHttpClient;
@@ -91,6 +92,7 @@ public class HttpClient {
      * @param callback  回调
      */
     public void login(String account, String password, int classId, Callback<UserResp> callback) {
+        Log.i("AAAA","login");
         netInterface.login(account, password, classId, callback);
     }
 
