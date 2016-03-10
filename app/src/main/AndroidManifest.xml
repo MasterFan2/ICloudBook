@@ -135,7 +135,87 @@
         <activity
             android:name=".activity.test.TestDropDownActivity"
             android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name="com.masterfan.cloudbook.activity.home.ui.BookDetailActivity"
+            android:label="@string/title_activity_test_drop_down"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+            android:name="com.masterfan.cloudbook.activity.home.ui.MPDFViewActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".activity.manamgment.ui.ClassReadFragmentActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".activity.manamgment.ui.BookDataManagementActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".activity.manamgment.ui.UploadBookAuditManagementActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".activity.manamgment.ui.UserAccountManagementFragmentActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".activity.manamgment.ui.UserReadManagementActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".activity.manamgment.ui.BookReadManagementActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name=".activity.manamgment.ui.ReadStatisticsActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity android:name="com.masterfan.cloudbook.activity.personal.ui.MultiImageSelectorActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity android:name="com.masterfan.cloudbook.activity.manamgment.ui.BookReadManagementListActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity android:name="com.masterfan.cloudbook.activity.manamgment.ui.StudentAccountManageListActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity android:name="com.masterfan.cloudbook.activity.manamgment.ui.TeacherAccountManageListActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity android:name="com.masterfan.cloudbook.activity.manamgment.ui.ClassReadListActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+
+        <activity android:name="com.masterfan.cloudbook.activity.manamgment.ui.PersonReadListActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
     </application>
 
