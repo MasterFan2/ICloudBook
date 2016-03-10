@@ -3,12 +3,17 @@ package com.masterfan.cloudbook.activity.manamgment.ui;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -16,8 +21,12 @@ import com.masterfan.cloudbook.R;
 import com.masterfan.cloudbook.Util.DialogUtils;
 import com.masterfan.library.ui.MTFBaseActivity;
 import com.masterfan.library.ui.annotation.MTFActivityFeature;
+import com.masterfan.library.widget.dropmenu.GirdDropDownAdapter;
+import com.masterfan.library.widget.dropmenu.ListDropDownAdapter;
+import com.masterfan.library.widget.dropmenu.MTFDropDownMenu;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -35,41 +44,70 @@ public class BookReadManagementActivity extends MTFBaseActivity{
     @Bind(R.id.book_read_management_book_type_layout)
     LinearLayout linearLayout;
 
-    @Bind(R.id.book_read_management_start_time_textview)
     TextView startTimeTxt;
 
-    @Bind(R.id.book_read_management_end_time_textview)
     TextView endTimeTxt;
 
-    @Bind(R.id.book_read_management_find_btn)
     Button findBtn;
 
+    @Bind(R.id.dropDownMenu)
+    MTFDropDownMenu mDropDownMenu;
+    private String headers[] = {"请选择图书类别"};
+    private String citys[] = {"不限", "古典", "言情", "诗歌", "戏剧", "散文", "英文"};
+
+    private GirdDropDownAdapter cityAdapter;
+    private List<View> popupViews = new ArrayList<>();
 
     private String starttime = "";
     private String endtime = "";
 
+    View view;
     @Override
     public void initialize(Bundle savedInstanceState) {
+        view = LayoutInflater. from(this).inflate(R.layout.activity_book_read_management_btn,null );
+        startTimeTxt = (TextView) view.findViewById(R.id.book_read_management_start_time_textview);
+        endTimeTxt = (TextView) view.findViewById(R.id.book_read_management_end_time_textview);
+        findBtn = (Button) view.findViewById(R.id.book_read_management_find_btn);
+        startTimeTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimeDialog(1);
+            }
+        });
+        endTimeTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimeDialog(2);
+            }
+        });
+        findBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BookReadManagementActivity.this, BookReadManagementListActivity.class);
+                if(intent != null){
+                    startActivity(intent);
+                }
+            }
+        });
+        final ListView cityView = new ListView(this);
+        cityAdapter = new GirdDropDownAdapter(this, Arrays.asList(citys));
+        cityView.setDividerHeight(0);
+        cityView.setAdapter(cityAdapter);
+        popupViews.add(cityView);
+        cityView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                cityAdapter.setCheckItem(position);
+                mDropDownMenu.setTabText(position == 0 ? headers[0] : citys[position]);
+                mDropDownMenu.closeMenu();
+            }
+        });
 
+
+        mDropDownMenu.setDropDownMenu(Arrays.asList(headers), popupViews, view);
     }
 
-    @OnClick(R.id.book_read_management_find_btn)
-    public void onclickFindBtn(View view){
-        Intent intent = new Intent(BookReadManagementActivity.this, BookReadManagementListActivity.class);
-        if(intent != null){
-            startActivity(intent);
-        }
-    }
 
-    @OnClick(R.id.book_read_management_start_time_textview)
-    public void onclickStartTimeTxt(View view){
-        showTimeDialog(1);
-    }
-
-    @OnClick(R.id.book_read_management_end_time_textview)
-    public void onclickEndTimeTxt(View view){
-        showTimeDialog(2);
-    }
 
     /**
      * 显示日期选择对话框
