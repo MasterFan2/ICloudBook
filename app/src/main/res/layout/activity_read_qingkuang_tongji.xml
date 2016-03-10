@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.masterfan.library.widget.title.MTFTitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:titleText="阅读情况统计"
+        app:titleTxtColor="@android:color/white"
+        app:titleBackgroundColor="@color/colorPrimary"
+        />
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:background="@drawable/bg_textview_green_one"
+            android:text="2016级"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_textview_green_one"
+            android:text="请选择班级"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/base_green"
+        />
+    <TextView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="以下是图表。。。未做"
+        />
+</LinearLayout>

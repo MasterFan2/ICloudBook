@@ -5,8 +5,8 @@
     <string name="title_activity_home">HomeActivity</string>
 
     <!-- home bottom -->
-    <string name="home_index">首页</string>
-    <string name="home_resource">资源</string>
+    <string name="home_index">读书</string>
+    <string name="home_resource">课件</string>
     <string name="home_personal">个人</string>
     <string name="home_management">管理</string>
     <string name="title_activity_signup">SignupActivity</string>
@@ -19,6 +19,20 @@
     <string name="s_my_book">我的图书</string>
     <string name="title_activity_my_upload">MyUploadActivity</string>
     <string name="title_activity_class">ClassActivity</string>
+    <string name="title_activity_book_data_management">BookDataManagementActivity</string>
     <string name="title_activity_test_drop_down">TestDropDownActivity</string>
     <!-- end personal-->
+
+    <!-- !!-->
+    <string name="msg_no_camera">没有系统相机</string>
+    <string name="folder_all">所有照片</string>
+    <string name="preview">预览</string>
+    <string name="msg_amount_limit">已经达到最高选择数量</string>
+
+    <string name="crop__saving">正在保存照片…</string>
+    <string name="crop__wait">请等待…</string>
+    <string name="crop__pick_error">无效的图片</string>
+    <string name="on_processing">请稍等...</string>
+    <string name="crop__done">完成</string>
+    <string name="crop__cancel">取消</string>
 </resources>

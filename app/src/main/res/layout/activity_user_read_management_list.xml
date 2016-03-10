@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context=".activity.personal.ui.MessageListActivity">
+    <com.masterfan.library.widget.title.MTFTitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:titleText="用户阅读情况管理"
+        app:titleTxtColor="@android:color/white"
+        app:titleBackgroundColor="@color/colorPrimary"
+        />
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="阅读时间排行"
+        android:textSize="@dimen/text_size_15"
+        android:layout_gravity="center"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/green_line"
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="姓名"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="@dimen/text_size_15"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="@dimen/text_size_15"
+        android:text="年级/班级"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:text="阅读时间（分钟）"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="@dimen/text_size_15"
+        android:gravity="center"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/green_line"
+        />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/user_read_management_list_recyclerView_refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/user_read_management_list_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

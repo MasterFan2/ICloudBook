@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ICloudBook.iml" filepath="$PROJECT_DIR$/ICloudBook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PdfLibrary/PdfLibrary.iml" filepath="$PROJECT_DIR$/PdfLibrary/PdfLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PdfLibrary/PdfLibrary.iml" filepath="$PROJECT_DIR$/PdfLibrary/PdfLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
     </modules>

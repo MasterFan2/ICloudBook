@@ -83,7 +83,7 @@
                     android:layout_gravity="bottom"
                     android:padding="5dp"
                     android:layout_margin="5dp"
-                    android:background="@drawable/bg_textview_two"
+                    android:background="@drawable/bg_textview_green_two"
                     android:gravity="center"
                     android:text="取消关注" />
 
@@ -94,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:background="@drawable/bg_textview_two"
+                    android:background="@drawable/bg_textview_green_two"
                     android:gravity="center"
                     android:padding="5dp"
                     android:text="私聊" />

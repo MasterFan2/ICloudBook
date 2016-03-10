@@ -24,7 +24,7 @@
             android:padding="15dp"
             android:layout_height="wrap_content">
             <EditText
-                android:id="@+id/update_nickname_num"
+                android:id="@+id/self_introduction_content_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -36,6 +36,7 @@
                 android:background="@null"
                 />
                 <TextView
+                    android:id="@+id/self_introduction_num_textview"
                     android:layout_width="wrap_content"
                     android:text="0/200"
                     android:layout_alignParentBottom="true"
@@ -44,6 +45,7 @@
         </RelativeLayout>
     </LinearLayout>
     <Button
+        android:id="@+id/self_introduction_save_button"
         android:textColor="@color/white"
         android:layout_margin="10dp"
         android:background="@drawable/btn_bg_save"
@@ -72,4 +74,5 @@
         android:layout_height="wrap_content"
         android:text="下拉测试"
         />
+
 </LinearLayout>

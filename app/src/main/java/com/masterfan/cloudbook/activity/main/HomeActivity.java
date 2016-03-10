@@ -2,6 +2,7 @@ package com.masterfan.cloudbook.activity.main;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -15,6 +16,9 @@ import com.masterfan.library.ui.MTFBaseActivity;
 import com.masterfan.library.ui.annotation.MTFActivityFeature;
 import com.masterfan.library.utils.T;
 import com.masterfan.library.widget.title.MTFTitleView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -67,7 +71,7 @@ public class HomeActivity extends MTFBaseActivity {
         layouts = new RelativeLayout[]{indexLayout, resourceLayout, managementLayout, personalLayout};
         layouts[0].setBackgroundColor(getResources().getColor(R.color.base_green_checked));
 
-        titleView.setTitleText("首页");
+        titleView.setTitleText(getResources().getString(R.string.home_index));
     }
 
     /**
@@ -77,19 +81,19 @@ public class HomeActivity extends MTFBaseActivity {
     public void onTabClicked(View view){
         switch (view.getId()){
             case R.id.home_index_rl_layout:
-                titleView.setTitleText("首页");
+                titleView.setTitleText(getResources().getString(R.string.home_index));
                 index = 0;
                 break;
             case R.id.home_resource_rl_layout:
-                titleView.setTitleText("资源");
+                titleView.setTitleText(getResources().getString(R.string.home_resource));
                 index = 1;
                 break;
             case R.id.home_management_rl_layout:
-                titleView.setTitleText("管理");
+                titleView.setTitleText(getResources().getString(R.string.home_management));
                 index = 2;
                 break;
             case R.id.home_personal_rl_layout:
-                titleView.setTitleText("个人");
+                titleView.setTitleText(getResources().getString(R.string.home_personal));
                 index = 3;
                 break;
         }
@@ -112,4 +116,32 @@ public class HomeActivity extends MTFBaseActivity {
     public void onRight(View view){
         T.s(context, "更多");
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+            exitBy2Click();
+        }
+        return false;
+    }
+    private static boolean isExit = false;
+    public void exitBy2Click (){
+        Timer tExit = null;
+        if( isExit == false ){
+            isExit = true;
+            T. s(this,"再按一次退出程序" );
+            tExit = new Timer();
+            tExit.schedule( new TimerTask() {
+                @Override
+                public void run() {
+                    isExit = false;
+                }
+            }, 2000);
+        } else {
+            finish();
+            System. exit( 0);
+        }
+
+    }
+
 }

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="facsimileterminal1.www.facsimilemedia.com.redbook.MainActivity">
+
+    <LinearLayout
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/item_teacher_account_manage_name_textview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="姓名"
+        android:layout_gravity="center"
+        android:gravity="center"
+        />
+
+        <TextView
+            android:id="@+id/item_teacher_account_manage_nickname_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="昵称"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/item_teacher_account_manage_sex_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="性别"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/item_teacher_account_manage_state_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="状态"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:background="@drawable/bg_textview_black_five"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="冻结"
+            android:textColor="@color/gray_49"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/bg_textview_green_five"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="0dp"
+            android:textColor="@color/green_3e"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="解除冻结"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_textview_orange_five"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="0dp"
+            android:textColor="@color/orange_E9"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="重置密码"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+
+
+    </LinearLayout>
+<View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="@color/line"
+    />
+</LinearLayout>
