@@ -3,6 +3,8 @@ package com.masterfan.cloudbook.http.net;
 import android.content.Context;
 import android.util.Log;
 
+import com.masterfan.cloudbook.activity.manamgment.entity.ClassesResp;
+import com.masterfan.cloudbook.activity.manamgment.entity.GradeResp;
 import com.masterfan.cloudbook.http.bean.UserResp;
 import com.squareup.okhttp.OkHttpClient;
 
@@ -16,9 +18,9 @@ import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
 import retrofit.http.POST;
-import retrofit.http.Query;
 
 /**
+ * Http请求
  * Created by Administrator on 2015/11/15.
  */
 public class HttpClient {
@@ -74,12 +76,19 @@ public class HttpClient {
     interface NetInterface {
 
         @POST("/userInfo/login")
-        @FormUrlEncoded
+        @FormUrlEncoded     //post请求要加这句
         void login(@Field("account")String account, @Field("password")String password, @Field("classid")int classId, Callback<UserResp> callback);
-
 //        get  示例----后面要删除
 //        @GET("/twitter/index")
 //        void twitterList(@Query("pageIndex")int pageIndex, @Query("pageSize")int pageSize, Callback<TwitterResp> cb);
+
+        @GET("/userInfo/schoolGrade")
+        void getGrade(Callback<GradeResp> callback);
+
+
+        @POST("/userInfo/schoolGradeClasses")
+        @FormUrlEncoded     //post请求要加这句
+        void getClasses(@Field("id")int id,Callback<ClassesResp> callback);
     }
 
 
@@ -96,4 +105,15 @@ public class HttpClient {
         netInterface.login(account, password, classId, callback);
     }
 
+    /**
+     * 获取年级
+     * @param callback  回调
+     */
+    public void getGrade(Callback<GradeResp> callback) {
+        netInterface.getGrade(callback);
+    }
+
+    public void getClasses(int id,Callback<ClassesResp> callback) {
+        netInterface.getClasses(id, callback);
+    }
 }

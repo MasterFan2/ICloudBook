@@ -1,39 +1,102 @@
 package com.masterfan.cloudbook.http.bean;
 
+import org.xutils.db.annotation.Column;
+import org.xutils.db.annotation.Table;
+
 /**
  * Created by masterfan on 16/3/11.
  */
-public class UserInfo {
+@Table(name = "UserInfo")
+public class UserInfo extends BaseEntity {
+    @Column(name = "birthday")
     private String birthday;
-    private int         sex;
+
+    @Column(name = "sex")
+    private int sex;
+
+    @Column(name = "phone")
     private String phone;
+
+    @Column(name = "bookfavoritecount")
     private int bookfavoritecount;
+
+    @Column(name = "focucount")
     private int focucount;
+
+    @Column(name = "studentNumber")
     private String studentNumber;
+
+    @Column(name = "state")
     private int state;
+
+    @Column(name = "bookuploadcount")
     private int bookuploadcount;
+
+    @Column(name = "type")
     private int type;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "bookrecommendcount")
     private int bookrecommendcount;
-    private long id;
+
+
+    @Column(name = "readtimecount")
     private int readtimecount;
+
+    @Column(name = "commentcount")
     private int commentcount;
+
+    @Column(name = "QQ")
     private String QQ;
+
+    @Column(name = "bookdownloadcount")
     private int bookdownloadcount;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "chatcount")
     private int chatcount;
+
+    @Column(name = "head")
     private String head;
+
+    @Column(name = "readtotalsec")
     private int readtotalsec;
+
+    @Column(name = "classes")
     private int classes;
+
+    @Column(name = "byfocucount")
     private int byfocucount;
+
+    @Column(name = "nickname")
     private String nickname;
+
+    @Column(name = "readbookcount")
     private int readbookcount;
+
+    @Column(name = "favorite")
     private String favorite;
+
+    @Column(name = "student_number")
     private String student_number;
+
+    @Column(name = "school")
     private int school;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "account")
     private String account;
+
+    @Column(name = "motto")
     private String motto;
+
+    @Column(name = "introduction")
     private String introduction;
 
     public String getBirthday() {
@@ -124,13 +187,7 @@ public class UserInfo {
         this.bookrecommendcount = bookrecommendcount;
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public int getReadtimecount() {
         return readtimecount;
@@ -298,7 +355,6 @@ public class UserInfo {
                 ", type=" + type +
                 ", password='" + password + '\'' +
                 ", bookrecommendcount=" + bookrecommendcount +
-                ", id=" + id +
                 ", readtimecount=" + readtimecount +
                 ", commentcount=" + commentcount +
                 ", QQ='" + QQ + '\'' +
