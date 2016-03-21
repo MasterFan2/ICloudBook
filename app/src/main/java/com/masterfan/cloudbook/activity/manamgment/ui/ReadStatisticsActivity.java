@@ -46,6 +46,7 @@ public class ReadStatisticsActivity extends MTFBaseActivity {
 
     @Bind(R.id.dropDownMenu)
     MTFDropDownMenu mDropDownMenu;
+
     private String headers[] = {"请选择年级", "请选择班级"};
     private String grades[];
     private String classs[];

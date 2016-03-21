@@ -16,6 +16,7 @@
             android:id="@+id/titleView"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            app:rightButtonHide="true"
             app:titleText="我的评论"
             app:titleTxtColor="@android:color/white"
             app:titleBackgroundColor="@color/colorPrimary"

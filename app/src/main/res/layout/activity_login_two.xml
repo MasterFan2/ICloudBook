@@ -6,50 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     tools:context="com.masterfan.cloudbook.activity.login.LoginActivity">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <com.masterfan.library.widget.title.MTFTitleView
-            android:id="@+id/titleView"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:titleText="登陆"
-            app:titleTxtColor="@android:color/white"
-            app:titleBackgroundColor="@color/colorPrimary"
-            />
-        <ImageView
-            android:layout_marginTop="50dp"
-            android:layout_width="wrap_content"
-            android:src="@mipmap/logo"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content" />
-        <View
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/base_gray_line"
-            />
-        <com.masterfan.library.widget.dropmenu.MTFDropDownMenu
-            android:id="@+id/dropDownMenu"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:ddmenuTextSize="13sp"
-            app:ddtextUnselectedColor="@color/drop_down_unselected"
-            app:ddtextSelectedColor="@color/drop_down_selected"
-            app:dddividerColor="@color/gray"
-            app:ddunderlineColor="@color/gray"
-            app:ddmenuSelectedIcon="@drawable/drop_down_selected_icon"
-            app:ddmaskColor="@color/mask_color"
-            app:ddmenuBackgroundColor="@color/white"
-            app:ddmenuUnselectedIcon="@drawable/drop_down_unselected_icon"
-            />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_marginTop="20dp"
@@ -59,7 +19,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
-                android:visibility="gone"
+
                 android:layout_width="fill_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
@@ -96,7 +56,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
-                android:visibility="gone"
+
                 android:layout_width="fill_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
@@ -122,11 +82,9 @@
                     android:maxLength="20"
                     android:textColor="#666666"
                     />
-
             </LinearLayout>
         </LinearLayout>
         <Button
-            android:visibility="gone"
             android:id="@+id/login_login_btn"
             android:layout_marginTop="20dp"
             android:layout_marginLeft="100dp"
@@ -140,7 +98,6 @@
             />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/login_forget_password_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -150,5 +107,4 @@
             android:layout_marginTop="20dp"
             android:text="忘记密码 ？"/>
     </LinearLayout>
-    </ScrollView>
 </RelativeLayout>

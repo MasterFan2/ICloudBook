@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:titleText="图书详情"
+        app:rightButtonHide="true"
         app:titleTxtColor="@android:color/white"
         app:titleBackgroundColor="@color/colorPrimary"
         />
@@ -38,6 +39,7 @@
            android:orientation="vertical"
            android:layout_height="wrap_content">
            <TextView
+               android:id="@+id/book_detail_book_name_textview"
                android:textSize="@dimen/base_size_20"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -55,6 +57,7 @@
                android:text="作者："
                />
            <TextView
+               android:id="@+id/book_detail_book_writer_textview"
                android:textSize="@dimen/text_size_15"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
@@ -73,7 +76,7 @@
                    android:text="分类："
                    />
                <TextView
-
+                   android:id="@+id/book_detail_book_type_textview"
                    android:textSize="@dimen/text_size_15"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -92,6 +95,7 @@
                    android:text="收藏："
                    />
                <TextView
+                   android:id="@+id/book_detail_book_collect_textview"
                    android:textSize="@dimen/text_size_15"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -105,6 +109,7 @@
                    android:text="推荐："
                    />
                <TextView
+                   android:id="@+id/book_detail_book_recommend_textview"
                    android:textSize="@dimen/text_size_15"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -124,6 +129,7 @@
                    android:text="字数："
                    />
                <TextView
+                   android:id="@+id/book_detail_book_count_textview"
                    android:textSize="@dimen/text_size_15"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -136,12 +142,14 @@
                android:orientation="horizontal"
                >
                <TextView
+
                    android:textSize="@dimen/text_size_15"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="总被阅读时间："
                    />
                <TextView
+                   android:id="@+id/book_detail_book_read_total_time_textview"
                    android:textSize="@dimen/text_size_15"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"

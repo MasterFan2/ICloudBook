@@ -8,6 +8,7 @@
     <com.masterfan.library.widget.title.MTFTitleView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
+        app:rightButtonHide="true"
         android:layout_height="?attr/actionBarSize"
         app:titleText="版权声明"
         app:titleTxtColor="@android:color/white"

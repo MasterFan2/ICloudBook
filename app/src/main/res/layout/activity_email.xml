@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:titleText="电子邮箱"
+        app:rightButtonHide="true"
         app:titleTxtColor="@android:color/white"
         app:titleBackgroundColor="@color/colorPrimary"
         />

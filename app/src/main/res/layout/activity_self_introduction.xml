@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:titleText="自我介绍"
+        app:rightButtonHide="true"
         app:titleTxtColor="@android:color/white"
         app:titleBackgroundColor="@color/colorPrimary"
         />
@@ -45,6 +46,7 @@
         </RelativeLayout>
     </LinearLayout>
     <Button
+
         android:id="@+id/self_introduction_save_button"
         android:textColor="@color/white"
         android:layout_margin="10dp"
@@ -54,6 +56,7 @@
         android:text="保存"
         />
     <com.masterfan.library.widget.probutton.MTFProcessButton
+        android:visibility="gone"
         android:id="@+id/progress_btn"
         android:layout_width="match_parent"
         android:layout_margin="10dp"
@@ -66,6 +69,7 @@
         app:pb_textProgress="下载中..."
         />
     <Button
+        android:visibility="gone"
         android:id="@+id/dropdown_btn"
         android:textColor="@color/white"
         android:layout_margin="10dp"

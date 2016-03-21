@@ -9,6 +9,7 @@
     <com.masterfan.library.widget.title.MTFTitleView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
+        app:rightButtonHide="true"
         android:layout_height="?attr/actionBarSize"
         app:titleBackgroundColor="@color/colorPrimary"
         app:titleText="图书阅读情况管理"

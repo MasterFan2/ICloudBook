@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:titleText="上传图书"
+            app:rightButtonHide="true"
             app:titleTxtColor="@android:color/white"
             app:titleBackgroundColor="@color/colorPrimary"
             />

@@ -8,6 +8,7 @@
 
     <com.masterfan.library.widget.title.MTFTitleView
         android:id="@+id/titleView"
+        app:rightButtonHide="true"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:titleBackgroundColor="@color/colorPrimary"

@@ -7,11 +7,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.masterfan.cloudbook.R;
+import com.masterfan.cloudbook.Util.Dbutils;
+import com.masterfan.cloudbook.Util.SystemInfo;
 import com.masterfan.cloudbook.activity.home.ui.AboutWeActivity;
 import com.masterfan.cloudbook.activity.home.ui.CopyrightNoticeActivity;
 import com.masterfan.cloudbook.activity.home.ui.ProblemfeedbackActivity;
 import com.masterfan.cloudbook.activity.home.ui.VersionUpdateActivity;
 import com.masterfan.cloudbook.activity.login.LoginActivity;
+import com.masterfan.cloudbook.activity.main.HomeActivity;
+import com.masterfan.cloudbook.activity.personal.entity.ExitState;
 import com.masterfan.cloudbook.activity.personal.ui.BookFriendFragmentActivity;
 import com.masterfan.cloudbook.activity.personal.ui.CommentListActivity;
 import com.masterfan.cloudbook.activity.personal.ui.MessageListActivity;
@@ -19,13 +23,26 @@ import com.masterfan.cloudbook.activity.personal.ui.MyUploadListActivity;
 import com.masterfan.cloudbook.activity.personal.ui.NoteBookListActivity;
 import com.masterfan.cloudbook.activity.personal.ui.PersonalDataActivity;
 import com.masterfan.cloudbook.activity.personal.ui.WorksmanagementFragmentActivity;
+import com.masterfan.cloudbook.activity.personal.util.T;
+import com.masterfan.cloudbook.http.bean.Tokens;
+import com.masterfan.cloudbook.http.bean.UserInfo;
+import com.masterfan.cloudbook.http.bean.UserResp;
+import com.masterfan.cloudbook.http.net.HttpClient;
 import com.masterfan.library.ui.MTFBaseFragment;
 import com.masterfan.library.ui.annotation.MTFFragmentFeature;
 
+import org.xutils.DbManager;
+import org.xutils.ex.DbException;
+import org.xutils.x;
+
 import butterknife.Bind;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
+ *个人
  * Created by 13510 on 2016/1/19.
  */
 @MTFFragmentFeature(layout = R.layout.activity_personal)
@@ -71,9 +88,10 @@ public class HomePersonalFragment extends MTFBaseFragment {
     @Bind(R.id.personal_exit_login_layout)
     LinearLayout exitLoginLayout;//退出登录
 
+    DbManager db;
     @Override
     public void initialize() {
-
+        db = x.getDb(Dbutils.getConfig());
     }
 
     @OnClick(R.id.personal_problem_feedback_layout)
@@ -128,8 +146,39 @@ public class HomePersonalFragment extends MTFBaseFragment {
 
     @OnClick(R.id.personal_exit_login_layout)
     public void onclickExitLogin(){
-            animFinish();
+            //退出登陆
+        Log.i("AAAA", ExitState.getIsLogin() + "--登录状态");
+        HttpClient.getInstance().exitLogin(callback);
     }
+    private Callback<Object > callback = new Callback<Object>() {
+        @Override
+        public void success(Object userResp, Response response) {
+            Log.i("AAAA","getReason "+response.getReason()+"   getStatus "+response.getStatus());
+            if(response.getStatus()==200 && "OK".equals(response.getReason())){
+                try {
+                    db.delete(UserInfo.class);
+                    ExitState.setIsLogin(-1);
+                    animFinish();
+                } catch (DbException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        @Override
+        public void failure(RetrofitError error) {
+            Log.i("AAAA","error "+ error.toString());
+            try {
+                db.delete(UserInfo.class);
+                db.delete(Tokens.class);
+            } catch (DbException e) {
+                e.printStackTrace();
+            }
+            ExitState.setIsLogin(-1);
+            animFinish();
+        }
+    };
+
+
     @OnClick(R.id.personal_head_img)
     public void onclickHeadImage(){
         Intent intent = new Intent(HomePersonalFragment.this.getContext(),PersonalDataActivity.class);

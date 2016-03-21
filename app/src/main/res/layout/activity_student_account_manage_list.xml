@@ -11,6 +11,7 @@
     <com.masterfan.library.widget.title.MTFTitleView
         android:id="@+id/titleView"
         android:layout_width="match_parent"
+        app:rightButtonHide="true"
         android:layout_height="?attr/actionBarSize"
         app:titleText="用户账户管理"
         app:titleTxtColor="@android:color/white"
