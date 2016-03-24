@@ -144,6 +144,12 @@
         </activity>
 
         <activity
+            android:name="com.masterfan.cloudbook.activity.home.ui.BookReadActivity"
+            android:label="@string/title_activity_test_drop_down"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
             android:name="com.masterfan.cloudbook.activity.home.ui.MPDFViewActivity"
             android:label="@string/title_activity_test_drop_down"
             android:theme="@style/AppTheme.NoActionBar">

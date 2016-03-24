@@ -200,4 +200,46 @@
             app:pb_textProgress="下载中..."
             />
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="20dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_25"
+                android:text="精华评论"/>
+            <TextView
+                android:id="@+id/book_detail_write_comment_textview"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:textColor="@color/orange_E9"
+                android:layout_marginRight="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_20"
+                android:text="写评论"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="vertical">
+            <include layout="@layout/fragment_home_index"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:text="查看全部评论"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:background="@drawable/bg_textview_green_all_two"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 </LinearLayout>

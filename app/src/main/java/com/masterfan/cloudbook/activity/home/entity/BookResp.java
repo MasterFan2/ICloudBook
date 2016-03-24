@@ -8,25 +8,35 @@ import java.util.ArrayList;
  * Created by sunzj on 2016/3/16.
  */
 public class BookResp {
-    private String code;
-    private ArrayList<Book> book;
+    private int code;
+    private Book book;
+    private String content;
 
     public BookResp() {
     }
 
-    public String getCode() {
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
-    public ArrayList<Book> getBook() {
+    public Book getBook() {
         return book;
     }
 
-    public void setBook(ArrayList<Book> book) {
+    public void setBook(Book book) {
         this.book = book;
     }
 }

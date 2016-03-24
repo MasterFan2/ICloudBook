@@ -149,7 +149,7 @@ public class HomeIndexFragment extends MTFBaseFragment implements SwipeRefreshLa
         adapter = new MyAdapter();
         adapterWrapper = new MTFRecyclerViewAdapterWrapper(adapter);
         recyclerView.setAdapter(adapterWrapper);
-        gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        gridLayoutManager = new GridLayoutManager(getActivity(), 3);//每一行显示3个
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridLayoutManager);
 

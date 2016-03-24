@@ -35,4 +35,13 @@ public class UserInfo {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id=" + id +
+                ", head='" + head + '\'' +
+                ", nickname='" + nickname + '\'' +
+                '}';
+    }
 }

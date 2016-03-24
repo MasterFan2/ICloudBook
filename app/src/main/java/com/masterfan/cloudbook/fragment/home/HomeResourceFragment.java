@@ -31,6 +31,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
+ * 课件
  * Created by 13510 on 2016/1/19.
  */
 @MTFFragmentFeature(layout = R.layout.fragment_home_resource)

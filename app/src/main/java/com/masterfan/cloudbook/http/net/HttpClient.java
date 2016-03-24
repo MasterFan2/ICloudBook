@@ -5,7 +5,9 @@ import android.util.Log;
 
 import com.masterfan.cloudbook.Util.GetSystemInfoUtils;
 import com.masterfan.cloudbook.Util.SystemInfo;
+import com.masterfan.cloudbook.activity.home.entity.BookResp;
 import com.masterfan.cloudbook.activity.home.entity.BooksResp;
+import com.masterfan.cloudbook.activity.home.entity.CommentsResp;
 import com.masterfan.cloudbook.activity.home.entity.Detail;
 import com.masterfan.cloudbook.activity.home.entity.DetailResp;
 import com.masterfan.cloudbook.activity.manamgment.entity.ClassesResp;
@@ -152,10 +154,10 @@ public class HttpClient {
         void bookDetail(@Query("bookid")int bookid , Callback<DetailResp> callback);
 
         @GET("/book/bookComments")
-        void bookComments(@Query("page")int page ,@Query("rows")int rows ,@Query("bookid")int bookid , Callback<DetailResp> callback);
+        void bookComments(@Query("page")int page ,@Query("rows")int rows ,@Query("bookid")int bookid , Callback<CommentsResp> callback);
 
         @GET("/book/txtBookRead")
-        void txtBookRead(@Query("page")int page ,@Query("rows")int rows ,@Query("bookid")int bookid , Callback<DetailResp> callback);
+        void txtBookRead(@Query("page")int page ,@Query("rows")int rows ,@Query("bookid")int bookid , Callback<BookResp> callback);
     }
 
 
@@ -224,7 +226,8 @@ public class HttpClient {
      * @param bookid
      * @param callback
      */
-    public void bookComments(int page,int rows,int bookid,Callback<DetailResp>callback){
+    public void bookComments(int page,int rows,int bookid,Callback<CommentsResp>callback){
+        Log.i("AAAA","参数："+page+"  "+rows+" "+bookid);
         netInterface.bookComments(page, rows, bookid, callback);
     }
 
@@ -235,7 +238,7 @@ public class HttpClient {
      * @param bookid
      * @param callback
      */
-    public void txtBookRead(int page,int rows,int bookid,Callback<DetailResp>callback){
+    public void txtBookRead(int page,int rows,int bookid,Callback<BookResp>callback){
         netInterface.txtBookRead(page, rows, bookid, callback);
     }
 }
