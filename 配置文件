@@ -93,3 +93,4 @@ adb再打不开时：
 2016-4-11 22:20:24  为了做图书翻页，在cloudbook目录下新建view目录，里面的文件全是加进来的
                     加了一张图片。drawable/tx_green_wall.png
                     加了一个Activity BookReadMainActivity  把BookReadActivity暂时换成了BookReadMainActivity进行测试
+2016-9-8 1:18:34    今天把笔记本中的项目拿到新的电脑上来了，并且处理了一个报错问题
