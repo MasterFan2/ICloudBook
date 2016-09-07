@@ -9,8 +9,6 @@ import com.masterfan.cloudbook.R;
 import com.masterfan.cloudbook.Util.Dbutils;
 import com.masterfan.cloudbook.activity.home.entity.Book;
 import com.masterfan.cloudbook.activity.home.entity.BookResp;
-import com.masterfan.cloudbook.activity.home.entity.BooksResp;
-import com.masterfan.cloudbook.activity.home.entity.DetailResp;
 import com.masterfan.cloudbook.http.net.HttpClient;
 import com.masterfan.library.ui.MTFBaseActivity;
 import com.masterfan.library.ui.annotation.MTFActivityFeature;

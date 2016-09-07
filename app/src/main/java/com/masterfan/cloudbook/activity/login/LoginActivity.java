@@ -261,6 +261,9 @@ public class LoginActivity extends MTFBaseActivity {
 
         @Override
         public void failure(RetrofitError error) {
+            if (pd != null) {
+                pd.dismiss();
+            }
             Log.i("AAAA", "err:" + error.toString());
         }
     };

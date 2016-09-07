@@ -205,7 +205,7 @@ public class BookDetailActivity extends MTFBaseActivity implements SwipeRefreshL
 
     @OnClick(R.id.book_detail_write_comment_textview)
     public void onclickWriteComment(View view){
-        Intent intent = new Intent(BookDetailActivity.this,BookReadActivity.class);
+        Intent intent = new Intent(BookDetailActivity.this,BookReadMainActivity.class);
         intent.putExtra("bookid",bookid);
         startActivity(intent);
     }
