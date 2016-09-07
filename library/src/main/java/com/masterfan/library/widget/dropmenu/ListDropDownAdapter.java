@@ -30,6 +30,9 @@ public class ListDropDownAdapter extends BaseAdapter {
         this.list = list;
     }
 
+    public void setDate(List<String> list){
+        this.list = list;
+    }
     @Override
     public int getCount() {
         return list.size();
@@ -60,16 +63,19 @@ public class ListDropDownAdapter extends BaseAdapter {
     }
 
     private void fillValue(int position, ViewHolder viewHolder) {
-        viewHolder.mText.setText(list.get(position));
-        if (checkItemPosition != -1) {
-            if (checkItemPosition == position) {
-                viewHolder.mText.setTextColor(context.getResources().getColor(R.color.drop_down_selected));
-                viewHolder.mText.setBackgroundResource(R.color.check_bg);
-            } else {
-                viewHolder.mText.setTextColor(context.getResources().getColor(R.color.drop_down_unselected));
-                viewHolder.mText.setBackgroundResource(R.color.white);
+        if(list!=null || list.size()>=0){
+            viewHolder.mText.setText(list.get(position));
+            if (checkItemPosition != -1) {
+                if (checkItemPosition == position) {
+                    viewHolder.mText.setTextColor(context.getResources().getColor(R.color.drop_down_selected));
+                    viewHolder.mText.setBackgroundResource(R.color.check_bg);
+                } else {
+                    viewHolder.mText.setTextColor(context.getResources().getColor(R.color.drop_down_unselected));
+                    viewHolder.mText.setBackgroundResource(R.color.white);
+                }
             }
         }
+
     }
 
     static class ViewHolder {
