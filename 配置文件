@@ -70,3 +70,26 @@ Upload reason  上传理由
 2016-3-4 0:35:24  添加图书详情页面    关于我们 版权声明 版本更新 问题反馈 这几个界面搬到个人界面来了。
 2016-3-8 22:36:16 图书详情页面 打开阅读PDF文件成功，点击按钮下载，并在按钮上显示下载进度
 2016-3-10 23:40:28  选择年级，选择班级添加好了
+
+adb再打不开时：
+1.cmd运行  netstat -ano | findstr "5037"  找到第一行最后一个值
+2.运行    taskkill /f /pid 5920         //替换成最后那个值
+
+接口：http://116.255.235.119:1282/teachingAssistantInterface/userInfo/schoolGrade   获取年级 参数： 无参数
+      http://116.255.235.119:1282/teachingAssistantInterface/userInfo/schoolGradeClasses 获取年级对应的班级 参数：id  年级id，
+      http://116.255.235.119:1282/teachingAssistantInterface/userInfo/login  登录接口   参数：classid 班级id，account：账号，password：密码
+      http://116.255.235.119:1282/teachingAssistantInterface/userInfo/myNameIsExists，是否同名   参数：classid，name
+      http://116.255.235.119:1282/teachingAssistantInterface/userInfo/loginOut  退出登录  参数： 无参数
+      http://116.255.235.119:1282/teachingAssistantInterface/book/index    图书列表   参数： page=当前第几页(从1开始)，rows=每页数据条数
+      http://116.255.235.119:1282/teachingAssistantInterface/book/bookDetail 图书详情  参数： bookid,
+      http://116.255.235.119:1282/teachingAssistantInterface/book/bookComments    图书评论列表     参数： page=1,rows=2,bookid=6007
+      http://116.255.235.119:1282/teachingAssistantInterface/book/txtBookRead   txt图书阅读  参数：  page=当前页数,rows=每页显示文字个数,bookid=6007
+
+
+
+2016-3-22 1:03:28  获取图书列表和图书详情 接口调试成功
+2016-3-25 1:10:29  txt图书阅读  接口调试成功
+
+2016-4-11 22:20:24  为了做图书翻页，在cloudbook目录下新建view目录，里面的文件全是加进来的
+                    加了一张图片。drawable/tx_green_wall.png
+                    加了一个Activity BookReadMainActivity  把BookReadActivity暂时换成了BookReadMainActivity进行测试
